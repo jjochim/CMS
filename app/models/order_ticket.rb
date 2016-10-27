@@ -1,0 +1,2 @@
+class OrderTicket < ApplicationRecord
+end

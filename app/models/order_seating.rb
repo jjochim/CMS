@@ -1,0 +1,2 @@
+class OrderSeating < ApplicationRecord
+end

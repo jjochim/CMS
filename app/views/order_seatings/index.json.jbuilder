@@ -1,0 +1,1 @@
+json.array! @order_seatings, partial: 'order_seatings/order_seating', as: :order_seating

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2016-10-27 18:52:56
+  movie_id: 1
+  room_id: 1
+  threed: false
+  lector: false
+  subtitle: false
+  dubbing: false
+
+two:
+  start_date: 2016-10-27 18:52:56
+  movie_id: 1
+  room_id: 1
+  threed: false
+  lector: false
+  subtitle: false
+  dubbing: false

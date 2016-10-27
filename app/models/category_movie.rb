@@ -1,0 +1,2 @@
+class CategoryMovie < ApplicationRecord
+end

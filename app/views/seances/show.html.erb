@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @seance.start_date %>
+</p>
+
+<p>
+  <strong>Movie:</strong>
+  <%= @seance.movie_id %>
+</p>
+
+<p>
+  <strong>Room:</strong>
+  <%= @seance.room_id %>
+</p>
+
+<p>
+  <strong>Threed:</strong>
+  <%= @seance.threed %>
+</p>
+
+<p>
+  <strong>Lector:</strong>
+  <%= @seance.lector %>
+</p>
+
+<p>
+  <strong>Subtitle:</strong>
+  <%= @seance.subtitle %>
+</p>
+
+<p>
+  <strong>Dubbing:</strong>
+  <%= @seance.dubbing %>
+</p>
+
+<%= link_to 'Edit', edit_seance_path(@seance) %> |
+<%= link_to 'Back', seances_path %>

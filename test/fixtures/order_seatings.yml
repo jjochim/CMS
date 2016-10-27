@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  seating_id: 1
+  order_id: 1
+  ticked_id: 1
+
+two:
+  seating_id: 1
+  order_id: 1
+  ticked_id: 1
