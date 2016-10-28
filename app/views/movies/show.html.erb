@@ -57,7 +57,7 @@
 
 <p>
   <strong>Picture:</strong>
-  <%= @movie.picture %>
+  <%= image_tag @movie.picture.url() %>
 </p>
 
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
