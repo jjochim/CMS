@@ -15,3 +15,15 @@
  *= require bootstrap
  *= require bootstrap-theme
  */
+
+@font-face {
+    font-family: 'Slick';
+    font-weight: normal;
+    font-style: normal;
+    src: url('slick.eot');
+    src: url('slick.eot?#iefix') format('embedded-opentype'),
+    url('slick.woff') format('woff'),
+    url('slick.ttf') format('truetype'),
+    url('slick.svg') format('svg');
+    url('ajax-loader.gif') format('gif');
+}

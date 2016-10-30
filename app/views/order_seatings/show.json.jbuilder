@@ -1,1 +1,0 @@
-json.partial! "order_seatings/order_seating", order_seating: @order_seating
