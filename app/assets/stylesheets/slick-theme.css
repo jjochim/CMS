@@ -1,19 +1,19 @@
-@charset 'UTF-8';
+@charset "UTF-8";
 /* Slider */
 .slick-loading .slick-list
 {
     background: #fff url('./ajax-loader.gif') center center no-repeat;
 }
-
-/* Icons */
-@font-face
-{
-    font-family: 'slick';
+@font-face {
+    font-family: 'Slick';
     font-weight: normal;
     font-style: normal;
-
-    src: url('./slick.eot');
-    src: url('./slick.eot?#iefix') format('embedded-opentype'), url('./slick.woff') format('woff'), url('./slick.ttf') format('truetype'), url('./slick.svg#slick') format('svg');
+    src: url('slick.eot');
+    src: url('slick.eot?#iefix') format('embedded-opentype'),
+    url('slick.woff') format('woff'),
+    url('slick.ttf') format('truetype'),
+    url('slick.svg') format('svg'),
+    url('ajax-loader.gif') format('gif');
 }
 /* Arrows */
 .slick-prev,
