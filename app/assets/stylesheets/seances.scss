@@ -1,3 +1,22 @@
 // Place all the styles related to the Seances controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.date-seance {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.tab-content.seance {
+  margin-top: 10px;
+  margin-left: 33px;
+}
+
+.disable-nav-tabs {
+  pointer-events: none;
+}
+
+.btn-seance {
+  width: 62px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}

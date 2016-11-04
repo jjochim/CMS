@@ -1,61 +1,100 @@
-<p id="notice"><%= notice %></p>
+<% if current_user and current_user.role == 'admin' %>
+    <!--admin-->
 
-<h1>Movies</h1>
+    <div class="container">
 
-<div class="container">
-  <section class="regular slider">
-    <div><img src="http://placehold.it/350x300?text=1"></div>
-    <div><img src="http://placehold.it/350x300?text=2"></div>
-    <div><img src="http://placehold.it/350x300?text=3"></div>
-    <div><img src="http://placehold.it/350x300?text=4"></div>
-    <div><img src="http://placehold.it/350x300?text=5"></div>
-    <div><img src="http://placehold.it/350x300?text=6"></div>
-    <div><img src="http://placehold.it/350x300?text=7"></div>
-  </section>
-</div>
+      <h1>Filmy</h1>
+      <%= link_to new_movie_path, class: "btn btn-success admin_new" do %>
+          </span>Dodaj nowy film
+      <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Duration</th>
-      <th>Genre</th>
-      <th>Pegi</th>
-      <th>Description</th>
-      <th>Director</th>
-      <th>Actors</th>
-      <th>Country</th>
-      <th>Language</th>
-      <th>Premiere</th>
-      <th>Url trailer</th>
-      <th>Picture</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="search-form">
+        <%= search_form_for @search do |f| %>
+            <%= f.label :title_or_country_or_genre_cont, 'Tytuł, kraj lub gatunek:' %>
+            <%= f.text_field :title_or_country_or_genre_cont %>
+            <%= f.submit value: 'Szukaj' %>
+        <% end %>
+      </div>
 
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td><%= movie.title %></td>
-        <td><%= movie.duration %></td>
-        <td><%= movie.genre %></td>
-        <td><%= movie.pegi %></td>
-        <td><%= movie.description %></td>
-        <td><%= movie.director %></td>
-        <td><%= movie.actors %></td>
-        <td><%= movie.country %></td>
-        <td><%= movie.language %></td>
-        <td><%= movie.premiere %></td>
-        <td><%= movie.url_trailer %></td>
-        <td><%= movie.picture %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>Tytuł</th>
+          <th>Czas trwania</th>
+          <th>Gatunek</th>
+          <th>Kraj</th>
+          <th>Premiera</th>
+          <th colspan="3">Akcje</th>
+        </tr>
+        </thead>
 
-<br>
+        <tbody>
+        <% @movies.each do |movie| %>
+            <tr>
+              <td><%= movie.title %></td>
+              <td><%= movie.duration %></td>
+              <td><%= movie.genre %></td>
+              <td><%= movie.country %></td>
+              <td><%= format_date(movie.premiere) %></td>
+              <td class="text-right"><%= link_to 'Szczegóły', movie, class: "btn btn-default btn-xs" %>
+                <%= link_to 'Edytuj', edit_movie_path(movie), class: "btn btn-default btn-xs" %>
+                <%= link_to 'Usuń', movie, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @movies, :previous_label => 'Poprzednia', :next_label => 'Nastepna', renderer: BootstrapPagination::Rails %>
 
-<%= link_to 'New Movie', new_movie_path %>
+
+      <br>
+    </div>
+
+    <!--admin-->
+<% else %>
+    <!--user, employee-->
+
+    <div class="container container-margin">
+      <div class="row">
+        <div class="col-xs-12">
+          <legend>Repertuar</legend>
+        </div>
+      </div>
+      <div class="search-form-movie">
+        <%= search_form_for @search do |f| %>
+            <%= f.text_field :title_or_country_or_genre_cont %>
+            <%= f.submit value: 'Szukaj', class: 'btn btn-default' %>
+        <% end %>
+      </div>
+
+      <% @movies.each_slice(4) do |slice| %>
+
+    <div class="row">
+        <div class="col-xs-12">
+          <div class="movies-container">
+            <% slice.each do |movie| %>
+              <div class="movies-item">
+                <!--<%= image_tag movie.picture, class: "photo" %>-->
+                <%= image_tag 'indeks'+[1,2].shuffle[0].to_s+'.jpg' %>
+                <div class="movie-caption">
+                  <%= movie.title %>
+                </div>
+                <div class="movie-controls">
+                    <%= link_to 'Kup bilet', {controller: 'seances', action: 'show_seances_with_movie', movie_id: movie.id}, :class => 'control-btn'  %>
+                    <%= link_to 'Szczegóły', movie , :class => 'control-btn'%>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <%= will_paginate @movies, :previous_label => 'Poprzednia', :next_label => 'Nastepna', renderer: BootstrapPagination::Rails %>
+        </div>
+      </div>
+    </div>
+
+    <!--user, employee-->
+<% end %>

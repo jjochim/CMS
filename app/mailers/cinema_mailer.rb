@@ -15,7 +15,7 @@ class CinemaMailer < ApplicationMailer
   def info_for_user(order,num)
     @order = order
     @info = Info.last
-    room = order.seanse.room
+    room = order.seance.room
     @seats = num
     @room = room.name
 

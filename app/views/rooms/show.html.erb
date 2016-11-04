@@ -1,19 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <h1>Podgląd sali</h1>
+  <div class="row">
+    <div class="col-xs-12">
+      <legend>Lista siedzień</legend>
+    </div>
+  </div>
+  <div class="row" style="text-align:center">
+    <div class="seatings-container" style="display: inline-block; width:100%">
+      <div class="seating-legend-vertical">
+        <% (1..@room.columns).each do |index| %>
+            <div class="legend-item"><%= index %></div>
+        <% end %>
+      </div>
+      <div class="seating-legend-horizontal">
+        <% (1..@room.rows).each do |index| %>
+            <div class="legend-item"><%= (64 + index).chr %></div>
+        <% end %>
+      </div>
+      <div class="seatings">
+        <% @responseObject.each_with_index do |item, i| %>
+            <div class="seating-row" id=<%= i %> >
+              <% item.each_with_index do |child, j| %>
+                  <div class="seat updatespace <%=  child.slot == true  ? 'cms-seatable' : 'cms-not-seatable'%>">
+                    <%= j+1 %><%=(65 + i).chr %>
+                  </div>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'Powrót', rooms_path, class: "btn btn-default" %>
+</div>
+<div id="responseObject" style = "display:none;">
+  <%= @responseObject[0].count %>
+</div>
 
-<p>
-  <strong>Rows:</strong>
-  <%= @room.rows %>
-</p>
-
-<p>
-  <strong>Columns:</strong>
-  <%= @room.columns %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @room.name %>
-</p>
-
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+<script>
+  $( document ).ready(function() {
+        var margin = 5;
+        $(".seat").css("width", (1170/$('#responseObject').text()-2*margin) + "px");
+        $(".seat").css("height", (1170/$('#responseObject').text()-2*margin) + "px");
+        $(".seating-legend-vertical").css("left", ((1170/$('#responseObject').text()-2*margin)/2)+"px")
+        $(".legend-item").css("width", (1170/$('#responseObject').text()-2*margin)+"px")
+//        $(".legend-item").css("margin", margin+"px")
+    console.log((1170/$('#responseObject').text()) + "px");
+  });
+</script>

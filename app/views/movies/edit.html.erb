@@ -1,6 +1,6 @@
-<h1>Editing Movie</h1>
+<div class="container"><h1>Edytor Filmu</h1>
 
-<%= render 'form', movie: @movie %>
+  <%= render 'form', movie: @movie %>
 
-<%= link_to 'Show', @movie %> |
-<%= link_to 'Back', movies_path %>
+  <%= button_to 'Powrót', movies_path, class: 'button', method: :get  %>
+</div>

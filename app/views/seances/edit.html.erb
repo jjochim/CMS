@@ -1,6 +1,6 @@
-<h1>Editing Seance</h1>
+<div class="container"><h1>Edytor Seansu</h1>
 
-<%= render 'form', seance: @seance %>
+  <%= render 'form', seance: @seance %>
 
-<%= link_to 'Show', @seance %> |
-<%= link_to 'Back', seances_path %>
+  <%= button_to 'Powrót', seances_path, class: 'button', method: :get  %>
+</div>

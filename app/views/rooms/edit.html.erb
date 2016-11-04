@@ -1,6 +1,40 @@
-<h1>Editing Room</h1>
+<div class="container">
+  <h1>Edytor sali</h1>
+  <div class="row">
+    <div class="col-xs-12">
+      <legend>Lista siedzień</legend>
+    </div>
+  </div>
+  <div class="row" style="text-align:center">
+    <div class="seatings-container" style="display: inline-block; width: <%= @room.columns*64 + 40 %>px; height: <%= @room.rows*60 + 40%>px">
+      <div class="seating-legend-vertical">
+        <% (1..@room.columns).each do |index| %>
+            <div class="legend-item"><%= index %></div>
+        <% end %>
+      </div>
+      <div class="seating-legend-horizontal">
+        <% (1..@room.rows).each do |index| %>
+            <div class="legend-item"><%= (64 + index).chr %></div>
+        <% end %>
+      </div>
+      <div class="seatings">
+        <% @responseObject.each_with_index do |item, i| %>
+            <div class="seating-row" style="width: <%= @room.columns * 64 %>px">
+              <% item.each_with_index do |child, j| %>
+                  <div class="seat updatespace" data-seating-id="<%= child.id %>">
+                    <%= j+1 %><%=(65 + i).chr %>
+                    <%= form_for(child, :method => :put, remote: true, :html => {:'data-type' => 'json'}) do |f| %>
+                        <%= f.hidden_field :slot, class: "seating-status" %>
+                        <!--<%= submit_tag "Update", class: "submit_tag" %>-->
+                    <% end %>
+                  </div>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'Akceptuj', rooms_path, class: "btn btn-default" %>
+  <%= link_to 'Anuluj', "#", class: "btn btn-default" %>
+</div>
 
-<%= render 'form', room: @room %>
-
-<%= link_to 'Show', @room %> |
-<%= link_to 'Back', rooms_path %>

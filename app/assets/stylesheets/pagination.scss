@@ -1,0 +1,19 @@
+$mainOrange: rgba(225, 125, 85, 1);
+$lightOrange: rgba(255, 165, 125, 1);
+.pagination{
+  li{
+    a{
+      color: black;
+    }
+  }
+}
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover{
+    background-color: $mainOrange;
+    border-color: $mainOrange;
+    color: black;
+}
+
+.pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover{
+  background-color: $lightOrange;
+  color: black;
+}

@@ -1,64 +1,47 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <legend><%= @movie.title %></legend>
+  <div class="col-md-5">
+    
+      <strong>Genre:</strong>
+      <%= @movie.genre %>
+    <br>
 
-<p>
-  <strong>Title:</strong>
-  <%= @movie.title %>
-</p>
+      <strong>Director:</strong>
+      <%= @movie.director %>
+    <br>
 
-<p>
-  <strong>Duration:</strong>
-  <%= @movie.duration %>
-</p>
+      <strong>Actors:</strong>
+      <%= @movie.actors %>
+    <br>
 
-<p>
-  <strong>Genre:</strong>
-  <%= @movie.genre %>
-</p>
+      <strong>Country:</strong>
+      <%= @movie.country %>
+    <br>
 
-<p>
-  <strong>Pegi:</strong>
-  <%= @movie.pegi %>
-</p>
+      <strong>Pegi:</strong>
+      <%= @movie.pegi %>
+    <br>
 
-<p>
-  <strong>Description:</strong>
-  <%= @movie.description %>
-</p>
+      <strong>Duration:</strong>
+      <%= @movie.duration %>
+    <br>
 
-<p>
-  <strong>Director:</strong>
-  <%= @movie.director %>
-</p>
+      <strong>Premiere:</strong>
+      <%= @movie.premiere %>
+    <br>
 
-<p>
-  <strong>Actors:</strong>
-  <%= @movie.actors %>
-</p>
+      <strong>Description:</strong>
+      <%= @movie.description %>
+    <br>
 
-<p>
-  <strong>Country:</strong>
-  <%= @movie.country %>
-</p>
-
-<p>
-  <strong>Language:</strong>
-  <%= @movie.language %>
-</p>
-
-<p>
-  <strong>Premiere:</strong>
-  <%= @movie.premiere %>
-</p>
-
-<p>
-  <strong>Url trailer:</strong>
-  <%= @movie.url_trailer %>
-</p>
-
-<p>
-  <strong>Picture:</strong>
-  <%= image_tag @movie.picture.url() %>
-</p>
-
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+    <% if current_user and current_user.role == 'admin' %>
+        <%= link_to 'Edytuj', edit_movie_path(@movie) %>
+    <% else %>
+        <%= link_to 'Rezerwuj', {controller: 'seances', action: 'show_seances_with_movie', movie_id: @movie.id}, class: "btn btn-default" %>
+    <% end %>
+    <%= link_to 'Powrót', movies_path, class: "btn btn-default" %>
+  </div>
+  <div class="col-md-7">
+    <iframe src=<%= @movie.url_trailer %> frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>

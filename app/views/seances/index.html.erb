@@ -1,39 +1,92 @@
-<p id="notice"><%= notice %></p>
+<% if current_user and current_user.role == 'admin' %>
+    <!--admin-->
+    <div class="container">
+      <h1>Seance</h1>
+      <%= link_to new_seance_path, class: "btn btn-success admin_new" do %>
+          Dodaj nowy seans
+      <% end %>
 
-<h1>Seances</h1>
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>Czas rozpoczęcia</th>
+          <th>Film</th>
+          <th>Sala</th>
+          <th>Zajęte miejsca</th>
+          <th>3D</th>
+          <th>Typ</th>
+          <th colspan="3">Akcje</th>
+        </tr>
+        </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Start date</th>
-      <th>Movie</th>
-      <th>Room</th>
-      <th>Threed</th>
-      <th>Lector</th>
-      <th>Subtitle</th>
-      <th>Dubbing</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <tbody>
+        <% @seances.each do |seance| %>
+            <tr>
+              <td><%= format_datatime(seance.start_date) %></td>
+              <td><%= seance.movie.title %></td>
+              <td><%= seance.room.name %></td>
+              <td><%= seats_count(seance) %>/<%= seance.room.seatings.where(slot: true).count %></td>
+              <td><%= seance.threed %></td>
+              <td><% if seance.subtitle %>Napisy<% end %><% if seance.lector %>Lektor<% end %><% if seance.dubbing %>Dubbing<% end %></td>
+              <td class="text-right">
+                <% if seats_count(seance) == 0 %><%= link_to 'Edytuj', edit_seance_path(seance), class: "btn btn-default btn-xs" %>
+                    <%= link_to 'Usuń', seance, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %><% end %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @seance, :previous_label => 'Poprzednia', :next_label => 'Nastepna', renderer: BootstrapPagination::Rails %>
 
-  <tbody>
-    <% @seances.each do |seance| %>
-      <tr>
-        <td><%= seance.start_date %></td>
-        <td><%= seance.movie_id %></td>
-        <td><%= seance.room_id %></td>
-        <td><%= seance.threed %></td>
-        <td><%= seance.lector %></td>
-        <td><%= seance.subtitle %></td>
-        <td><%= seance.dubbing %></td>
-        <td><%= link_to 'Show', seance %></td>
-        <td><%= link_to 'Edit', edit_seance_path(seance) %></td>
-        <td><%= link_to 'Destroy', seance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    </div>
+    <!--admin-->
+<% else %>
+    <!--user, emp-->
 
-<br>
+    <div class="container">
+      <legend>Seance</legend>
+      <div class="row">
+        <ul class="nav nav-tabs" role="tablist">
+          <% active = 6 %>
+          <% tmp = false %>
+          <% (0..6).each do |indx1| %>
+              <% one_day = @seances.where(start_date: (Time.now.beginning_of_day + indx1.days)..(Time.now.end_of_day + indx1.days)) %>
+              <% tmp1 = day_of_week((Time.now + indx1.day).wday) %>
+              <li role="presentation" class="<% if one_day.count == 0 %>disable-nav-tabs<% else; active = indx1; end %><% if indx1 == active and tmp == false; tmp = true %>active<% end %>" >
+                <a href="#<%= tmp1 %>" aria-controls="<%= tmp1 %>" role="tab" data-toggle="tab">
+                  <h4 class="date-seance"><%= tmp1 %></h4><%= format_date(Time.now + indx1.day) %>
+                </a>
+              </li>
+          <% end %>
+        </ul>
+        <div class="tab-content seance">
+          <% active = 6 %>
+          <% tmp = false %>
+          <% (0..6).each do |indx2| %>
+              <% one_day = @seances.where(start_date: (Time.now.beginning_of_day + indx2.days)..(Time.now.end_of_day + indx2.days)) %>
+              <% tmp2 = day_of_week((Time.now + indx2.day).wday) %>
+              <div role="tabpanel" class="tab-pane <% if one_day.count != 0; active = indx2; end %><% if indx2 == active and tmp == false; tmp = true %>active<% end %>" id="<%= tmp2 %>">
+                <table class="table-hover table">
+                  <tbody>
+                  <% one_day.group(:movie_id).each do |seance| %>
+                      <tr>
+                        <td><h4><b><%= seance.movie.title %></b></h4></td>
+                        <td>
+                          <% one_day.where(movie_id: seance.movie).sort_by { |x| x.start_date }.each do |time| %>
+                              <%= link_to((time.start_date.strftime("%H:%M") + '<b>' + threed_check(time) + '</b>' + '<br>' + '<b>' + subtitle_check(time) + '</b>').html_safe , new_order_path(seance_id: time.id), class: "btn btn-default btn-xs btn-seance") %>
+                          <% end %>
+                        </td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
-<%= link_to 'New Seance', new_seance_path %>
+    <!--user, emp-->
+<% end %>
+
+
+

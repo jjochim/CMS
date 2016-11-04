@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   resources :movies
   resources :infos
   resources :tickets
-  resources :seances
+  resources :seances do
+    collection do
+      get :show_seances_with_movie
+    end
+  end
   resources :orders
   resources :seatings
   resources :rooms

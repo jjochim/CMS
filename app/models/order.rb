@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  belongs_to :seancse
+  belongs_to :seance
   has_many :order_seatings, dependent: :destroy
   has_many :seatings, through: :order_seatings
   has_many :order_tickets, dependent: :destroy

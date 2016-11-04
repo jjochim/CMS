@@ -1,3 +1,82 @@
 // Place all the styles related to the Movies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$mainOrange: rgba(225, 125, 85, 1);
+$lightOrange: rgba(255, 165, 125, 1);
+
+.movies-container {
+  width: 100%;
+  text-align: justify;
+  text-align-last: justify;
+  -moz-text-align-last: justify;
+
+  .movies-item {
+    img{
+      width: 100%;
+      height: 100%;
+    }
+    width: 250px;
+    height: 400px;
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid $mainOrange;
+    position: relative;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    margin-bottom: 15px;
+    transition: border-color 0.2s linear;
+
+    .movie-caption {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      bottom: 24px;
+      height: 24px;
+      background-color: rgba(255,255,255, 0.7);
+      font-size: 14px;
+      text-align: center;
+      color: black;
+      text-align-last: center;
+      -moz-text-align-last: center;
+      line-height: 24px;
+      cursor: default;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .movie-controls {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      height: 24px;
+      font-size:0px;
+      background-color: $mainOrange;
+
+      .control-btn {
+        width: 50%;
+        height: 24px;
+        background-color: $mainOrange;
+        color: black;
+        display: inline-block;
+        padding: 3px;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: center;
+        text-align-last: center;
+        -moz-text-align-last: center;
+        transition: background-color 0.2s linear;
+        cursor: pointer;
+      }
+
+      .control-btn:hover {
+        background-color: $lightOrange;
+      }
+    }
+  }
+
+  .movies-item:hover {
+    border-color: $lightOrange;
+  }
+}

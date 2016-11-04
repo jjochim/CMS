@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :rows %>
+    <%= f.label :name, 'Nazwa' %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :rows, 'Wiersze' %>
     <%= f.number_field :rows %>
   </div>
 
   <div class="field">
-    <%= f.label :columns %>
+    <%= f.label :columns, 'Kolumny' %>
     <%= f.number_field :columns %>
-  </div>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
   </div>
 
   <div class="actions">

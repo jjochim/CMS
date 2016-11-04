@@ -1,43 +1,18 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Infos</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Street</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>City</th>
-      <th>Zip code</th>
-      <th>Description</th>
-      <th>Google url</th>
-      <th>Cinema name</th>
-      <th>Building number</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @infos.each do |info| %>
-      <tr>
-        <td><%= info.street %></td>
-        <td><%= info.email %></td>
-        <td><%= info.phone %></td>
-        <td><%= info.city %></td>
-        <td><%= info.zip_code %></td>
-        <td><%= info.description %></td>
-        <td><%= info.google_url %></td>
-        <td><%= info.cinema_name %></td>
-        <td><%= info.building_number %></td>
-        <td><%= link_to 'Show', info %></td>
-        <td><%= link_to 'Edit', edit_info_path(info) %></td>
-        <td><%= link_to 'Destroy', info, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Info', new_info_path %>
+<div class="container">
+  <legend>Kontakt</legend>
+  <p><%= @info.description %></p>
+  <div class="col-md-6">
+    <iframe src="<%= @info.google_url %>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
+  <div class="col-md-6">
+    <div style="margin-left: 10%;">
+      <legend><h5>Dane kontaktowe</h5></legend>
+      <div>
+        ul. <%= @info.street %> <%= @info.building_number %><br>
+        <%= @info.zip_code %> <%= @info.city %><br>
+        tel. <%= @info.phone %><br>
+        <%= @info.email %>
+      </div>
+    </div>
+  </div>
+</div>

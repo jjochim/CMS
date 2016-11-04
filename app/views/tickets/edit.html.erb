@@ -1,6 +1,7 @@
-<h1>Editing Ticket</h1>
+<div class="container">
+  <h1>Edytor biletu</h1>
 
-<%= render 'form', ticket: @ticket %>
+  <%= render 'form', ticket: @ticket %>
 
-<%= link_to 'Show', @ticket %> |
-<%= link_to 'Back', tickets_path %>
+  <%= button_to 'Powrót', tickets_path, class: 'button', method: :get  %>
+</div>

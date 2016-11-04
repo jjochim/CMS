@@ -1,0 +1,54 @@
+// Place all the styles related to the Orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.cms-seatable
+  background-color: orange !important
+
+.cms-not-seatable
+  background-color: black !important
+  pointer-events: none
+
+.cms-seat
+  transition: background-color 0.25s linear
+  display: inline-block
+  margin: 5px
+  background-color: white
+  width: 50px
+  height: 50px
+  padding-top: 17px
+  text-align: center
+  font-size: 16px
+  font-weight: bold
+  color: rgba(0,0,0,0)
+  transition: color 0.25s linear
+
+
+.cms-seatable:hover
+  color: rgba(0,0,0,1)
+
+
+.cms-seatable:hover:not(.is-na-true):not(.sold):not(.false)
+  background-color: lime
+  cursor: pointer
+
+.cms-occupied
+  background-color: gray !important
+  pointer-events: none
+
+.cms-selected-seat
+  background-color: cornflowerblue !important
+
+.well-sm
+  background-color: orange
+
+.info
+  text-align: center
+
+.not-paid
+  background-color: orange
+
+.not-paid-title
+  margin-bottom: 0px
+  margin-top: 0px
+

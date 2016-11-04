@@ -4,7 +4,21 @@ class SeancesController < ApplicationController
   # GET /seances
   # GET /seances.json
   def index
-    @seances = Seance.all
+    if current_user and current_user.role == 'admin'
+      @seances = Seance.paginate(:page => params[:page])
+    else
+      @seances = Seance.seven_days_from_now.paginate(:page => params[:page])
+    end
+  end
+
+  def show_seances_with_movie
+    @movie_name = Movie.find(params[:movie_id]).title
+    @seances = Seance.where(movie_id: params[:movie_id]).seven_days_from_now
+    Rails.logger.info @seances_with.inspect
+    respond_to do |format|
+      format.html {  }
+      format.json { render json:  @seances_with  }
+    end
   end
 
   # GET /seances/1
