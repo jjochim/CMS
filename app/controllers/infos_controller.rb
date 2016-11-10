@@ -8,6 +8,9 @@ class InfosController < ApplicationController
     @info = Info.last
   end
 
+  def edit
+  end
+
   # PATCH/PUT /infos/1
   # PATCH/PUT /infos/1.json
   def update
@@ -25,7 +28,7 @@ class InfosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_info
-      @info = Info.find(params[:id])
+      @info = Info.first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

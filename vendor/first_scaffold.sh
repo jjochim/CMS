@@ -7,6 +7,7 @@ rails g scaffold Seance start_date:datetime movie_id:integer room_id:integer thr
 rails g scaffold Ticket name price:float
 rails g scaffold Info street email phone city zip_code description google_url cinema_name building_number
 
-rails g model OrderSeating seating_id:integer order_id:integer ticked_id:integer
-rails g model OrderTicket order_id:integer ticked_id:integer
+
 rails g model CategoryMovie category_id:integer movie_id:integer
+rails g model OrderSeating seating_id:integer order_id:integer ticket_id:integer
+rails g model OrderTicket order_id:integer ticket_id:integer

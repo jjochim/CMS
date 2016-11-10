@@ -3,9 +3,9 @@
 one:
   seating_id: 1
   order_id: 1
-  ticked_id: 1
+  ticket_id: 1
 
 two:
   seating_id: 1
   order_id: 1
-  ticked_id: 1
+  ticket_id: 1

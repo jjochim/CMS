@@ -15,3 +15,7 @@
  *= require bootstrap
  *= require bootstrap-theme
  */
+
+body {
+    margin: 0px;
+}

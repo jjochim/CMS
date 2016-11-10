@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
     end
     # Rails.logger.info '$' * 30'
     # Rails.logger.info params.inspect
-    if current_user.has_role? :admin
+    if current_user.role == 'admin'
       @orders = @search.result(distinct: true).where(paid: false)
       @paid_orders = @search.result(distinct: true).where(paid: true)
     else
@@ -83,7 +83,8 @@ class OrdersController < ApplicationController
                       name: params[:name],
                       surname: params[:surname],
                       email: params[:email],
-                      phone: params[:phone]
+                      phone: params[:phone],
+                      paid: false
     )
     if not order.save
       respond_to do |format|

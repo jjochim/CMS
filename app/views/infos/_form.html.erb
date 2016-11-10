@@ -1,0 +1,62 @@
+<%= form_for(info) do |f| %>
+  <% if info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(info.errors.count, "error") %> prohibited this info from being saved:</h2>
+
+      <ul>
+      <% info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cinema_name, 'Nazwa kina' %>
+    <%= f.text_field :cinema_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, 'Opis' %>
+    <%= f.text_area :description, rows: "5" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city, 'Miasto' %>
+    <%= f.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= f.label :street, 'Ulica' %>
+    <%= f.text_field :street %>
+  </div>
+
+  <div class="field">
+    <%= f.label :building_number, 'Numer budynku' %>
+    <%= f.text_field :building_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :zip_code, 'Kod pocztowy' %>
+    <%= f.text_field :zip_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, 'Email' %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone, 'Telefon' %>
+    <%= f.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= f.label :google_url, 'URL mapy googla' %>
+    <%= f.text_field :google_url %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit value: 'Akceptuj' %>
+  </div>
+<% end %>

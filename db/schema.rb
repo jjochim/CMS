@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028193902) do
+ActiveRecord::Schema.define(version: 20161110131235) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -59,14 +59,14 @@ ActiveRecord::Schema.define(version: 20161028193902) do
   create_table "order_seatings", force: :cascade do |t|
     t.integer  "seating_id"
     t.integer  "order_id"
-    t.integer  "ticked_id"
+    t.integer  "ticket_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "order_tickets", force: :cascade do |t|
     t.integer  "order_id"
-    t.integer  "ticked_id"
+    t.integer  "ticket_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

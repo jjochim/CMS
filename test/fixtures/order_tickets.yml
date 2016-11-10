@@ -2,8 +2,8 @@
 
 one:
   order_id: 1
-  ticked_id: 1
+  ticket_id: 1
 
 two:
   order_id: 1
-  ticked_id: 1
+  ticket_id: 1

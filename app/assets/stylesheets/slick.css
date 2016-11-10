@@ -1,4 +1,8 @@
 /* Slider */
+.regular.slider{
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
 .slick-slider
 {
     position: relative;
