@@ -25,24 +25,28 @@ class MoviesController < ApplicationController
   # GET /movies/new
   def new
     @movie = Movie.new
+    @category = Category.all
   end
 
   # GET /movies/1/edit
   def edit
+    @category
   end
 
   # POST /movies
   # POST /movies.json
   def create
-    @movie = Movie.new(movie_params)
+    movie = Movie.new(movie_params)
+    Rails.logger.info '#' * 30
 
     respond_to do |format|
-      if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
-        format.json { render :show, status: :created, location: @movie }
+      if movie.save
+        format.html { redirect_to movie, notice: 'Movie was successfully created.' }
+        format.json { render :show, status: :created, location: movie }
       else
         format.html { render :new }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
+        format.json { render json: movie.errors, status: :unprocessable_entity }
+        movie.delete
       end
     end
   end
@@ -50,6 +54,7 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update
+    params[:movie][:category_ids] ||= []
     respond_to do |format|
       if @movie.update(movie_params)
         format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
@@ -79,6 +84,7 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :duration, :genre, :pegi, :description, :director, :actors, :country, :language, :premiere, :url_trailer, :picture)
+      params.require(:movie).permit(:title, :duration, :genre, :pegi, :description, :director, :actors, :country,
+                                    :language, :premiere, :url_trailer, :picture, :category_ids => [])
     end
 end

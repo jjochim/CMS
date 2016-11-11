@@ -18,6 +18,15 @@
     </div>
 
     <div class="field">
+      <% for category in Category.all %>
+          <div>
+            <%= check_box_tag "movie[category_ids][]", category.id, movie.categories.include?(category) %>
+            <%= category.name %>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="field">
       <%= f.label :duration, 'Czas trwania' %>
       <%= f.number_field :duration %>
     </div>
