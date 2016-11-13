@@ -14,6 +14,7 @@ Info.create(cinema_name: 'Kino', street: 'ulica', email: 'email@email.com', phon
             google_url: "https://ww")
 
 puts 'Kategorie '
+Category.create(name: 'Premiera')
 Category.create(name: 'Komedia')
 Category.create(name: 'Horror')
 Category.create(name: 'Akcja')
