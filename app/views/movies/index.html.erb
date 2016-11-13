@@ -10,8 +10,8 @@
 
       <div class="search-form">
         <%= search_form_for @search do |f| %>
-            <%= f.label :title_or_country_or_genre_cont, 'Tytuł, kraj lub gatunek:' %>
-            <%= f.text_field :title_or_country_or_genre_cont %>
+            <%= f.label :title_or_country_cont, 'Tytuł, kraj lub gatunek:' %>
+            <%= f.text_field :title_or_country_cont %>
             <%= f.submit value: 'Szukaj' %>
         <% end %>
       </div>
@@ -33,7 +33,11 @@
             <tr>
               <td><%= movie.title %></td>
               <td><%= movie.duration %></td>
-              <td><%= movie.genre %></td>
+              <td>
+                <% movie.categories.each do |category| %>
+                    <%= category.name %>
+                <% end %>
+              </td>
               <td><%= movie.country %></td>
               <td><%= format_date(movie.premiere) %></td>
               <td class="text-right"><%= link_to 'Szczegóły', movie, class: "btn btn-default btn-xs" %>
@@ -61,32 +65,11 @@
       </div>
       <div class="row">
         <section class="regular slider">
-          <div>
-            <img src="http://placehold.it/350x100?text=1">
-          </div>          <div>
-            <img src="http://placehold.it/350x30?text=1">
-          </div>          <div>
-            <img src="http://placehold.it/350x300?text=1">
-          </div>          <div>
-            <img src="http://placehold.it/350x300?text=1">
-          </div>          <div>
-            <img src="http://placehold.it/350x300?text=1">
-          </div>
-          <div>
-            <img src="http://placehold.it/350x300?text=2">
-          </div>
-          <div>
-            <img src="http://placehold.it/350x300?text=3">
-          </div>
-          <div>
-            <img src="http://placehold.it/350x300?text=4">
-          </div>
-          <div>
-            <img src="http://placehold.it/350x300?text=5">
-          </div>
-          <div>
-            <img src="http://placehold.it/350x300?text=6">
-          </div>
+          <% @premiere.each do |p| %>
+            <div>
+              <%= image_tag p.picture %>
+            </div>
+          <% end %>
         </section>
       </div>
       <div class="row">
@@ -96,7 +79,7 @@
       </div>
       <div class="search-form-movie">
         <%= search_form_for @search do |f| %>
-            <%= f.text_field :title_or_country_or_genre_cont %>
+            <%= f.text_field :title_or_country_cont %>
             <%= f.submit value: 'Szukaj', class: 'btn btn-default' %>
         <% end %>
       </div>

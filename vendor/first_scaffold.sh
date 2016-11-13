@@ -1,4 +1,4 @@
-rails g scaffold Movie title duration:integer genre pegi:integer description director actors country language premiere:datetime url_trailer picture
+rails g scaffold Movie title duration:integer pegi:integer description director actors country language premiere:datetime url_trailer picture
 rails g scaffold Category name
 rails g scaffold Room rows:integer columns:integer name
 rails g scaffold Seating slot:boolean room_id:integer

@@ -13,16 +13,18 @@
   <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="<%= root_path %>"></a>
+        <a class="navbar-brand" href="<%= root_path %>"><%= Info.last.cinema_name %></a>
       </div>
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
             <% if current_user.role=='admin' %>
-                <li <% if [params[:controller], params[:action]] == ["movies", "index"] %>class="active"<% end %>><%= link_to "Filmy", root_path %>
+                <li <% if [params[:controller], params[:action]] == ["movies", "index"] %>class="active"<% end %>><%= link_to "Filmy", root_path %></li>
+                <li <% if [params[:controller], params[:action]] == ["categories", "index"] %>class="active"<% end %>><%= link_to "Gatunki", categories_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["rooms", "index"] %>class="active"<% end %>><%= link_to "Sale", rooms_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["seances", "index"] %>class="active"<% end %>><%= link_to "Seanse", seances_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["orders", "index"] %>class="active"<% end %>><%= link_to "Zamówienia", orders_path %></li>
-                <li <% if [params[:controller], params[:action]] == ["infos", "index"] %>class="active"<% end %>><%= link_to "Kontakt", edit_info_path(1) %></li>
+                <li <% if [params[:controller], params[:action]] == ["tickets", "index"] %>class="active"<% end %>><%= link_to "Bilety", tickets_path %></li>
+                <li <% if [params[:controller], params[:action]] == ["infos", "edit"] %>class="active"<% end %>><%= link_to "Kontakt", edit_info_path(1) %></li>
             <% else %>
                 <li <% if [params[:controller], params[:action]] == ["movie", "index"] %>class="active"<% end %>><%= link_to "Filmy", root_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["seances", "index"] %>class="active"<% end %>><%= link_to "Seanse", seances_path %></li>

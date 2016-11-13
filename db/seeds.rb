@@ -13,13 +13,18 @@ Info.create(cinema_name: 'Kino', street: 'ulica', email: 'email@email.com', phon
             description: 'Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker',
             google_url: "https://ww")
 
+puts 'Kategorie '
+Category.create(name: 'Komedia')
+Category.create(name: 'Horror')
+Category.create(name: 'Akcja')
+Category.create(name: 'Dramat')
+puts
 
 print 'Movie '
 0.upto(15) do |indx|
-  Movie.create(
+  tmp = Movie.create(
       title: 'Movie_' + indx.to_s,
       duration: 60 + indx,
-      genre: 'genre_' + indx.to_s,
       pegi: [3, 10, 18].shuffle.first,
       description: (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
       director: 'director_' + indx.to_s,
@@ -29,6 +34,7 @@ print 'Movie '
       url_trailer: 'https://www.youtube.com/embed/hvchSr3Myfg',
       language: ['polish', 'german', 'english'].shuffle.first
   )
+  tmp.categories << Category.all.shuffle.first
   print '. '
 end
 puts
@@ -61,3 +67,5 @@ print 'Seance '
   end
 end
 puts
+
+

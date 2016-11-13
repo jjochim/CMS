@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
       movies = Seance.seven_days_from_now.map{|x| x.movie.id}
       @movies = @search.result(distinct: true).where(id: movies).paginate(:page => params[:page])
     end
+    @premiere = Category.where(name: 'Premiera').last.movies
   end
 
   # GET /movies/1

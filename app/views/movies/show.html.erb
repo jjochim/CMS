@@ -1,9 +1,11 @@
 <div class="container">
   <legend><%= @movie.title %></legend>
   <div class="col-md-5">
-    
+
       <strong>Genre:</strong>
-      <%= @movie.genre %>
+    <% @movie.categories.each do |category| %>
+        <%= category.name %>
+    <% end %>
     <br>
 
       <strong>Director:</strong>
