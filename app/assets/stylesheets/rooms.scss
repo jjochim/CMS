@@ -9,10 +9,10 @@
 
 
 .seating-row {
-  //display: block;
+  display: block;
   background-color: black;
-  //height: 60px;
-  display:flex;
+  height: 60px;
+  //display:flex;
 }
 
 .seatings-container {
@@ -55,8 +55,8 @@
   display: inline-block;
   margin: 5px;
   background-color: white;
-  //width: 50px;
-  //height: 50px;
+  width: 50px;
+  height: 50px;
   padding-top: 17px;
   text-align: center;
   font-size: 16px;
@@ -88,4 +88,10 @@
 
 .block {
   background-color: #666666;
+}
+
+.rooms-header{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
 }
