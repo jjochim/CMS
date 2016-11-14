@@ -43,7 +43,7 @@
         </div>
         <div class="seatings">
           <% @responseObject.each_with_index do |item, i| %>
-              <div class="seating-row" style="width: <%= @room.columns * 64 %>px">
+              <div class="seating-row">
                 <% item.each_with_index do |child, j| %>
                     <div class="cms-seat <%=  child.slot == true  ? 'cms-seatable' : 'cms-not-seatable'%>
                   <%= "cms-occupied" if @occupied_places.include? child.id %>" data-seating-id="<%= child.id %>" data-seating-number="<%= j+1 %><%=(65 + i).chr %>">
@@ -61,3 +61,44 @@
   </div>
 
 </div>
+<div id="cms-columns" style = "display:none;">
+  <%= @room.columns %>
+</div>
+<div id="cms-rows" style = "display:none;">
+  <%= @room.rows %>
+</div>
+<script>
+  $( document ).ready(function() {
+    if( parseFloat($('#cms-columns').text().trim()) > 18){
+      var margin = 5;
+      $(".seatings-container").css('width','100%')
+      $(".seatings-container").css('height','auto')
+
+      $(".cms-seat").css("width", (1170/$('#cms-columns').text()-2*margin) + "px");
+      $(".cms-seat").css("height", (1170/$('#cms-columns').text()-2*margin) + "px");
+      // $(".seating-legend-vertical").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
+      $(".seating-legend-vertical").css("width", 1170+"px")
+      $(".seating-legend-vertical").css("display", 'flex')
+      // $(".seating-legend-vertical").css("justify-content", 'space-around')
+      $(".seating-legend-vertical").css("left", '25px')
+      $(".legend-item").css("padding-top", '0')
+      $(".legend-item").css("height", 'auto')
+
+      $(".seating-legend-horizontal").css("height", $('#cms-rows').text()*(1170/$('#cms-columns').text()))
+
+      $(".seating-legend-horizontal").css("display", 'flex')
+      $(".seating-legend-horizontal").css("justify-content", 'space-around')
+      $(".seating-legend-horizontal").css("left", '0px')
+      $(".seating-legend-horizontal").css("top", '25px')
+      $(".seating-legend-horizontal").css("flex-direction", 'column')
+
+
+
+      $(".seating-row").css('display', 'flex')
+      $(".seating-row").css('height', 'auto')
+      $('.cms-seat').css('width', 'auto!important')
+      $('.cms-seat').css('height', 'auto!important')
+      console.log((1170/$('#responseObject').text()) + "px");
+    }
+  });
+</script>
