@@ -10,7 +10,7 @@
 
       <div class="search-form">
         <%= search_form_for @search do |f| %>
-            <%= f.label :title_or_country_cont, 'Tytuł, kraj lub gatunek:' %>
+            <%= f.label :title_or_country_cont, 'Tytuł lub kraj:' %>
             <%= f.text_field :title_or_country_cont %>
             <%= f.submit value: 'Szukaj' %>
         <% end %>
@@ -56,7 +56,6 @@
     <!--admin-->
 <% else %>
     <!--user, employee-->
-
     <div class="container container-margin">
       <div class="row">
         <div class="col-xs-12">
@@ -67,7 +66,9 @@
         <section class="regular slider">
           <% @premiere.each do |p| %>
             <div>
-              <%= image_tag p.picture %>
+              <%= link_to p do %>
+                <%= image_tag p.picture %>
+              <% end %>
             </div>
           <% end %>
         </section>

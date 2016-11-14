@@ -1,0 +1,7 @@
+<div class="container">
+  <h1>Edytor użytkownika</h1>
+
+  <%= render 'form', user: @user %>
+
+  <%= button_to 'Powrót', users_path, class: 'button', method: :get  %>
+</div>
