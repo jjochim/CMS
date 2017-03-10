@@ -72,7 +72,7 @@
                         <td><h4><b><%= seance.movie.title %></b></h4></td>
                         <td>
                           <% one_day.where(movie_id: seance.movie).sort_by { |x| x.start_date }.each do |time| %>
-                              <%= link_to((time.start_date.strftime("%H:%M") + '<b>' + threed_check(time) + '</b>' + '<br>' + '<b>' + subtitle_check(time) + '</b>').html_safe , new_order_path(seance_id: time.id), class: "btn btn-default btn-xs btn-seance") %>
+                              <%= link_to((time.start_date.strftime("%H:%M") + '<b>' + threed_check(time) + '</b>' + '<br>' + '<b>' + subtitle_check(time) + '</b>').html_safe , {controller: 'orders', action: 'show_info', seance_id: time.id}, class: "btn btn-default btn-xs btn-seance") %>
                           <% end %>
                         </td>
                       </tr>

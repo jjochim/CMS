@@ -13,27 +13,28 @@
 
   <div class="field">
     <%= f.label :name, 'Imię*' %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, value: '' %>
   </div>
 
   <div class="field">
     <%= f.label :surname, 'Nazwisko*' %>
-    <%= f.text_field :surname %>
+    <%= f.text_field :surname, value: ''%>
   </div>
 
   <div class="field">
     <%= f.label :email, 'Email*' %>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, value: '' %>
   </div>
 
   <div class="field">
     <%= f.label :phone, 'Telefon' %>
-    <%= f.text_field :phone %>
+    <%= f.text_field :phone,value: '' %>
   </div>
-    <h6>* Dane obowiązkowe!</h6>
+  <h6>* Dane obowiązkowe!</h6>
 
-  <div class="field">
-    <%= f.hidden_field :seance_id, value: params[:seance_id] %>
+  <div class="actions">
+    <%= f.submit value: 'Akceptuj' %>
   </div>
+
 
 <% end %>

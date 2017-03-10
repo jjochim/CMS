@@ -12,11 +12,11 @@ class OrdersController < ApplicationController
     end
     # Rails.logger.info '$' * 30'
     # Rails.logger.info params.inspect
-    if current_user.role == 'admin'
+    if user_signed_in? && current_user.role=='admin'
       @orders = @search.result(distinct: true).where(paid: false)
       @paid_orders = @search.result(distinct: true).where(paid: true)
     else
-      seance = Seance.seven_days_from_two_hours_ago.map{|x| x.id}
+      seance = Seance.seven_days_from_now.map{|x| x.id}
       @orders = @search.result(distinct: true).where(paid: false).where(seance_id: seance)
       @paid_orders = @search.result(distinct: true).where(paid: true).where(seance_id: seance)
     end
@@ -29,16 +29,21 @@ class OrdersController < ApplicationController
     @price = 0
   end
 
-  # GET /orders/new
-  def new
-    Rails.logger.info '$' * 30
-    Rails.logger.info params.inspect
+  def show_info
+    @seance_info = Seance.find(params[:seance_id])
+    room_quantity = @seance_info.room.seatings.where(slot: true).count
+    current_orders = @seance_info.orders
+    @current_seatings = current_orders.map {|x| x.seatings}.count
+    @available_seatings = room_quantity - @current_seatings
+    @progress_bar = (@available_seatings * 100 / room_quantity).round
 
-    @order = Order.new
-    seance = Seance.find(params[:seance_id])
-    @seatings = Seating.where(room: seance.room)
-    @room = Room.find(seance.room_id)
-    current_orders = seance.orders
+  end
+
+  def show_room
+    @seance = Seance.find(params[:seance_id])
+    @seatings = Seating.where(room: @seance.room)
+    @room = Room.find(@seance.room_id)
+    current_orders = @seance.orders
     @room_quantity = @seatings.where(slot: true).count
 
     Rails.logger.info current_orders.inspect
@@ -68,6 +73,18 @@ class OrdersController < ApplicationController
     end
   end
 
+  # GET /orders/new
+  def new
+    Rails.logger.info '$' * 30
+    Rails.logger.info params.inspect
+    Rails.logger.info params[:id]
+    tab = Array.new
+    tab = params[:ARR_OF_SELECTED_FIELDS]
+    puts tab.last
+    @order = Order.new
+
+  end
+
   # GET /orders/1/edit
   def edit
   end
@@ -75,47 +92,40 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    Rails.logger.info '$@' * 400
-    Rails.logger.info params.inspect
-    Rails.logger.info '22222222'
+    occupied = false
+    seance_id = params[:seance_id]
+    selected_fields = params[:ARR_OF_SELECTED_FIELDS].split(",")
 
-    order = Order.new(seance_id: params[:id],
-                      name: params[:name],
-                      surname: params[:surname],
-                      email: params[:email],
-                      phone: params[:phone],
+    order = Order.new(seance_id: seance_id,
+                      name: 'Imię',
+                      surname: 'Nazwisko',
+                      email: 'email@przykład.pl',
+                      phone: 'nr. tel.',
                       paid: false
     )
     if not order.save
       respond_to do |format|
         format.json { render json: order.errors, status: :unprocessable_entity }
       end
-    end
-
-    if params['ARR_OF_SELECTED_FIELDS']
-      params['ARR_OF_SELECTED_FIELDS'].each do |seating_id|
-        order.seatings << Seating.find(seating_id)
-      end
-    end
-
-    if params['HASH_OF_SELECTED_TICKETS']
-      params['HASH_OF_SELECTED_TICKETS'].to_hash.each do |key, val|
-        Rails.logger.info 'key: ' + key + ' val: ' + val
-        ticket = Ticket.where(name: key)
-        Rails.logger.info  ap ticket
-        Rails.logger.info 'ticket'
-        0.upto(val.to_i - 1) do
-          order.tickets << ticket
+    else
+      seance = Seance.find(seance_id)
+      current_orders = seance.orders
+      current_seatings = current_orders.map {|x| x.seatings}
+      occupied_places  = []
+      current_seatings.each {|seats| seats.each{ |x|  occupied_places << x.id}}
+      selected_fields.each do |seat|
+        if occupied_places.include?(seat.to_i)
+          occupied = true
         end
       end
-    end
-    respond_to do |format|
-      if order.seatings.count == order.tickets.count and order.tickets.count > 0
-        format.json { render json: {}, status: :ok}
-        CinemaMailer.info_for_user(order, params['ARR_OF_SELECTED_SEATING_NUMBRE']).deliver_later(wait: 1.minutes)
-      else
-        format.json {render json: {}, status: :unprocessable_entity}
+      if occupied
         order.delete
+        redirect_to show_room_orders_path(seance_id: seance_id), notice: "Something serious happened"
+      else
+        selected_fields.each do |id|
+          order.seatings << Seating.find(id)
+        end
+        redirect_to edit_order_path(order.id)
       end
     end
   end
@@ -123,9 +133,14 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
+    Rails.logger.info '$@' * 400
+    Rails.logger.info params.inspect
+    Rails.logger.info '22222222'
+    Rails.logger.info params[:id]
+
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to movies_path, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -152,6 +167,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:name, :surname, :email, :phone, :seance_id, :paid)
+      params.require(:order).permit(:name, :surname, :email, :phone, :seance_id, :paid, )
     end
 end

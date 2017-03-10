@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4">
+      <%= image_tag @seance_info.movie.picture, class: "photo" %>
+    </div>
+    <div class="col-xs-8">
+      <h2><%= @seance_info.movie.title %></h2>
+      <h4>
+        <%= @seance_info.start_date.strftime("%H:%M") %>
+        |
+        <b><%= threed_check(@seance_info) %></b>
+        |
+        <%= subtitle_check(@seance_info) %>
+      </h4>
+      <div class="progress">
+        <div class="progress-bar progress-bar-success" role="progressbar" style="width:<%= @progress_bar %>%">
+          <%= @available_seatings %>
+        </div>
+        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:<%= 100 - @progress_bar %>%">
+          <%= @current_seatings %>
+        </div>
+      </div>
+      <% if @available_seatings != 0 %>
+        <%= link_to 'Kontynuuj', {controller: 'orders', action: 'show_room', seance_id: @seance_info.id}, class: "btn btn-default" %>
+      <% end %>
+      <%= link_to 'Powrót', seances_path, class: "btn btn-default" %>
+    </div>
+  </div>
+</div>
+
+

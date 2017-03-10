@@ -39,6 +39,8 @@ module ApplicationHelper
     tmp = ''
     if seance.threed
       tmp = ' 3D'
+    else
+      tmp = ' 2D'
     end
     return tmp
   end

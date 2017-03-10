@@ -8,7 +8,12 @@ Rails.application.routes.draw do
       get :show_seances_with_movie
     end
   end
-  resources :orders
+  resources :orders do
+    collection do
+      get :show_info
+      get :show_room
+    end
+  end
   resources :seatings
   resources :rooms
   resources :categories
