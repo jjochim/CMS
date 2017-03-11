@@ -25,9 +25,8 @@
       </div>
     </div>
   </div>
-  <%= link_to 'Kontynuuj', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order"  %>
-  <button class="cs-submit-order">Akceptuje</button>
-  <%= button_to 'Anuluj', movies_path, class: 'button', method: :get  %>
+  <%= link_to 'Rezerwój', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order"  %>
+  <%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal"  %>
 </div>
 
 

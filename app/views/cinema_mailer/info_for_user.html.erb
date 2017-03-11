@@ -12,7 +12,7 @@
   Zarezerwowano bilet na seans: <%= @order.seance.movie.title %><br>
   Seans odbedzie sie dnia: <%= @order.seance.start_date.strftime("%d-%m-%Y") %>, o godzinie: <%= @order.seance.start_date.strftime("%H:%M") %>, w sali: <%= @room %>.<br>
   Zarezerwowane miejsca to: <% @seats.each do |x| %><%= x + ' ' %><% end %><br>
-  <a style="color: red;">Prosimy stawić się do 15 minut przed seancem, ponieważ rezerwaceję zostają automatycznie kasowane!</a>
+  <a style="color: red;">Prosimy stawić się do 15 minut przed seansem, ponieważ rezerwaceję zostają automatycznie kasowane!</a>
 </p>
 <p>Dziękujemy za skorzystanie z naszych usług, miłego dnia!</p>
 <p>

@@ -1,12 +1,15 @@
 <div class="container">
-  <h1>Podgląd sali</h1>
+  <div class = 'rooms-header'>
+    <h1>Podgląd sali</h1>
+    <%= link_to 'Powrót', rooms_path, class: "btn btn-default" %>
+  </div>
   <div class="row">
     <div class="col-xs-12">
       <legend>Lista siedzień</legend>
     </div>
   </div>
   <div class="row" style="text-align:center">
-    <div class="seatings-container" style="display: inline-block; width:100%">
+    <div class="seatings-container" style="display: inline-block; width: <%= @room.columns*64 + 40 %>px; height: <%= @room.rows*60 + 40%>px">
       <div class="seating-legend-vertical">
         <% (1..@room.columns).each do |index| %>
             <div class="legend-item"><%= index %></div>
@@ -30,20 +33,40 @@
       </div>
     </div>
   </div>
-  <%= link_to 'Powrót', rooms_path, class: "btn btn-default" %>
-</div>
-<div id="responseObject" style = "display:none;">
-  <%= @responseObject[0].count %>
 </div>
 
+<div id="cms-columns" style = "display:none;">
+  <%= @room.columns %>
+</div>
+<div id="cms-rows" style = "display:none;">
+  <%= @room.rows %>
+</div>
 <script>
-  $( document ).ready(function() {
-        var margin = 5;
-        $(".seat").css("width", (1170/$('#responseObject').text()-2*margin) + "px");
-        $(".seat").css("height", (1170/$('#responseObject').text()-2*margin) + "px");
-        $(".seating-legend-vertical").css("left", ((1170/$('#responseObject').text()-2*margin)/2)+"px")
-        $(".legend-item").css("width", (1170/$('#responseObject').text()-2*margin)+"px")
-//        $(".legend-item").css("margin", margin+"px")
-    console.log((1170/$('#responseObject').text()) + "px");
-  });
+    $( document ).ready(function() {
+        if( parseFloat($('#cms-columns').text().trim()) > 18){
+            var margin = 5;
+            $(".seatings-container").css('width','100%')
+            $(".seatings-container").css('height','auto')
+            $(".seat").css("width", (1170/$('#cms-columns').text()-2*margin) + "px");
+            $(".seat").css("height", (1170/$('#cms-columns').text()-2*margin) + "px");
+            // $(".seating-legend-vertical").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
+            $(".seating-legend-vertical").css("width", 1170+"px")
+            $(".seating-legend-vertical").css("display", 'flex')
+            // $(".seating-legend-vertical").css("justify-content", 'space-around')
+            $(".seating-legend-vertical").css("left", '25px')
+            $(".legend-item").css("padding-top", '0')
+            $(".legend-item").css("height", 'auto')
+            $('.seatings').ready(function(){
+                $(".seating-legend-horizontal").css("height", $('.seatings').height()+"px")
+            })
+            $(".seating-legend-horizontal").css("display", 'flex')
+            $(".seating-legend-horizontal").css("justify-content", 'space-around')
+            $(".seating-legend-horizontal").css("left", '0px')
+            $(".seating-legend-horizontal").css("top", '25px')
+            $(".seating-legend-horizontal").css("flex-direction", 'column')
+            $(".seating-row").css('display', 'flex')
+            $(".seating-row").css('height', 'auto')
+            console.log((1170/$('#responseObject').text()) + "px");
+        }
+    });
 </script>

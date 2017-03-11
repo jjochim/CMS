@@ -1,36 +1,43 @@
-$(document).on("click", '.cs-submit-order', function(e) {
+$(document).on("submit", '#cms-comfirm-order', function(e) {
     var _data, _url;
     e.preventDefault();
-    console.log($('#seance_id'));
     _data = {
-        ARR_OF_SELECTED_FIELDS: ticketsManagement.selectedFields,
-        ARR_OF_SELECTED_SEATING_NUMBRE: ticketsManagement.selectedSeatingNumber,
-    'name': 'order_name',
+        'name': 'order_name',
         'surname': 'order_name1',
         'email': 'order_name2',
-        'phone': 'order_name3',
-        'seance_id': 2
+        'phone': 'order_name3'
     };
     console.log(_data);
-    _url = '/orders/';
-    return $.ajax({
-        method: 'get',
-        dataType: 'json',
-        data: _data,
-        url: _url,
-        success: function(response) {
-            return swal({
-                title: 'Przyjeto zamówienie!',
-                text: 'Życzymy miłego seansu!<br><button>Ok</button>',
-                type: 'success',
-                html: true,
-                showConfirmButton: false
-            });
-        },
-    });
+    _url = $('.cms-url-order').data('url')+".json";
+    console.log(_url);
+    // return $.ajax({
+    //     method: 'put',
+    //     dataType: 'json',
+    //     data: _data,
+    //     url: _url,
+    //     success: function(response) {
+    //         return swal({
+    //             title: 'Przyjeto zamówienie!',
+    //             text: 'Życzymy miłego seansu!<br><button class="swall-ok">Ok</button>',
+    //             type: 'success',
+    //             html: true,
+    //             showConfirmButton: false
+    //         });
+    //     },
+    //     error: function(response) {
+    //         return swal({
+    //             title: 'Błąd',
+    //             text: 'Błedne dane<br><button class="swall-error">Ok</button>',
+    //             type: 'warning',
+    //             html: true,
+    //             showConfirmButton: false
+    //         });
+    //     }
+    // });
 });
 
 HTML = null;
+PAYPALHTML = null;
 
 var ticketsManagement = {
     ticketsLeft: 10,
@@ -62,7 +69,8 @@ var ticketsManagement = {
             this.selectedSeatingNumber.splice(index, 1);
 
             $(dom).removeClass('cms-selected-seat');
-            this.tr(this.selectedFields, this.selectedSeatingNumber);
+            this.book(this.selectedFields, this.selectedSeatingNumber);
+            this.paypal(this.selectedFields, this.selectedSeatingNumber);
 
         } else {
 
@@ -73,7 +81,8 @@ var ticketsManagement = {
 
                 $(dom).addClass('cms-selected-seat');
                 this.ticketsLeft--;
-                this.tr(this.selectedFields, this.selectedSeatingNumber);
+                this.book(this.selectedFields, this.selectedSeatingNumber);
+                this.paypal(this.selectedFields, this.selectedSeatingNumber);
 
             } else {
                 swal("Uwaga!", "Osiągnięto maksymalną liczbę biletów!", "warning");
@@ -82,11 +91,13 @@ var ticketsManagement = {
         }
     },
 
-    tr: function( tab, tab2) {
-        document.getElementById('cms-submit-order').href = HTML + '&' + 'ARR_OF_SELECTED_FIELDS=' + tab + '&ARR_OF_SELECTED_SEATING_NUMBRE=' + tab2;
-        console.log(document.getElementById('cms-submit-order').href);
+    book: function( tab, tab2) {
+        document.getElementById('cms-submit-order').href = HTML + '&' + 'ARR_OF_SELECTED_FIELDS=' + tab + '&ARR_OF_SELECTED_SEATING_NUMBRE=' + tab2 + '&payment=false';
     },
 
+    paypal: function( tab, tab2) {
+        document.getElementById('cms-submit-order-paypal').href = PAYPALHTML + '&' + 'ARR_OF_SELECTED_FIELDS=' + tab + '&ARR_OF_SELECTED_SEATING_NUMBRE=' + tab2 + '&payment=true';
+    },
 
     deploy: function( seatingButtons) {
         this.DOMs.seatingButtons = seatingButtons;
@@ -102,6 +113,7 @@ var ticketsManagement = {
 
 $(document).on('turbolinks:load', function() {
     HTML = document.getElementById('cms-submit-order').href;
+    PAYPALHTML = document.getElementById('cms-submit-order-paypal').href;
     ticketsManagement.deploy($('.cms-seatable'));
 });
 

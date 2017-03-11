@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>Witaj, <%= @order.name %>!</h1>
+<p>
+  Uwaga informacja wygenerowana automatycznie!<br>
+</p>
+<p>
+  Aby potwierdzić rezerwację na seans: <%= @order.seance.movie.title %> Proszę kliknąć link:<br>
+  <a href=""></a>
+</p>
+<p>Dziękujemy za skorzystanie z naszych usług, miłego dnia!</p>
+<p>
+  <b>Kontakt:</b><br>
+  <%= @info.street %><br>
+  <%= @info.city %><br>
+  <%= @info.phone %><br>
+  <%= @info.email %><br>
+</p>
+</body>
+</html>

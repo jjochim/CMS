@@ -30,4 +30,21 @@ class CinemaMailer < ApplicationMailer
     end
     tmp.deliver
   end
+
+  def confirm(order)
+    @order = order
+    @seance_name = @order.seance.movie.title
+    @info = Info.last
+
+    tmp = mail(
+        to: order.email,
+        subject: 'Rezerwacja biletu',
+        from: 'cinema.managment.system@gmail.com',
+        return_path: 'cinema.managment.system@gmail.com'
+    ) do |format|
+      format.html
+      format.text
+    end
+    tmp.deliver
+  end
 end

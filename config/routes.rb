@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     collection do
       get :show_info
       get :show_room
+      get :summary
     end
   end
   resources :seatings
