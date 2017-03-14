@@ -1,0 +1,35 @@
+<%= form_for(order) do |f| %>
+    <% if order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+          <ul>
+            <% order.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name, 'Imię*' %>
+      <%= f.text_field :name, value: '' %>
+    </div>
+
+    <div class="field">
+      <%= f.label :surname, 'Nazwisko*' %>
+      <%= f.text_field :surname, value: ''%>
+    </div>
+
+    <div class="field">
+      <%= f.label :email, 'Email*' %>
+      <%= f.text_field :email, value: '' %>
+    </div>
+
+    <div class="field">
+      <%= f.label :phone, 'Telefon' %>
+      <%= f.text_field :phone,value: '' %>
+    </div>
+    <h6>* Dane obowiązkowe!</h6>
+
+<% end %>

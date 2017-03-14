@@ -104,7 +104,9 @@ class OrdersController < ApplicationController
       end
 
       if order && seance
-        CinemaMailer.deliver_info_for_user(Order.find(order_id),[a2,b4])
+        order.approved = true
+        order.save
+        CinemaMailer.info_for_user(Order.find(order_id),order.list_seats.split(',')).deliver_later(wait: 1.seconds)
       else
         puts 404
       end
@@ -122,14 +124,32 @@ class OrdersController < ApplicationController
     occupied = false
     seance_id = params[:seance_id]
     selected_fields = params[:ARR_OF_SELECTED_FIELDS].split(",")
-
-    order = Order.new(seance_id: seance_id,
-                      name: 'Imię',
-                      surname: 'Nazwisko',
-                      email: 'email@przykład.pl',
-                      phone: 'nr. tel.',
-                      paid: false
-    )
+    if 'false' == params[:payment]
+      order = Order.new(seance_id: seance_id,
+                        name: 'Imię',
+                        surname: 'Nazwisko',
+                        email: 'email@przykład.pl',
+                        phone: 'nr. tel.',
+                        paid: false,
+                        approved: false,
+                        reserved: true,
+                        paypal: false,
+                        list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE]
+      )
+    end
+    if 'true' == params[:payment]
+      order = Order.new(seance_id: seance_id,
+                        name: 'Imię',
+                        surname: 'Nazwisko',
+                        email: 'email@przykład.pl',
+                        phone: 'nr. tel.',
+                        paid: false,
+                        approved: false,
+                        reserved: false,
+                        paypal: true,
+                        list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE]
+      )
+    end
     if not order.save
       respond_to do |format|
         format.json { render json: order.errors, status: :unprocessable_entity }
@@ -152,7 +172,11 @@ class OrdersController < ApplicationController
         selected_fields.each do |id|
           order.seatings << Seating.find(id)
         end
-        redirect_to edit_order_path(order.id)
+        if 'false' == params[:payment]
+          redirect_to edit_order_path(order.id)
+        else
+          redirect_to new_payment_path(order_id: order.id)
+        end
       end
     end
   end
@@ -190,6 +214,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:name, :surname, :email, :phone, :seance_id, :paid, )
+      params.require(:order).permit(:name, :surname, :email, :phone, :approved)
     end
 end

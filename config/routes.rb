@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get :summary
     end
   end
+  resources :payments
   resources :seatings
   resources :rooms
   resources :categories
