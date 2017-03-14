@@ -38,7 +38,7 @@ class CinemaMailer < ApplicationMailer
 
     tmp = mail(
         to: order.email,
-        subject: 'Rezerwacja biletu',
+        subject: 'Potwierdzenie rezerwacji',
         from: 'cinema.managment.system@gmail.com',
         return_path: 'cinema.managment.system@gmail.com'
     ) do |format|

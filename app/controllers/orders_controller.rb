@@ -86,7 +86,30 @@ class OrdersController < ApplicationController
   end
 
   def summary
+    seance_id = params[:s]
+    order_id = params[:o]
 
+    if seance_id && order_id
+
+      begin
+        order = Order.find(order_id)
+      rescue ActiveRecord::RecordNotFound => e
+        order = nil
+      end
+
+      begin
+        seance = Seance.find(seance_id)
+      rescue ActiveRecord::RecordNotFound => e
+        seance = nil
+      end
+
+      if order && seance
+        CinemaMailer.deliver_info_for_user(Order.find(order_id),[a2,b4])
+      else
+        puts 404
+      end
+    end
+    puts 404404
   end
 
   # GET /orders/1/edit
@@ -137,9 +160,12 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
+    Rails.logger.info '$' * 30
+    Rails.logger.info params.inspect
     respond_to do |format|
       if @order.update(order_params)
-        format.json { render json: {message: "Ooo ale zajebiscie udalo sie"}, status: :ok, location: @order }
+        format.json { render json: {message: "ok"}, status: :ok, location: @order }
+        CinemaMailer.confirm(@order).deliver_later(wait: 1.seconds)
       else
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end

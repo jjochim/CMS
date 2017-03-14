@@ -2,6 +2,8 @@
 
 <%= render 'form', order: @order %>
 
-<div class="cms-url-order" data-url="<%= edit_order_path(@order) %>">
+<button id="cms-comfirm-order">Zatwierdź</button>
+
+<div class="cms-url-order" data-url="<%= order_path(@order) %>">
 </div>
 

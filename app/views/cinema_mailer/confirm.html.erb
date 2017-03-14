@@ -10,7 +10,7 @@
 </p>
 <p>
   Aby potwierdzić rezerwację na seans: <%= @order.seance.movie.title %> Proszę kliknąć link:<br>
-  <a href=""></a>
+  <a href="<%= summary_orders_url %>?s=<%= @order.seance.id %>&o=<%= @order.id %>">Potwierdzam rezerwacje</a>
 </p>
 <p>Dziękujemy za skorzystanie z naszych usług, miłego dnia!</p>
 <p>

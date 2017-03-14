@@ -1,39 +1,39 @@
-$(document).on("submit", '#cms-comfirm-order', function(e) {
+$(document).on("click", '#cms-comfirm-order', function(e) {
     var _data, _url;
     e.preventDefault();
     _data = {
-        'name': 'order_name',
-        'surname': 'order_name1',
-        'email': 'order_name2',
-        'phone': 'order_name3'
+    'order':{'name': $('#order_name').val(),
+        'surname': $('#order_surname').val(),
+        'email': $('#order_email').val(),
+        'phone': $('#order_phone').val()}
     };
     console.log(_data);
-    _url = $('.cms-url-order').data('url')+".json";
+    _url = $('.cms-url-order').data('url');
     console.log(_url);
-    // return $.ajax({
-    //     method: 'put',
-    //     dataType: 'json',
-    //     data: _data,
-    //     url: _url,
-    //     success: function(response) {
-    //         return swal({
-    //             title: 'Przyjeto zamówienie!',
-    //             text: 'Życzymy miłego seansu!<br><button class="swall-ok">Ok</button>',
-    //             type: 'success',
-    //             html: true,
-    //             showConfirmButton: false
-    //         });
-    //     },
-    //     error: function(response) {
-    //         return swal({
-    //             title: 'Błąd',
-    //             text: 'Błedne dane<br><button class="swall-error">Ok</button>',
-    //             type: 'warning',
-    //             html: true,
-    //             showConfirmButton: false
-    //         });
-    //     }
-    // });
+    return $.ajax({
+        method: 'put',
+        dataType: 'json',
+        data: _data,
+        url: _url,
+        success: function(response) {
+            return swal({
+                title: 'Przyjeto zamówienie!',
+                text: 'Życzymy miłego seansu!<br><button class="swall-ok">Ok</button>',
+                type: 'success',
+                html: true,
+                showConfirmButton: false
+            });
+        },
+        error: function(response) {
+            return swal({
+                title: 'Błąd',
+                text: 'Błedne dane<br><button class="swall-error">Ok</button>',
+                type: 'warning',
+                html: true,
+                showConfirmButton: false
+            });
+        }
+    });
 });
 
 HTML = null;
