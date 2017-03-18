@@ -3,9 +3,9 @@
     <h1>Podgląd sali</h1>
     <%= link_to 'Powrót', rooms_path, class: "btn btn-default" %>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <legend>Lista siedzień</legend>
+  <div style="display: flex; width: 100%; justify-content: center;">
+    <div style="width: 100%; height: 50px; background-color: grey;">
+      <p style = 'display:flex; align-items:center; height: 100%; margin:0px; justify-content: center; font-size: 54px;'>Ekran</p>
     </div>
   </div>
   <div class="row" style="text-align:center">
@@ -38,35 +38,7 @@
 <div id="cms-columns" style = "display:none;">
   <%= @room.columns %>
 </div>
-<div id="cms-rows" style = "display:none;">
-  <%= @room.rows %>
-</div>
+
 <script>
-    $( document ).ready(function() {
-        if( parseFloat($('#cms-columns').text().trim()) > 18){
-            var margin = 5;
-            $(".seatings-container").css('width','100%')
-            $(".seatings-container").css('height','auto')
-            $(".seat").css("width", (1170/$('#cms-columns').text()-2*margin) + "px");
-            $(".seat").css("height", (1170/$('#cms-columns').text()-2*margin) + "px");
-            // $(".seating-legend-vertical").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
-            $(".seating-legend-vertical").css("width", 1170+"px")
-            $(".seating-legend-vertical").css("display", 'flex')
-            // $(".seating-legend-vertical").css("justify-content", 'space-around')
-            $(".seating-legend-vertical").css("left", '25px')
-            $(".legend-item").css("padding-top", '0')
-            $(".legend-item").css("height", 'auto')
-            $('.seatings').ready(function(){
-                $(".seating-legend-horizontal").css("height", $('.seatings').height()+"px")
-            })
-            $(".seating-legend-horizontal").css("display", 'flex')
-            $(".seating-legend-horizontal").css("justify-content", 'space-around')
-            $(".seating-legend-horizontal").css("left", '0px')
-            $(".seating-legend-horizontal").css("top", '25px')
-            $(".seating-legend-horizontal").css("flex-direction", 'column')
-            $(".seating-row").css('display', 'flex')
-            $(".seating-row").css('height', 'auto')
-            console.log((1170/$('#responseObject').text()) + "px");
-        }
-    });
+
 </script>

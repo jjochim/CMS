@@ -281,33 +281,123 @@ var ticketsManagement = {
     }
 };
 
+var ReverseContent;
+
+ReverseContent = function(d) {
+    if (d.length < 1) {
+        return;
+    }
+    if (document.getElementById(d).style.display === 'none') {
+        document.getElementById(d).style.display = 'block';
+    } else {
+        document.getElementById(d).style.display = 'none';
+    }
+};
+
+var SetValue;
+SetValue = function(d) {
+    if (d.length < 1) {
+        return;
+    }
+    if (document.getElementById(d).value === 'true') {
+        document.getElementById(d).value = false;
+    } else {
+        document.getElementById(d).value = true;
+    }
+    // console.log(document.getElementById(d).valueOf());
+};
+
+var Validate;
+Validate = function (d) {
+    var tmp = false;
+    for (var i = 0, length = d.length; i < length; i++) {
+        if (d[i].val().length == 0) {
+            SetStyle(d[i]);
+            tmp = true;
+        }else RemoveStyle(d[i]);
+    }
+    return tmp;
+};
+
+var SetStyle;
+SetStyle = function (d) {
+  d.css('border', '2px solid red');
+  d.css('border-radius', '4px');
+};
+
+var RemoveStyle;
+RemoveStyle = function (d) {
+  d.css('border', '');
+  d.css('border-radius', '');
+};
+
+$(document).on("click", '#cms-back-payment', function (e) {
+   e.preventDefault();
+    ReverseContent('cms-cc-payment');
+    ReverseContent('cms-data-payment');
+    ReverseContent('cms-back-payment');
+    SetValue('paid');
+    $('#paid').html('Przejdz do płatości');
+});
+
 $(document).on("click", '#paid', function(e) {
     var radios = document.getElementsByName('payments');
     var _data, _url, _payment_method;
+    var name = $('#order_name');
+    var surname = $('#order_surname');
+    var email = $('#order_email');
+    var selectedTicked = parseInt($('#dom5').html());
+    var maxTicked = parseInt($('#dom0').html());
+    var tickedDiv = $('#cms-tickets-payment');
+    var number = $('#number');
+    var firstName = $('#first_name');
+    var lastName = $('#last_name');
     e.preventDefault();
+    if (Validate([name,surname,email]) == true){
+        return;
+    };
+
+    if (selectedTicked != maxTicked){
+        SetStyle(tickedDiv);
+        return;
+    }else RemoveStyle(tickedDiv);
+
     for (var i = 0, length = radios.length; i < length; i++) {
         if (radios[i].checked) {
             _payment_method = radios[i].value
-            if (radios[i].value === 'visa') {
-                console.log('visa');
+            if (radios[i].value != 'paypal') {
+                if (this.value === 'false') {
+                    ReverseContent('cms-cc-payment');
+                    ReverseContent('cms-data-payment');
+                    ReverseContent('cms-back-payment');
+                    SetValue(this.id);
+                    console.log($('#paid').html());
+                    $('#paid').html('Zapłać');
+                    return;
+                }else {
+                    if (Validate([number, firstName, lastName]) == true){
+                        return;
+                    };
+                }
             }
             break;
         }
     };
+
     _data = {
         'order':{
-            'name': $('#order_name').val(),
-            'surname': $('#order_surname').val(),
-            'email': $('#order_email').val(),
+            'name': name.val(),
+            'surname': surname.val(),
+            'email': email.val(),
             'phone': $('#order_phone').val()},
         HASH_OF_SELECTED_TICKETS: HASH_OF_SELECTED_TICKETS,
         payment_method: _payment_method,
         'credit_card':{
-            'number': $('#number').val(),
+            'number': number.val(),
             'expire_month': $('#expire_month').val(),
             'expire_year': $('#expire_year').val(),
-            'first_name': $('#first_name').val(),
-            'last_name': $('#last_name').val()}
+            'first_name': firstName.val(),
+            'last_name': lastName.val()}
     };
 
     console.log(_data);
@@ -319,7 +409,9 @@ $(document).on("click", '#paid', function(e) {
         data: _data,
         url: _url,
         success: function(response) {
-            return swal({
+            if (response.message != 'ok') {
+                window.location.href = response.message;
+            } else return swal({
                 title: 'Przyjeto zamówienie!',
                 text: 'Życzymy miłego seansu!<br><button class="swall-ok">Ok</button>',
                 type: 'success',
@@ -330,7 +422,7 @@ $(document).on("click", '#paid', function(e) {
         error: function(response) {
             return swal({
                 title: 'Błąd',
-                text: 'Błedne dane<br><button class="swall-error">Ok</button>',
+                text: 'Błedne dane!<br>'+ JSON.parse(response.responseText).message +'<br><button class="swall-error">Ok</button>',
                 type: 'warning',
                 html: true,
                 showConfirmButton: false

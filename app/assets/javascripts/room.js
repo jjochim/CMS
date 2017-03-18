@@ -67,21 +67,21 @@ var SeatingUtils = {
 
 };
 
-$(document).ready(function() {
-    // your stuff here
-    // uruchamiam obsluge jsa
-    SeatingUtils.initialize();
-    //console.log("INI");
-    // podpinam obsluge zmiany i zapisu
-    $('.seat').on('click', function(e) {
-        var $div = $(e.currentTarget);
-        //console.log("CLICKED", e.currentTarget);
-        var $input = $div.find('.seating-status');
-        //console.log($input.val( (!SeatingUtils.castBoolean($input.val())).toString() ))
-        $input.val( (!SeatingUtils.castBoolean($input.val())).toString() );
-        SeatingUtils.save($div);
-    });
-})
+// $(document).ready(function() {
+//     // your stuff here
+//     // uruchamiam obsluge jsa
+//     SeatingUtils.initialize();
+//     //console.log("INI");
+//     // podpinam obsluge zmiany i zapisu
+//     $('.seat').on('click', function(e) {
+//         var $div = $(e.currentTarget);
+//         //console.log("CLICKED", e.currentTarget);
+//         var $input = $div.find('.seating-status');
+//         //console.log($input.val( (!SeatingUtils.castBoolean($input.val())).toString() ))
+//         $input.val( (!SeatingUtils.castBoolean($input.val())).toString() );
+//         SeatingUtils.save($div);
+//     });
+// })
 
 $(document).on('page:load', function() {
     // your stuff here
@@ -97,6 +97,32 @@ $(document).on('page:load', function() {
         $input.val( (!SeatingUtils.castBoolean($input.val())).toString() );
         SeatingUtils.save($div);
     });
+});
 
-
+$( document ).ready(function() {
+    if( parseFloat($('#cms-columns').text().trim()) > 18){
+        var margin = 5;
+        $(".seatings-container").css('width','100%')
+        $(".seatings-container").css('height','auto')
+        $(".seat").css("width", (1170/$('#cms-columns').text()-2*margin) + "px");
+        $(".seat").css("height", (1170/$('#cms-columns').text()-2*margin) + "px");
+        // $(".seating-legend-vertical").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
+        $(".seating-legend-vertical").css("width", 1170+"px")
+        $(".seating-legend-vertical").css("display", 'flex')
+        // $(".seating-legend-vertical").css("justify-content", 'space-around')
+        $(".seating-legend-vertical").css("left", '25px')
+        $(".legend-item").css("padding-top", '0')
+        $(".legend-item").css("height", 'auto')
+        $('.seatings').ready(function(){
+            $(".seating-legend-horizontal").css("height", $('.seatings').height()+"px")
+        })
+        $(".seating-legend-horizontal").css("display", 'flex')
+        $(".seating-legend-horizontal").css("justify-content", 'space-around')
+        $(".seating-legend-horizontal").css("left", '0px')
+        $(".seating-legend-horizontal").css("top", '25px')
+        $(".seating-legend-horizontal").css("flex-direction", 'column')
+        $(".seating-row").css('display', 'flex')
+        $(".seating-row").css('height', 'auto')
+        console.log((1170/$('#responseObject').text()) + "px");
+    }
 });

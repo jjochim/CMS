@@ -10,6 +10,10 @@ class PaymentsController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    p session[:payment_id]
+    if params[:paymentId] && params[:paymentId] == session[:payment_id]
+      @order.update(approved: true, paid: true)
+    end
   end
 
   # GET /orders/new
@@ -43,10 +47,21 @@ class PaymentsController < ApplicationController
   def update
     Rails.logger.info '$' * 30
     Rails.logger.info params.inspect
+    credit_card = {}
     payment_method = params[:payment_method]
+    credit_card['type'] = payment_method
+    if params[:credit_card]
+      params[:credit_card].to_hash.each do |kay,val|
+        credit_card[kay]=val
+      end
+    end
     hash = params[:HASH_OF_SELECTED_TICKETS]
     tmp = 0
     seating_count = @order.seatings.count
+    order_id = @order.id
+    items = []
+    item = {}
+    total = 0
 
     respond_to do |format|
       if @order.update(order_params)
@@ -55,93 +70,110 @@ class PaymentsController < ApplicationController
         if hash
           hash.to_hash.each do |key, val|
             Rails.logger.info 'key: ' + key + ' val: ' + val
-            ticket = Ticket.where(name: key)
+            ticket = Ticket.where(name: key).last
             Rails.logger.info  ap ticket
             Rails.logger.info 'ticket'
+            item['name']=key
+            item['sku']=key
+            item['price']=format("%.2f",ticket.price)
+            item['currency']='USD'
+            item['quantity']=val
+            total = total + (ticket.price * val.to_f)
             0.upto(val.to_i - 1) do
               @order.tickets << ticket
             end
             tmp = tmp + val.to_i
+            items << item
           end
           if tmp!=seating_count
             @order.order_tickets.each do |val|
               val.destroy
             end
-            format.json { render json: @order.errors, status: :unprocessable_entity }
+            format.json { render json: {message: 'Niewybrano biletów!'}, status: :unprocessable_entity }
           end
         else
-          format.json { render json: @order.errors, status: :unprocessable_entity }
+          format.json { render json: {message: 'Niepoprawne dane biletów!'}, status: :unprocessable_entity }
         end
 
-        if payment_method == 'paypal'
-          puts 'adssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss'
-        else
-          puts 'fdsagasasdgagsgasdfsaggsadfsagdfgsfadgsfdasagfd'
-          # pid=Process.fork do
-          #   require '././cc.rb'
-          #   Process.exit
-          # end
-          # puts "cc.rb PID #{pid}"
-          @payment = PayPal::SDK::REST::Payment.new({ :intent => "sale",
+        Rails.logger.info items
+        Rails.logger.info total
+        Rails.logger.info credit_card
 
-                                                      # ###Payer
-                                                      # A resource representing a Payer that funds a payment
-                                                      # Use the List of `FundingInstrument` and the Payment Method
-                                                      # as 'credit_card'
+        if payment_method == 'paypal'
+          puts 'paypal payment'
+          @payment = PayPal::SDK::REST::Payment.new({
+                                                        :intent =>  "sale",
+
+                                                        # ###Payer
+                                                        # A resource representing a Payer that funds a payment
+                                                        # Payment Method as 'paypal'
+                                                        :payer =>  {
+                                                            :payment_method =>  "paypal" },
+
+                                                        # ###Redirect URLs
+                                                        :redirect_urls => {
+                                                            :return_url => payment_url(@order),
+                                                            :cancel_url => new_payment_url(order_id: @order.id)},
+
+                                                        # ###Transaction
+                                                        # A transaction defines the contract of a
+                                                        # payment - what is the payment for and who
+                                                        # is fulfilling it.
+                                                        :transactions =>  [{
+
+                                                                               # Item List
+                                                                               :item_list => {
+                                                                                   :items => items},
+
+                                                                               # ###Amount
+                                                                               # Let's you specify a payment amount.
+                                                                               :amount =>  {
+                                                                                   :total =>  format("%.2f",total),
+                                                                                   :currency =>  "USD" },
+                                                                               :description =>  "Opłata " + @order.name + " " + @order.surname + " " + @order.email + "." }]})
+
+# Create Payment and return status
+          if @payment.create
+            # Redirect the user to given approval url
+            @redirect_url = @payment.links.find{|v| v.rel == "approval_url" }.href
+            logger.info "Payment[#{@payment.id}]"
+            session[:payment_id] = @payment.id
+            logger.info "Redirect: #{@redirect_url}"
+            format.json { render json: {message: @redirect_url.to_s }, status: :ok, location: @order }
+          else
+            logger.error @payment.error.inspect
+            format.json { render json: {message: 'Błąd połaczenia. Sprubój póżniej!'}, status: :unprocessable_entity }
+          end
+
+
+        else
+          puts 'credit card payment'
+          @payment = PayPal::SDK::REST::Payment.new({ :intent => "sale",
                                                       :payer => {
                                                           :payment_method => "credit_card",
-
-                                                          # ###FundingInstrument
-                                                          # A resource representing a Payeer's funding instrument.
-                                                          # Use a Payer ID (A unique identifier of the payer generated
-                                                          # and provided by the facilitator. This is required when
-                                                          # creating or using a tokenized funding instrument)
-                                                          # and the `CreditCardDetails`
                                                           :funding_instruments => [{
-
-                                                                                       # ###CreditCard
-                                                                                       # A resource representing a credit card that can be
-                                                                                       # used to fund a payment.
-                                                                                       :credit_card => {
-                                                                                           :type => "visa",
-                                                                                           :number => "4063332087878016",
-                                                                                           :expire_month => "11",
-                                                                                           :expire_year => "2021",
-                                                                                           :first_name => "Joee",
-                                                                                           :last_name => "Shopper",}}]},
-                                                      # ###Transaction
-                                                      # A transaction defines the contract of a
-                                                      # payment - what is the payment for and who
-                                                      # is fulfilling it.
+                                                                                       :credit_card => credit_card}]},
                                                       :transactions => [{
-
-                                                                            # Item List
                                                                             :item_list => {
-                                                                                :items => [{
-                                                                                               :name => "item",
-                                                                                               :sku => "item",
-                                                                                               :price => "15",
-                                                                                               :currency => "USD",
-                                                                                               :quantity => 1 }]},
-
-                                                                            # ###Amount
-                                                                            # Let's you specify a payment amount.
+                                                                                :items => items},
                                                                             :amount => {
-                                                                                :total => "15.00",
+                                                                                :total => format("%.2f",total),
                                                                                 :currency => "USD" },
-                                                                            :description => "Test credit card payment." }]})
+                                                                            :description => "Opłata " + @order.name + " " + @order.surname + " " + @order.email + "." }]})
           if @payment.create
             logger.info "Payment[#{@payment.id}] created successfully"
+            @order.update(approved: true, paid: true)
+            format.json { render json: {message: "ok"}, status: :ok, location: @order }
           else
             # Display Error message
             logger.error "Error while creating payment:"
             logger.error @payment.error.inspect
+            format.json { render json: {message: 'Nie poprawne dane karty kredytowej!'}, status: :unprocessable_entity }
           end
         end
 
-        format.json { render json: {message: "ok"}, status: :ok, location: @order }
       else
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+        format.json { render json: {message: "Nie poprawne dane zamówienia!"}, status: :unprocessable_entity }
       end
     end
   end

@@ -1,72 +1,81 @@
 <div class="cms-url-payment" data-url="<%= payment_path(@order) %>" data-order-id="<%= @order.id %>"></div>
-<div>
-  <%= render 'form', order: @order %>
-</div>
-<a id="dom5">0</a><a id="dom0"><%= @max %></a>
-<div class="cs-tickets-managment" >
-  <%= select_tag :ticket_id, options_for_select(Ticket.all.map {|x| [x.name, x.id]}),  class: 'cs-type-of-tickets', id: 'dom1' %>
-  <%= select_tag :how_many_tickets, options_for_select((1..@max)), class: 'cs-how-many-tickets', id: 'dom2' %>
-  <button id="dom3">Dodaj</button>
-</div>
-<div class="cs-tickets-results" id="dom4">
-</div>
-<div>
-  Visa:
-  <%= radio_button_tag(:payments, "visa") %><br>
 
-  PayPal:
-  <%= radio_button_tag(:payments, "paypal") %>
+<div id="cms-data-payment">
+  <div class="col-xs-6">
+    <%= render 'form', order: @order %>
+  </div>
+  <div class="col-xs-6" id="cms-tickets-payment">
+    <a id="dom5">0</a><a id="dom0"><%= @max %></a>
+    <div class="cs-tickets-managment" >
+      <%= select_tag :ticket_id, options_for_select(Ticket.all.map {|x| [x.name, x.id]}),  class: 'cs-type-of-tickets', id: 'dom1' %>
+      <%= select_tag :how_many_tickets, options_for_select((1..@max)), class: 'cs-how-many-tickets', id: 'dom2' %>
+      <button id="dom3">Dodaj</button>
+    </div>
+    <div class="cs-tickets-results" id="dom4">
+    </div>
+  </div>
+  <div class="col-xs-12">
+    Visa:
+    <%= radio_button_tag(:payments, "visa", checked = true) %><br>
 
-  <button id="paid">Przejdz do platnosci</button>
+    PayPal:
+    <%= radio_button_tag(:payments, "paypal") %>
+  </div>
 </div>
 
 
-<div>
+<div id="cms-cc-payment" class="col-xs-12" style="display: none">
   <div class="form-group">
     <label for="number">Numer karty:</label>
-    <input type="text" class="form-control" id="number">
+    <input type="text" class="form-control" id="number" value="4063332087878016">
   </div>
   <div class="form-group">
     <label for="expire_month">Miesiac:</label>
     <select class="form-control" id="expire_month">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-      <option>6</option>
-      <option>7</option>
-      <option>8</option>
-      <option>9</option>
-      <option>10</option>
+      <!--<option>1</option>-->
+      <!--<option>2</option>-->
+      <!--<option>3</option>-->
+      <!--<option>4</option>-->
+      <!--<option>5</option>-->
+      <!--<option>6</option>-->
+      <!--<option>7</option>-->
+      <!--<option>8</option>-->
+      <!--<option>9</option>-->
+      <!--<option>10</option>-->
       <option>11</option>
-      <option>12</option>
+      <!--<option>12</option>-->
     </select>
   </div>
   <div class="form-group">
     <label for="expire_year">Rok:</label>
     <select class="form-control" id="expire_year">
-      <option>2017</option>
-      <option>2018</option>
-      <option>2019</option>
-      <option>2020</option>
+      <!--<option>2017</option>-->
+      <!--<option>2018</option>-->
+      <!--<option>2019</option>-->
+      <!--<option>2020</option>-->
       <option>2021</option>
-      <option>2022</option>
-      <option>2023</option>
-      <option>2024</option>
-      <option>2025</option>
-      <option>2026</option>
-      <option>2027</option>
+      <!--<option>2022</option>-->
+      <!--<option>2023</option>-->
+      <!--<option>2024</option>-->
+      <!--<option>2025</option>-->
+      <!--<option>2026</option>-->
+      <!--<option>2027</option>-->
     </select>
   </div>
   <div class="form-group">
     <label for="first_name">Imie:</label>
-    <input type="text" class="form-control" id="first_name">
+    <input type="text" class="form-control" id="first_name" value="Joee">
   </div>
   <div class="form-group">
     <label for="last_name">Nazwisko:</label>
-    <input type="text" class="form-control" id="last_name">
+    <input type="text" class="form-control" id="last_name" value="Shopper">
   </div>
-  <button id="cms-confirm-paypal">Zatwierdzam</button>
 </div>
+<div class="col-xs-12">
+  <button id="paid" value="false">Przejdz do płatności</button>
+  <button id="cms-back-payment" style="display: none">Powrót</button>
+</div>
+
+
+
 

@@ -33,10 +33,9 @@ class OrdersController < ApplicationController
     @seance_info = Seance.find(params[:seance_id])
     room_quantity = @seance_info.room.seatings.where(slot: true).count
     current_orders = @seance_info.orders
-    @current_seatings = current_orders.map {|x| x.seatings}.count
+    @current_seatings = (current_orders.map {|x| x.seatings.count}).reduce(0, :+)
     @available_seatings = room_quantity - @current_seatings
     @progress_bar = (@available_seatings * 100 / room_quantity).round
-
   end
 
   def show_room
@@ -129,7 +128,6 @@ class OrdersController < ApplicationController
                         name: 'Imię',
                         surname: 'Nazwisko',
                         email: 'email@przykład.pl',
-                        phone: 'nr. tel.',
                         paid: false,
                         approved: false,
                         reserved: true,
@@ -142,7 +140,6 @@ class OrdersController < ApplicationController
                         name: 'Imię',
                         surname: 'Nazwisko',
                         email: 'email@przykład.pl',
-                        phone: 'nr. tel.',
                         paid: false,
                         approved: false,
                         reserved: false,
@@ -151,9 +148,7 @@ class OrdersController < ApplicationController
       )
     end
     if not order.save
-      respond_to do |format|
-        format.json { render json: order.errors, status: :unprocessable_entity }
-      end
+      redirect_to show_room_orders_path(seance_id: seance_id), notice: "Błąd serwer. Sprubój później!"
     else
       seance = Seance.find(seance_id)
       current_orders = seance.orders
@@ -167,7 +162,7 @@ class OrdersController < ApplicationController
       end
       if occupied
         order.delete
-        redirect_to show_room_orders_path(seance_id: seance_id), notice: "Something serious happened"
+        redirect_to show_room_orders_path(seance_id: seance_id), notice: "Przepraszamy, te miejsca zostały już zajęte!"
       else
         selected_fields.each do |id|
           order.seatings << Seating.find(id)
