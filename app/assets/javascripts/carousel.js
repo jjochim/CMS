@@ -1,7 +1,7 @@
 /**
  * Created by jj on 30.10.16.
  */
-$(document).on('ready', function() {
+$(document).on('turbolinks:load', function() {
     $(".regular").slick({
         dots: true,
         infinite: true,

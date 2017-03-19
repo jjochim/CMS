@@ -1,0 +1,26 @@
+.cms-login-submit{
+  width: 260px;
+}
+
+.cms-login-imput{
+  margin-left: 38.4%;
+  width: 260px;
+  text-align: center;
+}
+
+.cms-login{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cms-login > * {
+  padding: 10px;
+  flex: 1 100%;
+}

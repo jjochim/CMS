@@ -1,0 +1,30 @@
+<h1>Konta</h1>
+<%= link_to new_user_path, class: "btn btn-success admin_new" do %>
+    <span>Dodaj nowe konto</span>
+<% end %>
+<div class="col-xs-6">
+  <table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+      <th>Imie</th>
+      <th>Nazwisko</th>
+      <th>Rola</th>
+      <th colspan="3">Akcje</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.role %></td>
+          <td class="text-right"><%= link_to 'Szczegóły', user_path(id: user), class: "btn btn-default btn-xs" %>
+            <%= link_to 'Edit', edit_user_path(id: user), class: "btn btn-default btn-xs" %>
+            <%= link_to 'Usuń', user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

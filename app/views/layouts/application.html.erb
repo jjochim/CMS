@@ -25,6 +25,7 @@
                 <li <% if [params[:controller], params[:action]] == ["orders", "index"] %>class="active"<% end %>><%= link_to "Zamówienia", orders_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["tickets", "index"] %>class="active"<% end %>><%= link_to "Bilety", tickets_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["infos", "edit"] %>class="active"<% end %>><%= link_to "Kontakt", edit_info_path(1) %></li>
+                <li <% if [params[:controller], params[:action]] == ["users", "index"] %>class="active"<% end %>><%= link_to "Konta", users_path %></li>
             <% else %>
                 <li <% if [params[:controller], params[:action]] == ["movie", "index"] %>class="active"<% end %>><%= link_to "Filmy", root_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["seances", "index"] %>class="active"<% end %>><%= link_to "Seanse", seances_path %></li>

@@ -1,6 +1,11 @@
 <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>
 <% end %>
+<div class="cms-screen-wrapper">
+  <div class="cms-screen">
+    <p class="cms-screen-inside">Ekran</p>
+  </div>
+</div>
 <div class="row" style="text-align:center">
   <div class="seatings-container" style="display: inline-block; width: <%= @room.columns*64 + 40 %>px; height: <%= @room.rows*60 + 40%>px">
     <div class="seating-legend-vertical">
@@ -17,7 +22,7 @@
       <% @responseObject.each_with_index do |item, i| %>
           <div class="seating-row" style="width: <%= @room.columns * 64 %>px">
             <% item.each_with_index do |child, j| %>
-                <div class="cms-seat <%=  child.slot == true  ? 'cms-seatable' : 'cms-not-seatable'%>
+                <div class="seat <%=  child.slot == true  ? 'cms-seatable' : 'cms-not-seatable'%>
                 <%= "cms-occupied" if @occupied_places.include? child.id %>" data-seating-id="<%= child.id %>" data-seating-number="<%= j+1 %><%=(65 + i).chr %>">
                   <%= j+1 %><%=(65 + i).chr %>
                 </div>
@@ -27,7 +32,11 @@
     </div>
   </div>
 </div>
+<div class=""></div>
 <%= link_to 'Rezerwój', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order"  %>
 <%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal"  %>
+<div id="cms-columns" style = "display:none;">
+  <%= @room.columns %>
+</div>
 
 

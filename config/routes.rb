@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :payments
   resources :seatings
   resources :rooms
+  resources :users
   resources :categories
   root to: 'movies#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

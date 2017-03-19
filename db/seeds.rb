@@ -58,8 +58,8 @@ Ticket.create(name: 'studencki', price: '15')
 puts
 
 print 'Seance '
-0.upto(10) do |indx|
-  0.upto(24) do |index|
+0.upto(4) do |indx|
+  10.upto(24) do |index|
     0.upto(10) do
       print '. '
       Seance.create(room: Room.all.shuffle.first, movie: Movie.all.shuffle.first, start_date: Time.now + indx.days + index.hours,

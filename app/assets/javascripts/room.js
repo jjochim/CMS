@@ -99,30 +99,39 @@ $(document).on('page:load', function() {
     });
 });
 
-$( document ).ready(function() {
-    if( parseFloat($('#cms-columns').text().trim()) > 18){
-        var margin = 5;
-        $(".seatings-container").css('width','100%')
-        $(".seatings-container").css('height','auto')
-        $(".seat").css("width", (1170/$('#cms-columns').text()-2*margin) + "px");
-        $(".seat").css("height", (1170/$('#cms-columns').text()-2*margin) + "px");
+$(document).ready(function() {
+    var colums = $('#cms-columns').text();
+    var margin = 5;
+    var seat = (1115/colums-2*margin);
+    var width = $(".seatings-container").css("width");
+    if( parseFloat(colums.trim()) > 18){
+        $(".seatings-container").css('width','100%');
+        $(".seatings-container").css('height','auto');
+        // $(".seatings-container").css('margin_right','25px')
+        $(".seat").css("width", seat + "px");
+        $(".seat").css("height", seat + "px");
         // $(".seating-legend-vertical").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
-        $(".seating-legend-vertical").css("width", 1170+"px")
-        $(".seating-legend-vertical").css("display", 'flex')
+        $(".seating-legend-vertical").css("width", 1115+"px");
+        $(".seating-legend-vertical").css("display", 'flex');
         // $(".seating-legend-vertical").css("justify-content", 'space-around')
-        $(".seating-legend-vertical").css("left", '25px')
-        $(".legend-item").css("padding-top", '0')
-        $(".legend-item").css("height", 'auto')
+        $(".seating-legend-vertical").css("left", '25px');
+        $(".legend-item").css("padding-top", '0');
+        $(".legend-item").css("height", 'auto');
         $('.seatings').ready(function(){
-            $(".seating-legend-horizontal").css("height", $('.seatings').height()+"px")
-        })
-        $(".seating-legend-horizontal").css("display", 'flex')
-        $(".seating-legend-horizontal").css("justify-content", 'space-around')
-        $(".seating-legend-horizontal").css("left", '0px')
-        $(".seating-legend-horizontal").css("top", '25px')
-        $(".seating-legend-horizontal").css("flex-direction", 'column')
-        $(".seating-row").css('display', 'flex')
-        $(".seating-row").css('height', 'auto')
+            $(".seating-legend-horizontal").css("height", $('.seatings').height()+"px");
+        });
+        $(".seating-legend-horizontal").css("display", 'flex');
+        $(".seating-legend-horizontal").css("justify-content", 'space-around');
+        $(".seating-legend-horizontal").css("left", '0px');
+        $(".seating-legend-horizontal").css("top", '25px');
+        $(".seating-legend-horizontal").css("flex-direction", 'column');
+        $(".seating-row").css('display', 'flex');
+        $(".seating-row").css('height', 'auto');
+        $(".seating-row").css('width', 'auto');
         console.log((1170/$('#responseObject').text()) + "px");
+
+        $(".cms-screen-wrapper").css("width", colums * seat + "px");
+    }else {
+        $(".cms-screen-wrapper").css("width", parseFloat(width) * 0.8 + "px");
     }
 });
