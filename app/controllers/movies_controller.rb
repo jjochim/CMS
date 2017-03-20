@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
     if current_user and current_user.role == 'admin'
       @movies = @search.result(distinct: true).paginate(:page => params[:page])
     else
-      movies = MMMM
+      movies = $movie_front_side
       # movies = Seance.seven_days_from_now.map{|x| x.movie.id}.uniq
       @movies = @search.result(distinct: true).where(id: movies).paginate(:page => params[:page])
     end
