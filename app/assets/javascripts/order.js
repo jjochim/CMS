@@ -352,6 +352,7 @@ $(document).on("click", '#paid', function(e) {
     var number = $('#number');
     var firstName = $('#first_name');
     var lastName = $('#last_name');
+    var modal = $('#myModal');
     e.preventDefault();
     if (Validate([name,surname,email]) == true){
         return;
@@ -378,10 +379,11 @@ $(document).on("click", '#paid', function(e) {
                     if (Validate([number, firstName, lastName]) == true){
                         return;
                     };
-                }
-            }
+                };
+            };
+            modal.css('display', 'block');
             break;
-        }
+        };
     };
 
     _data = {
@@ -411,15 +413,19 @@ $(document).on("click", '#paid', function(e) {
         success: function(response) {
             if (response.message != 'ok') {
                 window.location.href = response.message;
-            } else return swal({
-                title: 'Przyjeto zamówienie!',
-                text: 'Życzymy miłego seansu!<br><button class="swall-ok">Ok</button>',
-                type: 'success',
-                html: true,
-                showConfirmButton: false
-            });
+            } else {
+                modal.css('display','none');
+                return swal({
+                    title: 'Przyjeto zamówienie!',
+                    text: 'Życzymy miłego seansu!<br><button class="swall-ok">Ok</button>',
+                    type: 'success',
+                    html: true,
+                    showConfirmButton: false
+                });
+            };
         },
         error: function(response) {
+            modal.css('display','none');
             return swal({
                 title: 'Błąd',
                 text: 'Błedne dane!<br>'+ JSON.parse(response.responseText).message +'<br><button class="swall-error">Ok</button>',

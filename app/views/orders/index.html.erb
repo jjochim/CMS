@@ -1,80 +1,51 @@
-<div class="container">
-
-  <h1>Zamówienia</h1>
-  <div class="search-form">
-    <%= search_form_for @search do |f| %>
-        <%= f.label :name_or_surname_cont, 'Imię lub nazwisko:' %>
-        <%= f.text_field :name_or_surname_cont %>
-        <%= f.submit value: 'Szukaj' %>
+<div class="row">
+  <ul class="nav nav-tabs" role="tablist">
+    <% active = 6 %>
+    <% tmp = false %>
+    <% (0..6).each do |indx1| %>
+        <% one_day = @seances.where(start_date: (Time.now.beginning_of_day + indx1.days)..(Time.now.end_of_day + indx1.days)) %>
+        <% tmp1 = day_of_week((Time.now + indx1.day).wday) %>
+        <li role="presentation" class="<% if one_day.count == 0 %>disable-nav-tabs<% else; active = indx1; end %><% if indx1 == active and tmp == false; tmp = true %>active<% end %>" >
+          <a href="#<%= tmp1 %>" aria-controls="<%= tmp1 %>" role="tab" data-toggle="tab">
+            <h4 class="date-seance"><%= tmp1 %></h4><%= format_date(Time.now + indx1.day) %>
+          </a>
+        </li>
+    <% end %>
+  </ul>
+  <div class="tab-content seance cms-order-reserved">
+    <% active = 6 %>
+    <% tmp = false %>
+    <% (0..6).each do |indx2| %>
+        <% one_day = @seances.where(start_date: (Time.now.beginning_of_day + indx2.days)..(Time.now.end_of_day + indx2.days)) %>
+        <% tmp2 = day_of_week((Time.now + indx2.day).wday) %>
+        <div role="tabpanel" class="tab-pane <% if one_day.count != 0; active = indx2; end %><% if indx2 == active and tmp == false; tmp = true %>active<% end %>" id="<%= tmp2 %>">
+          <table class="table-hover table">
+            <tbody>
+            <tr>
+              <td><b>Imię:</b></td>
+              <td><b>Nazwisko:</b></td>
+              <td><b>Email:</b></td>
+              <td><b>Tel:</b></td>
+              <td><b>Film:</b></td>
+              <td><b>Sala:</b></td>
+            </tr>
+            <% one_day.sort_by { |x| x.start_date}.each do |seance| %>
+              <% seance.orders.each do |order| %>
+                <% if order.approved == true && order.reserved == true %>
+                  <tr>
+                    <td><%= order.name %></td>
+                    <td><%= order.surname %></td>
+                    <td><%= order.email %></td>
+                    <td><% if order.phone %><%= order.phone %><% else %> - <% end %></td>
+                    <td><%= order.seance.movie.title %></td>
+                    <td><%= order.seance.room.name %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
     <% end %>
   </div>
-  <table class="table table-striped table-bordered">
-    <thead>
-    <tr>
-      <th colspan="10" class="text-center not-paid">
-        <h4 class="not-paid-title"><b>Rezerwacje</b></h4>
-      </th>
-    </tr>
-    <tr>
-      <th>Imię</th>
-      <th>Nazwisko</th>
-      <th>Email</th>
-      <th>Telefon</th>
-      <th>Data seansu</th>
-      <th>Film</th>
-      <th>Sala</th>
-      <th colspan="3">Akcje</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @orders.each do |order| %>
-        <tr>
-          <td><%= order.name %></td>
-          <td><%= order.surname %></td>
-          <td><%= order.email %></td>
-          <td><%= order.phone %></td>
-          <td><%= format_datatime(order.seance.start_date) %></td>
-          <td><%= order.seance.movie.title %></td>
-          <td><%= order.seance.room.name %></td>
-          <td class="text-right"><%= link_to 'Szczególy', order, class: "btn btn-default btn-xs" %>
-            <%= link_to 'Usuń', order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
-        </tr>
-    <% end %>
-    </tbody>
-
-    <thead>
-    <tr>
-      <th colspan="10" class="text-center not-paid">
-        <h4 class="not-paid-title"><b>Opłacone</b></h4>
-      </th>
-    </tr>
-    <tr>
-      <th>Imię</th>
-      <th>Nazwisko</th>
-      <th>Email</th>
-      <th>Telefon</th>
-      <th>Data seansu</th>
-      <th>Film</th>
-      <th>Sala</th>
-      <th colspan="3">Akcje</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @paid_orders.each do |order| %>
-        <tr>
-          <td><%= order.name %></td>
-          <td><%= order.surname %></td>
-          <td><%= order.email %></td>
-          <td><%= order.phone %></td>
-          <td><%= format_datatime(order.seance.start_date) %></td>
-          <td><%= order.seance.movie.title %></td>
-          <td><%= order.seance.room.name %></td>
-          <td class="text-right"><%= link_to 'Szczególy', order, class: "btn btn-default btn-xs" %>
-            <%= link_to 'Usuń', order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
 </div>

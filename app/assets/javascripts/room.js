@@ -67,23 +67,7 @@ var SeatingUtils = {
 
 };
 
-// $(document).ready(function() {
-//     // your stuff here
-//     // uruchamiam obsluge jsa
-//     SeatingUtils.initialize();
-//     //console.log("INI");
-//     // podpinam obsluge zmiany i zapisu
-//     $('.seat').on('click', function(e) {
-//         var $div = $(e.currentTarget);
-//         //console.log("CLICKED", e.currentTarget);
-//         var $input = $div.find('.seating-status');
-//         //console.log($input.val( (!SeatingUtils.castBoolean($input.val())).toString() ))
-//         $input.val( (!SeatingUtils.castBoolean($input.val())).toString() );
-//         SeatingUtils.save($div);
-//     });
-// })
-
-$(document).on('page:load', function() {
+$(document).ready(function() {
     // your stuff here
     // uruchamiam obsluge jsa
     SeatingUtils.initialize();
@@ -98,6 +82,27 @@ $(document).on('page:load', function() {
         SeatingUtils.save($div);
     });
 });
+
+// $(document).on('page:load', function() {
+//     // your stuff here
+//     // uruchamiam obsluge jsa
+//     SeatingUtils.initialize();
+//     //console.log("INI");
+//     // podpinam obsluge zmiany i zapisu
+//     $('.seat').on('click', function(e) {
+//         var $div = $(e.currentTarget);
+//         //console.log("CLICKED", e.currentTarget);
+//         var $input = $div.find('.seating-status');
+//         //console.log($input.val( (!SeatingUtils.castBoolean($input.val())).toString() ))
+//         $input.val( (!SeatingUtils.castBoolean($input.val())).toString() );
+//         SeatingUtils.save($div);
+//     });
+// });
+
+$(document).on("click", '#cms-room-create', function(e) {
+    $('#myModal').css('display', 'block');
+});
+
 
 $(document).ready(function() {
     var colums = $('#cms-columns').text();

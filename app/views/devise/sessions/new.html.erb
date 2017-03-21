@@ -11,9 +11,10 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "Log in", value: 'Zaloguj', class: 'cms-login-submit' %>
+        <%= f.submit "Log in", value: 'Zaloguj', class: 'cms-login-submit btn btn-default' %>
       </div>
   <% end %>
-
-  <%= render "devise/shared/links" %>
+  <div class="cms-login-link">
+    <%= render "devise/shared/links" %>
+  </div>
 </div>

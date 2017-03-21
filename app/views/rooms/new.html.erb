@@ -1,7 +1,10 @@
-<div class="container">
-  <h1>Kreator sali</h1>
+<h1>Kreator sali</h1>
 
-  <%= render 'form', room: @room %>
+<%= render 'form', room: @room %>
 
-  <%= button_to 'Powrót', rooms_path, class: 'button', method: :get  %>
+<%= button_to 'Powrót', rooms_path, class: 'button', method: :get  %>
+
+<div id="myModal" class="modal">
+  Proszę czekać...
+  <div class="modal-content loader"></div>
 </div>

@@ -16,9 +16,10 @@ class OrdersController < ApplicationController
       @orders = @search.result(distinct: true).where(paid: false)
       @paid_orders = @search.result(distinct: true).where(paid: true)
     else
-      seance = Seance.seven_days_from_now.map{|x| x.id}
-      @orders = @search.result(distinct: true).where(paid: false).where(seance_id: seance)
-      @paid_orders = @search.result(distinct: true).where(paid: true).where(seance_id: seance)
+      @seances = Seance.seven_days_from_now
+                    # .map{|x| x.id}
+      @orders = @search.result(distinct: true).where(paid: false).where(seance_id: @seances)
+      @paid_orders = @search.result(distinct: true).where(paid: true).where(seance_id: @seances)
     end
   end
 
