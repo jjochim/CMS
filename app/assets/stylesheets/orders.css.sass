@@ -54,3 +54,29 @@
 
 .cms-order-reserved
   margin-right: 32px
+
+.photo-payments
+  width: 80px
+  height: 48px
+  border: 2px solid goldenrod
+  border-radius: 4px
+
+input[name="payments"]:checked+label
+  margin-left: 20px
+  -webkit-filter: none
+  filter: none
+
+input[name="payments"]+label
+  width: 80px
+  height: 48px
+  -webkit-filter: grayscale(100%)
+  filter: grayscale(100%)
+
+input[name="payments"]
+  display: none
+
+#dom3
+  margin-top: 23px
+
+.cms-payments-title a
+  font-size: small

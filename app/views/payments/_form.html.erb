@@ -11,24 +11,24 @@
         </div>
     <% end %>
 
-    <div class="field">
+    <div class="field form-group">
       <%= f.label :name, 'Imię*' %>
-      <%= f.text_field :name, value: 'sad' %>
+      <%= f.text_field :name, value: 'sad' , class: 'form-control' %>
     </div>
 
-    <div class="field">
+    <div class="field form-group">
       <%= f.label :surname, 'Nazwisko*' %>
-      <%= f.text_field :surname, value: 'sa'%>
+      <%= f.text_field :surname, value: 'sa', class: 'form-control'%>
     </div>
 
-    <div class="field">
+    <div class="field form-group">
       <%= f.label :email, 'Email*' %>
-      <%= f.text_field :email, value: 'dsa@as.pl' %>
+      <%= f.text_field :email, value: 'dsa@as.pl', class: 'form-control' %>
     </div>
 
-    <div class="field">
+    <div class="field form-group">
       <%= f.label :phone, 'Telefon' %>
-      <%= f.text_field :phone,value: '' %>
+      <%= f.text_field :phone,value: '', class: 'form-control' %>
     </div>
     <h6>* Dane obowiązkowe!</h6>
 

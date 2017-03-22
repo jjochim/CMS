@@ -1,25 +1,35 @@
 <div class="cms-url-payment" data-url="<%= payment_path(@order) %>" data-order-id="<%= @order.id %>"></div>
 
 <div id="cms-data-payment">
-  <div class="col-xs-6">
+  <div class="col-xs-3">
+    <h4>Podaj dane:</h4>
     <%= render 'form', order: @order %>
   </div>
   <div class="col-xs-6" id="cms-tickets-payment">
-    <a id="dom5">0</a><a id="dom0"><%= @max %></a>
+    <h4 class="cms-payments-title">Menadżer biletów: <a>Wybrano: </a><a id="dom5" >0</a><a> / </a><a id="dom0"><%= @max %></a></h4>
     <div class="cs-tickets-managment" >
-      <%= select_tag :ticket_id, options_for_select(Ticket.all.map {|x| [x.name, x.id]}),  class: 'cs-type-of-tickets', id: 'dom1' %>
-      <%= select_tag :how_many_tickets, options_for_select((1..@max)), class: 'cs-how-many-tickets', id: 'dom2' %>
-      <button id="dom3">Dodaj</button>
+      <div class="col-xs-5 form-group">
+        <label for="dom1">Typ biletu:</label>
+        <%= select_tag :ticket_id, options_for_select(Ticket.all.map {|x| [x.name, x.id]}),  class: 'cs-type-of-tickets form-control', id: 'dom1' %>
+      </div>
+      <div class="col-xs-4 form-group">
+        <label for="dom2">Ilość:</label>
+        <%= select_tag :how_many_tickets, options_for_select((1..@max)), class: 'cs-how-many-tickets form-control', id: 'dom2' %>
+      </div>
+      <button id="dom3" class="col-xs-3 btn btn-default">Dodaj</button>
     </div>
     <div class="cs-tickets-results" id="dom4">
     </div>
   </div>
+  <div class="col-xs-3">
+    <h4>Cennik:</h4>
+  </div>
   <div class="col-xs-12">
-    Visa:
-    <%= radio_button_tag(:payments, "visa", checked = true) %><br>
-
-    PayPal:
-    <%= radio_button_tag(:payments, "paypal") %>
+    <%= radio_button_tag(:payments, "visa", checked = true, class: 'visa') %>
+    <label class="input-label" for="payments_visa"><%= image_tag '/uploads/movie/picture/1/visa.jpg', class: 'photo-payments visa'%></label>
+    <br>
+    <%= radio_button_tag(:payments, "paypal", class: 'paypal') %>
+    <label class="input-label" for="payments_paypal"><%= image_tag '/uploads/movie/picture/1/paypal.jpeg', class: 'photo-payments paypal'%></label>
   </div>
 </div>
 
@@ -72,7 +82,7 @@
   </div>
 </div>
 <div class="col-xs-12">
-  <button id="paid" value="false">Przejdz do płatności</button>
+  <button id="paid" value="false" class="btn btn-default">Przejdz do płatności</button>
   <button id="cms-back-payment" style="display: none">Powrót</button>
 </div>
 
