@@ -22,7 +22,7 @@
       <% @responseObject.each_with_index do |item, i| %>
           <div class="seating-row" style="width: <%= @room.columns * 64 %>px">
             <% item.each_with_index do |child, j| %>
-                <div class="seat <%=  child.slot == true  ? 'cms-seatable' : 'cms-not-seatable'%>
+                <div class="cms-seat <%=  child.slot == true  ? 'cms-seatable' : 'cms-not-seatable'%>
                 <%= "cms-occupied" if @occupied_places.include? child.id %>" data-seating-id="<%= child.id %>" data-seating-number="<%= j+1 %><%=(65 + i).chr %>">
                   <%= j+1 %><%=(65 + i).chr %>
                 </div>

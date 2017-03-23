@@ -23,7 +23,7 @@
       <% @responseObject.each_with_index do |item, i| %>
           <div class="seating-row" id=<%= i %> >
             <% item.each_with_index do |child, j| %>
-                <div class="seat updatespace <%=  child.slot == true  ? 'cms-seatable' : 'cms-not-seatable'%>">
+                <div class="cms-seat updatespace <%=  child.slot == true  ? 'cms-seatable' : 'cms-not-seatable'%>">
                   <%= j+1 %><%=(65 + i).chr %>
                 </div>
             <% end %>

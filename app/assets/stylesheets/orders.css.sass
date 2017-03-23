@@ -9,21 +9,6 @@
   background-color: black !important
   pointer-events: none
 
-.cms-seat
-  transition: background-color 0.25s linear
-  display: inline-block
-  margin: 5px
-  background-color: white
-  width: 50px
-  height: 50px
-  padding-top: 17px
-  text-align: center
-  font-size: 16px
-  font-weight: bold
-  color: rgba(0,0,0,0)
-  transition: color 0.25s linear
-
-
 .cms-seatable:hover
   color: rgba(0,0,0,1)
 
@@ -62,11 +47,13 @@
   border-radius: 4px
 
 input[name="payments"]:checked+label
-  margin-left: 20px
+  margin: 20px
+  margin-top: 15px
   -webkit-filter: none
   filter: none
 
 input[name="payments"]+label
+  margin: 20px
   width: 80px
   height: 48px
   -webkit-filter: grayscale(100%)
@@ -80,3 +67,41 @@ input[name="payments"]
 
 .cms-payments-title a
   font-size: small
+
+.cms-payments-title-first-a
+  margin-left: 80px
+
+.cms-payments-tickets-chosen
+  margin-top: 15px
+  margin-left: 15px
+  margin-right: 0px
+
+.cms-ticket-type-a
+  padding-left: 0px
+  padding-right: 25px
+  margin-top: 10px
+
+.cms-ticket-type-b
+  height: 34px
+  margin-bottom: 0px
+  margin-top: 8px
+
+.cms-ticket-number-a
+  padding-left: 7px
+  padding-right: 19px
+  margin-top: 10px
+
+.cms-ticket-number-b
+  height: 34px
+  margin-bottom: 0px
+  margin-top: 8px
+
+.btn-ticket-delete
+  margin-top: 18px
+
+.panel-body
+  padding-top: 7px
+
+.cms-payments-chosen
+  display: flex
+  justify-content: center

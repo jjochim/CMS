@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-
   # GET /orders
   # GET /orders.json
   def index
@@ -123,7 +122,15 @@ class OrdersController < ApplicationController
   def create
     occupied = false
     seance_id = params[:seance_id]
-    selected_fields = params[:ARR_OF_SELECTED_FIELDS].split(",")
+    if params[:ARR_OF_SELECTED_FIELDS]
+      selected_fields = params[:ARR_OF_SELECTED_FIELDS].split(",")
+    else
+      redirect_to show_room_orders_path(seance_id: seance_id), notice: "Nie wybrano miejsca!"
+    end
+    if not params[:ARR_OF_SELECTED_SEATING_NUMBRE]
+      return
+      redirect_to show_room_orders_path(seance_id: seance_id), notice: "Błąd serwer. Sprubój później!"
+    end
     if 'false' == params[:payment]
       order = Order.new(seance_id: seance_id,
                         name: 'Imię',

@@ -242,15 +242,22 @@ var ticketsManagement = {
 
     htmlTicketProto: function(ticket, index) {
         return (
-            "<div class='row'>" +
-            "<div class='col-xs-4'>" +
+            "<div class='row cms-payments-tickets-chosen'>" +
+            "<div class='col-xs-5 cms-ticket-type-a'>" +
+            "<div class='panel panel-default cms-ticket-type-b'>" +
+            "<div class='panel-body'>" +
             ticketsName[ticket.type - 1] +
             "</div>" +
-            "<div class='col-xs-4'>" +
+            "</div>" +
+            "</div>" +
+            "<div class='col-xs-4 cms-ticket-number-a' >" +
+            "<div class='panel panel-default cms-ticket-number-b'>" +
+            "<div class='panel-body'>" +
             ticket.number +
             "</div>" +
-            "<div class='col-xs-4'>" +
-            "<button class='btn-ticket-delete' data-ticket-count='" + ticket.number + "' data-ticket-name='" + ticketsName[ticket.type - 1] + "' data-index='" + index + "'>Usuń</button>" +
+            "</div>" +
+            "</div>" +
+            "<button class='col-xs-3 btn btn-default btn-ticket-delete' data-ticket-count='" + ticket.number + "' data-ticket-name='" + ticketsName[ticket.type - 1] + "' data-index='" + index + "'>Usuń</button>" +
             "</div>"
         );
     },

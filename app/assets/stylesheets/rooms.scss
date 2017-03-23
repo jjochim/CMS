@@ -107,3 +107,31 @@
   justify-content: center;
   font-size: 54px;
 }
+
+.cms-seat {
+  transition: background-color 0.25s linear;
+  display: inline-block;
+  margin: 5px;
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  padding-top: 17px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgba(0,0,0,0);
+  transition: color 0.25s linear;
+}
+
+.cms-seat:hover {
+  color: rgba(0,0,0,1);
+}
+
+.cms-seat:hover:not(.is-na-true):not(.sold):not(.false) {
+  background-color: lime;
+  cursor: pointer;
+}
+.cms-seat.is-na-true {
+  background-color: orange;
+  cursor: not-allowed;
+}

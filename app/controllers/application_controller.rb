@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   $movie_front_side = [4, 16, 6]
+  $checked_approved = [1, 2]
 
   protected
   def redirect_some_path_unless_role some_path, role #przekierowaie gdzies jezeli user nie ma podanej roli

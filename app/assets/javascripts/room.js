@@ -113,8 +113,8 @@ $(document).ready(function() {
         $(".seatings-container").css('width','100%');
         $(".seatings-container").css('height','auto');
         // $(".seatings-container").css('margin_right','25px')
-        $(".seat").css("width", seat + "px");
-        $(".seat").css("height", seat + "px");
+        $(".cms-seat").css("width", seat + "px");
+        $(".cms-seat").css("height", seat + "px");
         // $(".seating-legend-vertical").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
         $(".seating-legend-vertical").css("width", 1115+"px");
         $(".seating-legend-vertical").css("display", 'flex');

@@ -6,7 +6,7 @@
     <%= render 'form', order: @order %>
   </div>
   <div class="col-xs-6" id="cms-tickets-payment">
-    <h4 class="cms-payments-title">Menadżer biletów: <a>Wybrano: </a><a id="dom5" >0</a><a> / </a><a id="dom0"><%= @max %></a></h4>
+    <h4 class="cms-payments-title">Menadżer biletów: <a class="cms-payments-title-first-a">Wybrano: </a><a id="dom5" >0</a><a> / </a><a id="dom0"><%= @max %></a></h4>
     <div class="cs-tickets-managment" >
       <div class="col-xs-5 form-group">
         <label for="dom1">Typ biletu:</label>
@@ -24,10 +24,13 @@
   <div class="col-xs-3">
     <h4>Cennik:</h4>
   </div>
-  <div class="col-xs-12">
+  <div class="col-xs-12 cms-payments-chosen">
     <%= radio_button_tag(:payments, "visa", checked = true, class: 'visa') %>
     <label class="input-label" for="payments_visa"><%= image_tag '/uploads/movie/picture/1/visa.jpg', class: 'photo-payments visa'%></label>
-    <br>
+    <%= radio_button_tag(:payments, "discover", class: 'discover') %>
+    <label class="input-label" for="payments_discover"><%= image_tag '/uploads/movie/picture/1/discover.jpg', class: 'photo-payments discover'%></label>
+    <%= radio_button_tag(:payments, "amex", class: 'discover') %>
+    <label class="input-label" for="payments_amex"><%= image_tag '/uploads/movie/picture/1/ae.jpg', class: 'photo-payments amex'%></label>
     <%= radio_button_tag(:payments, "paypal", class: 'paypal') %>
     <label class="input-label" for="payments_paypal"><%= image_tag '/uploads/movie/picture/1/paypal.jpeg', class: 'photo-payments paypal'%></label>
   </div>
@@ -35,6 +38,7 @@
 
 
 <div id="cms-cc-payment" class="col-xs-12" style="display: none">
+  <h4>Dane karty:</h4>
   <div class="form-group">
     <label for="number">Numer karty:</label>
     <input type="text" class="form-control" id="number" value="4063332087878016">
@@ -81,9 +85,9 @@
     <input type="text" class="form-control" id="last_name" value="Shopper">
   </div>
 </div>
-<div class="col-xs-12">
+<div class="col-xs-12 cms-payments-chosen">
   <button id="paid" value="false" class="btn btn-default">Przejdz do płatności</button>
-  <button id="cms-back-payment" style="display: none">Powrót</button>
+  <button id="cms-back-payment" class="btn btn-default" style="display: none">Powrót</button>
 </div>
 
 <div id="myModal" class="modal">
