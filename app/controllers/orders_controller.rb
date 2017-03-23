@@ -11,14 +11,14 @@ class OrdersController < ApplicationController
     end
     # Rails.logger.info '$' * 30'
     # Rails.logger.info params.inspect
-    if user_signed_in? && current_user.role=='admin'
-      @orders = @search.result(distinct: true).where(paid: false)
-      @paid_orders = @search.result(distinct: true).where(paid: true)
-    else
+    if user_signed_in?
+    #   @orders = @search.result(distinct: true).where(paid: false)
+    #   @paid_orders = @search.result(distinct: true).where(paid: true)
+    # else
       @seances = Seance.seven_days_from_now
                     # .map{|x| x.id}
-      @orders = @search.result(distinct: true).where(paid: false).where(seance_id: @seances)
-      @paid_orders = @search.result(distinct: true).where(paid: true).where(seance_id: @seances)
+      # @orders = @search.result(distinct: true).where(paid: false).where(seance_id: @seances)
+      # @paid_orders = @search.result(distinct: true).where(paid: true).where(seance_id: @seances)
     end
   end
 
@@ -169,12 +169,13 @@ class OrdersController < ApplicationController
         end
       end
       if occupied
-        order.delete
+        order.destroy
         redirect_to show_room_orders_path(seance_id: seance_id), notice: "Przepraszamy, te miejsca zostały już zajęte!"
       else
         selected_fields.each do |id|
           order.seatings << Seating.find(id)
         end
+        Approved.create(order_id: order.id)
         if 'false' == params[:payment]
           redirect_to edit_order_path(order.id)
         else

@@ -12,7 +12,8 @@
         </li>
     <% end %>
   </ul>
-  <div class="tab-content seance cms-order-reserved">
+  <input type="text" id="reserved-input" onkeyup="myFunctiona()" placeholder="Imię lub nazwisko" title="Type in a name">
+  <div id="reserved-table" class="tab-content seance cms-order-reserved">
     <% active = 6 %>
     <% tmp = false %>
     <% (0..6).each do |indx2| %>
@@ -21,24 +22,27 @@
         <div role="tabpanel" class="tab-pane <% if one_day.count != 0; active = indx2; end %><% if indx2 == active and tmp == false; tmp = true %>active<% end %>" id="<%= tmp2 %>">
           <table class="table-hover table">
             <tbody>
-            <tr>
-              <td><b>Imię:</b></td>
-              <td><b>Nazwisko:</b></td>
-              <td><b>Email:</b></td>
-              <td><b>Tel:</b></td>
-              <td><b>Film:</b></td>
-              <td><b>Sala:</b></td>
+            <tr class="head">
+              <th><b>Imię i nazwisko:</b></th>
+              <th><b>Email:</b></th>
+              <th><b>Tel:</b></th>
+              <th><b>Film:</b></th>
+              <th><b>Sala:</b></th>
+              <th><b>Godzina:</b></th>
+              <th><b>Akcje:</b></th>
             </tr>
             <% one_day.sort_by { |x| x.start_date}.each do |seance| %>
               <% seance.orders.each do |order| %>
                 <% if order.approved == true && order.reserved == true %>
                   <tr>
-                    <td><%= order.name %></td>
-                    <td><%= order.surname %></td>
+                    <td><%= order.name %> <%= order.surname %></td>
                     <td><%= order.email %></td>
                     <td><% if order.phone %><%= order.phone %><% else %> - <% end %></td>
                     <td><%= order.seance.movie.title %></td>
                     <td><%= order.seance.room.name %></td>
+                    <td><%= format_time(order.seance.start_date) %></td>
+                    <td class="text-right"><%= link_to 'Szczególy', order, class: "btn btn-default btn-xs" %>
+                      <%= link_to 'Usuń', order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
                   </tr>
                 <% end %>
               <% end %>

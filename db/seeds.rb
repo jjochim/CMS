@@ -58,15 +58,34 @@ Ticket.create(name: 'studencki', price: '15')
 puts
 
 print 'Seance '
-0.upto(4) do |indx|
-  10.upto(24) do |index|
+0.upto(1) do |indx|
+  10.upto(22) do |index|
     0.upto(10) do
-      print '. '
-      Seance.create(room: Room.all.shuffle.first, movie: Movie.all.shuffle.first, start_date: Time.now + indx.days + index.hours,
-                    threed: [true, false].shuffle.first, dubbing: true)
+      if index % 2 == 0
+        print '. '
+        Seance.create(room: Room.all.shuffle.first, movie: Movie.all.shuffle.first, start_date: Time.now + indx.days + index.hours,
+                      threed: [true, false].shuffle.first, dubbing: true)
+      end
     end
   end
 end
 puts
+
+print 'Orders '
+0.upto(40) do |x|
+  Order.create(
+                 name: 'Name_' + x.to_s,
+                 surname: 'Surname_' + x.to_s,
+                 email: 'email' + x.to_s + '@.wp.pl',
+                 seance_id: Seance.all.shuffle.first.id,
+                 paid: false,
+                 approved: true,
+                 reserved: true,
+                 paypal: false
+  )
+  print '. '
+end
+puts
+
 
 
