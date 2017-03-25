@@ -153,18 +153,20 @@ var seatsManagement = {
 };
 
 $(document).on('turbolinks:load', function() {
-    ticketsManagement.deploy($("#dom0"), $("#dom1"), $("#dom2"), $("#dom3"), $("#dom4"), $('#dom5'));
+    ticketsManagement.deploy($("#dom0"), $("#dom1"), $("#dom2"), $("#dom3"), $("#dom4"), $('#dom5'), $("#dom6"));
     HTML = document.getElementById('cms-submit-order').href;
     PAYPALHTML = document.getElementById('cms-submit-order-paypal').href;
     seatsManagement.deploy($('.cms-seatable'));
 });
 
 HASH_OF_SELECTED_TICKETS = {};
+HASH_PRICE_TICKET = {};
 
 var ticketsManagement = {
     maxSeats: null,
     ticketsNumber: 0,
     ticketsLeft: 0,
+    sumTicketsPrice: 0,
     ticketsArr: [],
     ticketsName: [],
 
@@ -175,13 +177,15 @@ var ticketsManagement = {
         ticketNumber: null,
         ticketAdd: null,
         listRender: null,
-        seatingsLeftCounter: null
+        seatingsLeftCounter: null,
+        ticketPrice: null
     },
 
     addTicket: function() {
         var type = this.DOMs.ticketType.val();
         var text = this.DOMs.ticketType.text();
         ticketsName = text.split("\n");
+        console.log(ticketsName);
         var numb = parseInt(this.DOMs.ticketNumber.val());
 
         console.log(this.ticketsNumber , numb, this.maxSeats);
@@ -216,7 +220,9 @@ var ticketsManagement = {
     },
 
     removeHash: function (ticket) {
-        delete HASH_OF_SELECTED_TICKETS[ticket];
+        delete HASH_OF_SELECTED_TICKETS[ticket.substr(0,ticket.indexOf(' '))];
+        delete HASH_PRICE_TICKET[ticket];
+        this.ticketsPrice();
     },
 
     reRender: function() {
@@ -229,10 +235,16 @@ var ticketsManagement = {
 
         this.rebindDelete();
         this.refreshTicketsLeft();
+        // console.log('tuuuuuuuuuuuu');
+        // console.log(this.DOMs.ticketNumber.children.val());
     },
 
     refreshTicketsLeft: function() {
         this.DOMs.seatingsLeftCounter.html(this.ticketsLeft);
+    },
+
+    refreshTicketsPrice: function () {
+        this.DOMs.ticketPrice.html(this.sumTicketsPrice);
     },
 
     ticketProto: function(type, number) {
@@ -263,8 +275,23 @@ var ticketsManagement = {
     },
 
     ticketToHash: function(ticket) {
-        HASH_OF_SELECTED_TICKETS[ticketsName[ticket.type - 1]] = ticket.number;
+        HASH_OF_SELECTED_TICKETS[ticketsName[ticket.type - 1].substr(0,ticketsName[ticket.type - 1].indexOf(' '))] = ticket.number;
+        HASH_PRICE_TICKET[ticketsName[ticket.type - 1]] = ticket.number;
+        this.ticketsPrice();
         console.log(HASH_OF_SELECTED_TICKETS);
+        // console.log(HASH_PRICE_TICKET);
+    },
+
+    ticketsPrice: function() {
+        this.sumTicketsPrice = 0;
+        for (var i in HASH_PRICE_TICKET) {
+            if (HASH_PRICE_TICKET.hasOwnProperty(i)) {
+                this.sumTicketsPrice = this.sumTicketsPrice + parseFloat(i.substring(i.indexOf(' '),i.indexOf('zł'))) * parseInt(HASH_PRICE_TICKET[i]);
+                // console.log('key is: ' + i.substring(i.indexOf(' '),i.indexOf('zł')) + ', value is: ' + HASH_PRICE_TICKET[i]);
+            };
+        };
+        console.log(this.sumTicketsPrice);
+        this.refreshTicketsPrice();
     },
 
     rebindDelete: function() {
@@ -274,13 +301,14 @@ var ticketsManagement = {
         });
     },
 
-    deploy: function(maxSeatsDom, ticketTypeDom, ticketNumberDom, ticketAdd, listDom, ticketsLeftCounter) {
+    deploy: function(maxSeatsDom, ticketTypeDom, ticketNumberDom, ticketAdd, listDom, ticketsLeftCounter, price) {
         this.maxSeats = parseInt(maxSeatsDom.html());
         this.DOMs.ticketType = ticketTypeDom;
         this.DOMs.ticketNumber = ticketNumberDom;
         this.DOMs.ticketAdd = ticketAdd;
         this.DOMs.listRender = listDom;
         this.DOMs.seatingsLeftCounter = ticketsLeftCounter;
+        this.DOMs.ticketPrice = price;
 
         this.DOMs.ticketAdd.click(function() {
             ticketsManagement.addTicket();
@@ -436,6 +464,40 @@ $(document).on("click", '#paid', function(e) {
             return swal({
                 title: 'Błąd',
                 text: 'Błedne dane!<br>'+ JSON.parse(response.responseText).message +'<br><button class="swall-error">Ok</button>',
+                type: 'warning',
+                html: true,
+                showConfirmButton: false
+            });
+        }
+    });
+});
+
+$(document).on("click", '#cms-order-show', function(e) {
+    var _url = document.getElementById('cms-order-show').dataset.url;
+    var _data = {
+        TICKETS: HASH_OF_SELECTED_TICKETS
+    }
+    console.log(_url);
+    console.log(_data);
+    e.preventDefault();
+    return $.ajax({
+        method: 'get',
+        dataType: 'json',
+        data: _data,
+        url: _url,
+        success: function(response) {
+                return swal({
+                    title: 'Przyjeto dane.',
+                    text: 'Operacja zakończona powodzeniem!<br><button>Ok</button>',
+                    type: 'success',
+                    html: true,
+                    showConfirmButton: false
+                });
+        },
+        error: function(response) {
+            return swal({
+                title: 'Błąd',
+                text: 'Błedne dane!<br><button class="swall-error">Ok</button>',
                 type: 'warning',
                 html: true,
                 showConfirmButton: false

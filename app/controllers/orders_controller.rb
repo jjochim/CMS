@@ -22,6 +22,32 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update_ticket_type
+    @order = Order.find(params[:order_id])
+    Rails.logger.info params.inspect
+    Rails.logger.info ap @order
+
+    if not @order.update(paid: true)
+      respond_to do |format|
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    else
+      respond_to do |format|
+        if params[:TICKETS]
+          params[:TICKETS].each do |key,val|
+            ticket = Ticket.where(name: key).last
+            0.upto(val.to_i - 1) do
+              @order.tickets << ticket
+            end
+          end
+          format.json { render json: {message: "ok"}, status: :ok, location: @order }
+        else
+          format.json { render json: @order.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   # GET /orders/1
   # GET /orders/1.json
   def show

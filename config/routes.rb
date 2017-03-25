@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get :show_info
       get :show_room
       get :summary
+      get :update_ticket_type
     end
   end
   resources :payments

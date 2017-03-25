@@ -69,21 +69,21 @@ class PaymentsController < ApplicationController
 
         if hash
           hash.to_hash.each do |key, val|
-            Rails.logger.info 'key: ' + key + ' val: ' + val
+            # Rails.logger.info 'key: ' + key + ' val: ' + val
             ticket = Ticket.where(name: key).last
-            Rails.logger.info  ap ticket
-            Rails.logger.info 'ticket'
+            # Rails.logger.info  ap ticket
+            # Rails.logger.info 'ticket'
             item['name']=key
             item['sku']=key
             item['price']=format("%.2f",ticket.price)
             item['currency']='USD'
             item['quantity']=val
+            items.push(item.dup)
             total = total + (ticket.price * val.to_f)
             0.upto(val.to_i - 1) do
               @order.tickets << ticket
             end
             tmp = tmp + val.to_i
-            items << item
           end
           if tmp!=seating_count
             @order.order_tickets.each do |val|

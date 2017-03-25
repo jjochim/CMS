@@ -6,11 +6,11 @@
     <%= render 'form', order: @order %>
   </div>
   <div class="col-xs-6" id="cms-tickets-payment">
-    <h4 class="cms-payments-title">Menadżer biletów: <a class="cms-payments-title-first-a">Wybrano: </a><a id="dom5" >0</a><a> / </a><a id="dom0"><%= @max %></a></h4>
+    <h4 class="cms-payments-title">Menadżer biletów: </h4>
     <div class="cs-tickets-managment" >
       <div class="col-xs-5 form-group">
         <label for="dom1">Typ biletu:</label>
-        <%= select_tag :ticket_id, options_for_select(Ticket.all.map {|x| [x.name, x.id]}),  class: 'cs-type-of-tickets form-control', id: 'dom1' %>
+        <%= select_tag :ticket_id, options_for_select(Ticket.all.map {|x| [x.name + ' ' + format("%.2f", x.price) + 'zł', x.id]}),  class: 'cs-type-of-tickets form-control', id: 'dom1' %>
       </div>
       <div class="col-xs-4 form-group">
         <label for="dom2">Ilość:</label>
@@ -20,9 +20,14 @@
     </div>
     <div class="cs-tickets-results" id="dom4">
     </div>
-  </div>
-  <div class="col-xs-3">
-    <h4>Cennik:</h4>
+    <div class="cs-sum col-xs-12">
+      <div class="cs-left col-xs-5">
+        <h4 id="dom6">0.00</h4><h4>zł</h4>
+      </div>
+      <div class="cs-right col-xs-4">
+        <h4>Wybrano:</h4><h4 id="dom5" >0</h4><h4>/</h4><h4 id="dom0"><%= @max %></h4>
+      </div>
+    </div>
   </div>
   <div class="col-xs-12 cms-payments-chosen">
     <%= radio_button_tag(:payments, "visa", checked = true, class: 'visa') %>
@@ -39,50 +44,58 @@
 
 <div id="cms-cc-payment" class="col-xs-12" style="display: none">
   <h4>Dane karty:</h4>
-  <div class="form-group">
-    <label for="number">Numer karty:</label>
-    <input type="text" class="form-control" id="number" value="4063332087878016">
+  <div class="col-xs-3">
+    <div class="form-group cc-payment">
+      <label for="first_name">Imie:</label>
+      <input type="text" class="form-control" id="first_name" value="Joee">
+    </div>
+    <div class="form-group cc-payment">
+      <label for="last_name">Nazwisko:</label>
+      <input type="text" class="form-control" id="last_name" value="Shopper">
+    </div>
+    <div class="form-group cc-payment date">
+      <label for="expire_month">Miesiac:</label>
+      <select class="form-control" id="expire_month">
+        <!--<option>1</option>-->
+        <!--<option>2</option>-->
+        <!--<option>3</option>-->
+        <!--<option>4</option>-->
+        <!--<option>5</option>-->
+        <!--<option>6</option>-->
+        <!--<option>7</option>-->
+        <!--<option>8</option>-->
+        <!--<option>9</option>-->
+        <!--<option>10</option>-->
+        <option>11</option>
+        <!--<option>12</option>-->
+      </select>
+    </div>
+    <div class="form-group cc-payment date">
+      <label for="expire_year">Rok:</label>
+      <select class="form-control" id="expire_year">
+        <!--<option>2017</option>-->
+        <!--<option>2018</option>-->
+        <!--<option>2019</option>-->
+        <!--<option>2020</option>-->
+        <option>2021</option>
+        <!--<option>2022</option>-->
+        <!--<option>2023</option>-->
+        <!--<option>2024</option>-->
+        <!--<option>2025</option>-->
+        <!--<option>2026</option>-->
+        <!--<option>2027</option>-->
+      </select>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="expire_month">Miesiac:</label>
-    <select class="form-control" id="expire_month">
-      <!--<option>1</option>-->
-      <!--<option>2</option>-->
-      <!--<option>3</option>-->
-      <!--<option>4</option>-->
-      <!--<option>5</option>-->
-      <!--<option>6</option>-->
-      <!--<option>7</option>-->
-      <!--<option>8</option>-->
-      <!--<option>9</option>-->
-      <!--<option>10</option>-->
-      <option>11</option>
-      <!--<option>12</option>-->
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="expire_year">Rok:</label>
-    <select class="form-control" id="expire_year">
-      <!--<option>2017</option>-->
-      <!--<option>2018</option>-->
-      <!--<option>2019</option>-->
-      <!--<option>2020</option>-->
-      <option>2021</option>
-      <!--<option>2022</option>-->
-      <!--<option>2023</option>-->
-      <!--<option>2024</option>-->
-      <!--<option>2025</option>-->
-      <!--<option>2026</option>-->
-      <!--<option>2027</option>-->
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="first_name">Imie:</label>
-    <input type="text" class="form-control" id="first_name" value="Joee">
-  </div>
-  <div class="form-group">
-    <label for="last_name">Nazwisko:</label>
-    <input type="text" class="form-control" id="last_name" value="Shopper">
+  <div class="col-xs-3">
+    <div class="form-group cc-payment">
+      <label for="number">Numer karty:</label>
+      <input type="text" class="form-control" id="number" value="4063332087878016">
+    </div>
+    <div class="form-group cc-payment">
+      <label for="cvv">cvv:</label>
+      <input type="text" class="form-control" id="cvv" value="">
+    </div>
   </div>
 </div>
 <div class="col-xs-12 cms-payments-chosen">
