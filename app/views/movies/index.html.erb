@@ -90,17 +90,17 @@
         <div class="col-xs-12">
           <div class="movies-container">
             <% slice.each do |movie| %>
-              <div class="movies-item">
-                <%= image_tag movie.picture, class: "photo" %>
-                <div class="movie-caption">
-                  <%= movie.title %>
-                </div>
-                <div class="movie-controls">
-                    <%= link_to 'Kup bilet', {controller: 'seances', action: 'show_seances_with_movie', movie_id: movie.id}, :class => 'control-btn'  %>
-                    <%= link_to 'Szczegóły', movie , :class => 'control-btn'%>
+              <div class="movies-item" data-toltip="toltip<%= movie.id %>">
+                <%= link_to (image_tag movie.picture, class: "photo"), movie %>
+                <div class="movie-title" >
+                  <h4><%= link_to movie.title, movie %></h4>
                 </div>
               </div>
-            <% end %>
+              <div class="tip" id="toltip<%= movie.id %>" style="position: absolute; display: none;">
+                <div class="tip-title"><%= movie.title %></div>
+                <div class="tip-content">Jeżeli natomiast chcemy sami dopasować dzielenie wyrazów w akapicie, wartość auto należy zamienić na manual.<%= movie.description %></div>
+              </div>
+          <% end %>
           </div>
         </div>
       </div>

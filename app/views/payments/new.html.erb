@@ -32,6 +32,8 @@
   <div class="col-xs-12 cms-payments-chosen">
     <%= radio_button_tag(:payments, "visa", checked = true, class: 'visa') %>
     <label class="input-label" for="payments_visa"><%= image_tag '/uploads/movie/picture/1/visa.jpg', class: 'photo-payments visa'%></label>
+    <%= radio_button_tag(:payments, "mastercard", class: 'mastercard') %>
+    <label class="input-label" for="payments_mastercard"><%= image_tag '/uploads/movie/picture/1/mastercard.jpg', class: 'photo-payments mastercard'%></label>
     <%= radio_button_tag(:payments, "discover", class: 'discover') %>
     <label class="input-label" for="payments_discover"><%= image_tag '/uploads/movie/picture/1/discover.jpg', class: 'photo-payments discover'%></label>
     <%= radio_button_tag(:payments, "amex", class: 'discover') %>
@@ -59,7 +61,7 @@
         <!--<option>1</option>-->
         <!--<option>2</option>-->
         <!--<option>3</option>-->
-        <!--<option>4</option>-->
+        <option>4</option>
         <!--<option>5</option>-->
         <!--<option>6</option>-->
         <!--<option>7</option>-->
@@ -78,7 +80,7 @@
         <!--<option>2019</option>-->
         <!--<option>2020</option>-->
         <option>2021</option>
-        <!--<option>2022</option>-->
+        <option>2022</option>
         <!--<option>2023</option>-->
         <!--<option>2024</option>-->
         <!--<option>2025</option>-->

@@ -1,49 +1,58 @@
-<div class="container">
-  <legend><%= @movie.title %></legend>
-  <div class="col-md-5">
+<div class="col-xs-4">
+  <%= image_tag @movie.picture, class: "photo-show" %>
+  <%= image_tag '/uploads/movie/picture/1/discover.jpg', class: 'photo-payments' %>
+  <button id="trailer" class="btn btn-default col-xs-12">Zwiastun</button>
+</div>
+<div class="col-xs-8">
+  <h3><%= @movie.title %></h3>
 
-      <strong>Genre:</strong>
-    <% @movie.categories.each do |category| %>
-        <%= category.name %>
-    <% end %>
-    <br>
+  <p><%= @movie.duration %></p>
 
-      <strong>Director:</strong>
-      <%= @movie.director %>
-    <br>
+  <table>
+    <tbody>
+      <tr>
+        <th>reżyseria:</th>
+        <td><%= @movie.director %></td>
+      </tr>
+      <tr>
+        <th>obsada:</th>
+        <td><%= @movie.actors %></td>
+      </tr>
+      <tr>
+        <th>gatunek:</th>
+        <td>
+          <% @movie.categories.each do |category| %>
+              <%= category.name %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th>produkcja:</th>
+        <td><%= @movie.country %></td>
+      </tr>
+      <tr>
+        <th>premiera:</th>
+        <td><%= format_date(@movie.premiere) %></td>
+      </tr>
+      <tr>
+        <th>ogranieczenie</br>wiekowe:</th>
+        <td><%= @movie.pegi %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <% if current_user and current_user.role == 'admin' %>
+      <%= link_to 'Edytuj', edit_movie_path(@movie) %>
+  <% else %>
+      <%= link_to 'Rezerwuj', {controller: 'seances', action: 'show_seances_with_movie', movie_id: @movie.id}, class: "btn btn-default" %>
+  <% end %>
+  <%= link_to 'Powrót', movies_path, class: "btn btn-default" %>
+</div>
 
-      <strong>Actors:</strong>
-      <%= @movie.actors %>
-    <br>
-
-      <strong>Country:</strong>
-      <%= @movie.country %>
-    <br>
-
-      <strong>Pegi:</strong>
-      <%= @movie.pegi %>
-    <br>
-
-      <strong>Duration:</strong>
-      <%= @movie.duration %>
-    <br>
-
-      <strong>Premiere:</strong>
-      <%= @movie.premiere %>
-    <br>
-
-      <strong>Description:</strong>
-      <%= @movie.description %>
-    <br>
-
-    <% if current_user and current_user.role == 'admin' %>
-        <%= link_to 'Edytuj', edit_movie_path(@movie) %>
-    <% else %>
-        <%= link_to 'Rezerwuj', {controller: 'seances', action: 'show_seances_with_movie', movie_id: @movie.id}, class: "btn btn-default" %>
-    <% end %>
-    <%= link_to 'Powrót', movies_path, class: "btn btn-default" %>
-  </div>
-  <div class="col-md-7">
-    <iframe src=<%= @movie.url_trailer %> frameborder="0" allowfullscreen></iframe>
+<div id="my-trailer" class="modal">
+  <div class="modal-content">
+    <span id="close-trailer" class="close">&times;</span>
+    <iframe src=<%= @movie.url_trailer %> frameborder="0" allowfullscreen width="980px" height="420px"></iframe>
   </div>
 </div>
