@@ -9,5 +9,5 @@ rails g scaffold Info street email phone city zip_code description google_url ci
 
 
 rails g model CategoryMovie category_id:integer movie_id:integer
-rails g model OrderSeating seating_id:integer order_id:integer ticket_id:integer
+rails g model OrderSeating seating_id:integer order_id:integer
 rails g model OrderTicket order_id:integer ticket_id:integer

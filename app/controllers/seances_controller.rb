@@ -4,11 +4,28 @@ class SeancesController < ApplicationController
   # GET /seances
   # GET /seances.json
   def index
-    if current_user and current_user.role == 'admin'
-      @seances = Seance.paginate(:page => params[:page])
-    else
-      @seances = Seance.seven_days_from_now.paginate(:page => params[:page])
-    end
+    # if current_user and current_user.role == 'admin'
+    @search = Seance.search(params[:q])
+    @seances = @search.result.paginate(:page => params[:page])
+    # else
+    #   @seances = Seance.seven_days_from_now.paginate(:page => params[:page])
+    # end
+  end
+
+  def search
+    p
+    p
+    p
+    p
+    p
+    p
+    p
+    p
+    p
+    p
+    Rails.logger.info params.inspect
+    index
+    render :index
   end
 
   def show_seances_with_movie
