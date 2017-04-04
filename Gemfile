@@ -52,7 +52,7 @@ gem 'mini_magick'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'i18n'
-gem 'ransack'
+gem 'ransack', github:"activerecord-hackery/ransack", branch:"master"
 gem 'awesome_print'
 gem 'paypal-sdk-rest'
 gem 'rufus-scheduler'

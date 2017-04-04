@@ -10,8 +10,8 @@
 
       <div class="search-form">
         <%= search_form_for @search do |f| %>
-            <%= f.label :title_or_country_cont, 'Tytuł, kraj lub gatunek:' %>
-            <%= f.text_field :title_or_country_cont %>
+            <%= f.text_field :title_cont, placeholder: 'Tytuł' %>
+            <%= f.select :categories_name_cont, options_for_select(Category.all.map {|x| [x.name] }, :selected => @search.categories_name_cont) %>
             <%= f.submit value: 'Szukaj' %>
         <% end %>
       </div>
@@ -20,10 +20,10 @@
         <thead>
         <tr>
           <th>Tytuł</th>
-          <th>Czas trwania</th>
+          <th><%= sort_link @search, :duration, "Czas trwania" %></th>
           <th>Gatunek</th>
-          <th>Kraj</th>
-          <th>Premiera</th>
+          <th><%= sort_link @search, :country, "Kraj" %></th>
+          <th><%= sort_link @search, :premiere, "Premiera" %></th>
           <th colspan="3">Akcje</th>
         </tr>
         </thead>

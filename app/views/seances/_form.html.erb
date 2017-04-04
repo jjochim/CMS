@@ -26,6 +26,17 @@
     <%= f.collection_select :room_id, Room.all, :id, :name %>
   </div>
 
+  <div class="field">
+    <%= f.label :threed, '3D' %>
+    <%= f.check_box :threed %>
+  </div>
+
+  <div class="field">
+    <%= f.radio_button :lector, 'lektor', :checked => true %>
+    <%= f.radio_button :subtitle, 'napisy', :checked => false %>
+    <%= f.radio_button :dubbing, 'dubbing', :checked => false %>
+  </div>
+
   <div class="actions">
     <%= f.submit value: 'Akceptuj' %>
   </div>

@@ -4,7 +4,7 @@ class Seance < ApplicationRecord
   has_many :orders
   validates_presence_of [:movie, :room, :start_date]
   # validate :validate_room_and_date
-  self.per_page = 5
+  self.per_page = 12
   scope :seven_days_from_now, -> {where start_date: (Time.now + 15.minutes)..(6.days.from_now.end_of_day) }
 
 

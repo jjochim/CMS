@@ -4,32 +4,19 @@ class SeancesController < ApplicationController
   # GET /seances
   # GET /seances.json
   def index
-    # if current_user and current_user.role == 'admin'
+    if current_user and current_user.role == 'admin'
     @search = Seance.search(search_params[:q])
-    p '    '
-    p '    '
-    p '    '
-    p '    '
-    p '    '
-    p '    '
-    Rails.logger.info ap @search.result(distinct: true)
-    p '    '
-    p '    '
-    p '    '
-    Rails.logger.info search_params[:q]
-    p '    '
-    p '    '
-    p '    '
-    # @search = Seance.search(start_date_gteq: params[:q][:start_date_gteq], start_date_lteq: params[:q][:start_date_lteq])
-    @seances = @search.result.paginate(:page => params[:page])
-    # else
-    #   @seances = Seance.seven_days_from_now.paginate(:page => params[:page])
-    # end
+    @seances = @search.result(distinct: true).includes(:movie, :room).paginate(:page => params[:page])
+    else
+      @seances = Seance.seven_days_from_now.paginate(:page => params[:page])
+    end
   end
 
   def search
-    p params[:q][:start_date_gteq]
-    p params[:q][:start_date_lteq]
+    Rails.logger.info params.inspect
+    if not params[:q][:start_date_lteq].blank?
+      params[:q][:start_date_lteq] = params[:q][:start_date_lteq].to_date.end_of_day
+    end
     Rails.logger.info params.inspect
     index
     render :index
@@ -106,7 +93,7 @@ class SeancesController < ApplicationController
     end
 
     def search_params
-      params.permit( :utf8, :commit, q: [:start_date_lteq, :start_date_gteq] ).to_h
+      params.permit( :utf8, :commit, :page, q: [:start_date_lteq, :start_date_gteq, :movie_title_cont, :room_name_cont] ).to_h
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

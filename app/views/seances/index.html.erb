@@ -3,27 +3,37 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h1>Seance</h1>
-        <%= link_to new_seance_path, class: "btn btn-success admin_new" do %>
-            Dodaj nowy seans
-        <% end %>
-        <%= search_form_for @search, url: search_seances_path, html: {class: "form-inline col-md-8 col-md-offset-1", method: :get} do |f| %>
-            <div class="input-daterange">
-              <div class="col-md-4">
-                <%= f.text_field :start_date_gteq, class: "form-control", placeholder: "Date >= to" %>
-              </div>
-              <div class="col-md-4 col-md-offset-1">
-                <%= f.text_field :start_date_lteq, class: "form-control", placeholder: "Date <= to" %>
-              </div>
-            </div>
-
-            <div class="col-md-2 col-md-offset-1 form-actions">
-              <%= f.submit "Search", class: "btn btn-success" %>
-            </div>
-
-        <% end %>
+        <div class="container">
+          <div class="row-seance col-xs-5">
+            <h2>Seanse</h2>
+            <%= link_to new_seance_path, class: "btn btn-success admin_new" do %>
+                Dodaj nowy seans
+            <% end %>
+          </div>
+          <div>
+            <%= search_form_for @search, url: search_seances_path, html: {class: "form-inline col-xs-6 seance-search", method: :get} do |f| %>
+                <div class="input-daterange input-group" id="datepicker">
+                  <div class="col-xs-5">
+                    <%= f.search_field :start_date_gteq, class: "form-control", placeholder: "Od" %>
+                  </div>
+                  <div class="col-xs-5">
+                    <%= f.search_field :start_date_lteq, class: "form-control", placeholder: "Do" %>
+                  </div>
+                </div>
+                <div class="col-xs-5">
+                  <%= f.search_field :movie_title_cont, class: "form-control", placeholder: "Tytuł filmu" %>
+                </div>
+                <div class="col-xs-5">
+                  <%= f.search_field :room_name_cont, class: "form-control", placeholder: "Sala" %>
+                </div>
+                <div class="col-xs-2 form-actions">
+                  <%= f.submit "Szukaj", class: "btn btn-info" %>
+                </div>
+            <% end %>
+          </div>
+        </div>
       </div>
-      <div class="panel-body">
+      <div class="panel-body btn-">
         <table class="table table-striped table-bordered">
           <thead>
           <tr>
