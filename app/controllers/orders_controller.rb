@@ -3,23 +3,24 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    params.permit(:order)
-    if !params[:q].blank?
-      @search = Order.ransack({params[:q].first[0] => params[:q].first[1]})
-    else
-      @search = Order.ransack(nil)
-    end
-    # Rails.logger.info '$' * 30'
-    # Rails.logger.info params.inspect
     if user_signed_in?
-    #   @orders = @search.result(distinct: true).where(paid: false)
-    #   @paid_orders = @search.result(distinct: true).where(paid: true)
-    # else
-      @seances = Seance.seven_days_from_now
-                    # .map{|x| x.id}
-      # @orders = @search.result(distinct: true).where(paid: false).where(seance_id: @seances)
-      # @paid_orders = @search.result(distinct: true).where(paid: true).where(seance_id: @seances)
+      if current_user.role == 'admin'
+        @search = Order.ransack(params[:q])
+        @orders = @search.result(distinct: true).includes(:seance).where(:approved => true).paginate(:page => params[:page])
+      else
+        @seances = Seance.seven_days_from_now
+      end
     end
+  end
+
+  def search
+    Rails.logger.info params.inspect
+    if not params[:q][:seance_start_date_lteq].blank?
+      params[:q][:seance_start_date_lteq] = params[:q][:seance_start_date_lteq].to_date.end_of_day
+    end
+    Rails.logger.info params.inspect
+    index
+    render :index
   end
 
   def update_ticket_type

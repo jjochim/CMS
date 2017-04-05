@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :orders do
     collection do
+      match 'search' => 'orders#search', via: [:get, :post], as: :search
       get :show_info
       get :show_room
       get :summary

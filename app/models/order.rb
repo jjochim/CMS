@@ -6,5 +6,5 @@ class Order < ApplicationRecord
   has_many :tickets, through: :order_tickets
   validates_presence_of [:name, :surname, :email, :seance_id]
 
-  self.per_page = 20
+  self.per_page =10
 end

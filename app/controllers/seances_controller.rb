@@ -50,6 +50,14 @@ class SeancesController < ApplicationController
   # POST /seances.json
   def create
     @seance = Seance.new(seance_params)
+    tab = ['lector','dubbing','subtitle']
+    tab.each do |val|
+      if params[:rating] == val
+        @seance.send((val + '=').to_sym, true)
+      else
+        @seance.send((val + '=').to_sym, false)
+      end
+    end
 
     respond_to do |format|
       if @seance.save
@@ -65,6 +73,14 @@ class SeancesController < ApplicationController
   # PATCH/PUT /seances/1
   # PATCH/PUT /seances/1.json
   def update
+    tab = ['lector','dubbing','subtitle']
+    tab.each do |val|
+      if params[:rating] == val
+        @seance.send((val + '=').to_sym, true)
+      else
+        @seance.send((val + '=').to_sym, false)
+      end
+    end
     respond_to do |format|
       if @seance.update(seance_params)
         format.html { redirect_to @seance, notice: 'Seance was successfully updated.' }

@@ -32,9 +32,12 @@
   </div>
 
   <div class="field">
-    <%= f.radio_button :lector, 'lektor', :checked => true %>
-    <%= f.radio_button :subtitle, 'napisy', :checked => false %>
-    <%= f.radio_button :dubbing, 'dubbing', :checked => false %>
+    <%= label :rating_lector, 'Lektor' %>
+    <%= radio_button_tag :rating, 'lector', seance.lector %>
+    <%= label :rating_subtitle, 'Napisy' %>
+    <%= radio_button_tag :rating, 'subtitle', seance.subtitle %>
+    <%= label :rating_dubbing, 'Dubbing' %>
+    <%= radio_button_tag :rating, 'dubbing', seance.dubbing %>
   </div>
 
   <div class="actions">
