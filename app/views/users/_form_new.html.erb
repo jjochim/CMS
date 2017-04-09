@@ -27,7 +27,7 @@
     </div>
     <div class="field">
       <%=f.label :role, 'Rola'%>
-      <%=f.text_field :role %>
+      <%=f.select :role, {'Administrator' => 'admin', 'Pracownik' => 'employee'} %>
     </div>
     <div class="field">
       <%=f.label :password, 'Hasło' %>
@@ -38,6 +38,6 @@
       <%=f.password_field :password_confirmation, placeholder: "Powtórz hasło" %>
     </div>
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit 'Akceptuj' %>
     </div>
 <% end %>

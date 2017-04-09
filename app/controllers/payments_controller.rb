@@ -11,8 +11,15 @@ class PaymentsController < ApplicationController
   # GET /orders/1.json
   def show
     p session[:payment_id]
-    if params[:paymentId] && params[:paymentId] == session[:payment_id]
-      @order.update(approved: true, paid: true)
+    if params[:paymentId] && params[:PayerID] && params[:paymentId] == session[:payment_id]
+      if PayPal::SDK::REST::Payment.find(params[:paymentId]).execute( :payer_id => params[:PayerID] )
+        @order.update(approved: true, paid: true)
+        p 'succes payments'
+      else
+        puts @payment.error # Error Hash
+      end
+    else
+      p 'error payments'
     end
   end
 

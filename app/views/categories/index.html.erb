@@ -1,32 +1,54 @@
-<div class="container">
-  <p id="notice"><%= notice %></p>
+<!--<div class="panel panel-default">-->
+  <!--<div class="panel-heading">-->
+    <!---->
+  <!--</div>-->
+  <!--<div class="panel-body">-->
+    <!---->
+  <!--</div>-->
+  <!--<div class="panel-footer">-->
+    <!---->
+  <!--</div>-->
+<!--</div>-->
 
-  <h1>Gatunki</h1>
-  <%= link_to new_category_path, class: "btn btn-success admin_new" do %>
-      </span>Dodaj nowy gatunek
-  <% end %>
-  </br>
+<div class="col-xs-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="container">
+        <div>
+          <h3>Gatunki</h3>
+        </div>
+        <div>
+          <%= link_to new_category_path, class: "btn btn-success admin_new" do %>
+              Nowy
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>Gatunki</th>
+          <th>Akcje</th>
+        </tr>
+        </thead>
 
-  <div class="col-md-6">
-    <table class="table table-striped table-bordered">
-      <thead>
-      <tr>
-        <th>Gatunki</th>
-        <th>Akcje</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @categories.each do |category| %>
-          <tr>
-            <td><%= category.name %></td>
-            <td class="text-right">
-              <%= link_to 'Edit', edit_category_path(category), class: "btn btn-default btn-xs" %>
-              <%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %>
-            </td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
+        <tbody>
+        <% @categories.each do |category| %>
+            <tr>
+              <td><%= category.name %></td>
+              <td class="text-right">
+                <%= link_to 'Edytuj', edit_category_path(category), class: "btn btn-default btn-xs" %>
+                <%= link_to 'Usuń', category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel-footer">
+    </div>
   </div>
 </div>
+
+

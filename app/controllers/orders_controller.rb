@@ -27,6 +27,9 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:order_id])
     Rails.logger.info params.inspect
     Rails.logger.info ap @order
+    if current_user && current_user.role = 'employee'
+      @order.update(approved: true)
+    end
 
     if not @order.update(paid: true)
       respond_to do |format|
@@ -158,17 +161,31 @@ class OrdersController < ApplicationController
       return
       redirect_to show_room_orders_path(seance_id: seance_id), notice: "Błąd serwer. Sprubój później!"
     end
+
     if 'false' == params[:payment]
-      order = Order.new(seance_id: seance_id,
-                        name: 'Imię',
-                        surname: 'Nazwisko',
-                        email: 'email@przykład.pl',
-                        paid: false,
-                        approved: false,
-                        reserved: true,
-                        paypal: false,
-                        list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE]
-      )
+      if current_user && current_user.role = 'employee'
+        order = Order.new(seance_id: seance_id,
+                          name: current_user.name,
+                          surname: current_user.last_name,
+                          email: current_user.email,
+                          paid: false,
+                          approved: false,
+                          reserved: false,
+                          paypal: false,
+                          list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE]
+        )
+      else
+        order = Order.new(seance_id: seance_id,
+                          name: 'Imię',
+                          surname: 'Nazwisko',
+                          email: 'email@przykład.pl',
+                          paid: false,
+                          approved: false,
+                          reserved: true,
+                          paypal: false,
+                          list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE]
+        )
+      end
     end
     if 'true' == params[:payment]
       order = Order.new(seance_id: seance_id,

@@ -29,13 +29,13 @@
         <td><%= @order.seance.room.name %></td>
         <td><%= @order.seatings.count %></td>
         <td><% if @order.paid %>TAK<% else %>NIE<% end %></td>
-        <td class="text-center">
-          <%= @order.list_seats %>
-        </td>
         <td class="text-center"><%= link_to 'Usuń', @order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
       </tr>
   </tbody>
 </table>
+<div class="col-xs-12" style="margin-bottom: 10px;">
+  <h4>Lista siedzeń: <%= @order.list_seats %></h4>
+</div>
 
 <% if @order.paid == false %>
     <div class="col-xs-6" id="cms-tickets-payment">
@@ -68,6 +68,8 @@
 
 <div class="cms-order-show-button col-xs-12">
   <%= link_to 'Powrót', orders_path, class: "btn btn-default" %>
-  <button id="cms-order-show" class="btn btn-default" data-url="<%= update_ticket_type_orders_path(order_id: @order) %>">Potwierdź odbiór</button>
+  <% if @order.paid == false %>
+    <button id="cms-order-show" class="btn btn-default" data-url="<%= update_ticket_type_orders_path(order_id: @order) %>">Potwierdź odbiór</button>
+  <% end %>
 </div>
 

@@ -1,9 +1,37 @@
-<h1>Dane rezerwacji</h1>
+<% if current_user && current_user.role = 'employee' %>
 
-<%= render 'form', order: @order %>
-
-<button id="cms-comfirm-order">Zatwierdź</button>
-
+  <div class="col-xs-6" id="cms-tickets-payment">
+    <h4 class="cms-payments-title">Menadżer biletów: </h4>
+    <div class="cs-tickets-managment" >
+      <div class="col-xs-5 form-group">
+        <label for="dom1">Typ biletu:</label>
+        <%= select_tag :ticket_id, options_for_select(Ticket.all.map {|x| [x.name + ' ' + format("%.2f", x.price) + 'zł', x.id]}),  class: 'cs-type-of-tickets form-control', id: 'dom1' %>
+      </div>
+      <div class="col-xs-4 form-group">
+        <label for="dom2">Ilość:</label>
+        <%= select_tag :how_many_tickets, options_for_select((1..@order.seatings.count)), class: 'cs-how-many-tickets form-control', id: 'dom2' %>
+      </div>
+      <button id="dom3" class="col-xs-3 btn btn-default">Dodaj</button>
+    </div>
+    <div class="cs-tickets-results" id="dom4">
+    </div>
+    <div class="cs-sum col-xs-12">
+      <div class="cs-left col-xs-5">
+        <h4 id="dom6">0.00</h4><h4>zł</h4>
+      </div>
+      <div class="cs-right col-xs-4">
+        <h4>Wybrano:</h4><h4 id="dom5" >0</h4><h4>/</h4><h4 id="dom0"><%= @order.seatings.count %></h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <button style="margin-left: 15px; margin-top: 10px; padding-left: 20px; padding-right: 20px;" id="cms-order-buy" class="btn btn-info" data-url="<%= update_ticket_type_orders_path(order_id: @order) %>" data-redirect="<%= order_path(@order) %>" >Zapisz</button>
+  </div>
+<% else %>
+  <h1>Dane rezerwacji</h1>
+  <%= render 'form', order: @order %>
+  <button id="cms-comfirm-order">Zatwierdź</button>
+<% end %>
 <div class="cms-url-order" data-url="<%= order_path(@order) %>">
 </div>
 

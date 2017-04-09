@@ -38,16 +38,16 @@
 
     <div class="field">
       <%= f.label :description, 'Opis' %>
-      <%= f.text_field :description %>
-    </div>
-
-    <div class="field">
-      <%= f.label :director, 'Reżyser' %>
-      <%= f.text_field :director %>
+      <%= f.text_area :description, rows: "5" %>
     </div>
   </div>
 
   <div class="col-lg-6">
+    <div class="field">
+      <%= f.label :director, 'Reżyser' %>
+      <%= f.text_field :director %>
+    </div>
+
     <div class="field">
       <%= f.label :actors, 'Obsada' %>
       <%= f.text_field :actors %>

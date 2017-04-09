@@ -32,8 +32,13 @@
     </div>
   </div>
 </div>
-<%= link_to 'Rezerwój', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order"  %>
-<%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal"  %>
+<% if current_user %>
+    <%= link_to 'Sprzedaj', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order"  %>
+    <%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal", style: "display: none" %>
+<% else %>
+  <%= link_to 'Rezerwój', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order"  %>
+  <%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal"  %>
+<% end %>
 <div id="cms-columns" style = "display:none;">
   <%= @room.columns %>
 </div>

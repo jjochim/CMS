@@ -17,8 +17,8 @@ $(document).on("click", '#cms-comfirm-order', function(e) {
         url: _url,
         success: function(response) {
             return swal({
-                title: 'Przyjeto zamówienie!',
-                text: 'Życzymy miłego seansu!<br><button class="swall-ok">Ok</button>',
+                title: 'Przyjęto zamówienie!',
+                text: 'Na Twój adres e-mail została wysłana wiadomość z linkiem aktywacyjnym. Należy go aktywować w ciągu 5 minut!<br><button class="swall-ok">Ok</button>',
                 type: 'success',
                 html: true,
                 showConfirmButton: false
@@ -27,7 +27,7 @@ $(document).on("click", '#cms-comfirm-order', function(e) {
         error: function(response) {
             return swal({
                 title: 'Błąd',
-                text: 'Błedne dane<br><button class="swall-error">Ok</button>',
+                text: 'Błędne dane<br><button class="swall-error">Ok</button>',
                 type: 'warning',
                 html: true,
                 showConfirmButton: false
@@ -451,7 +451,7 @@ $(document).on("click", '#paid', function(e) {
             } else {
                 modal.css('display','none');
                 return swal({
-                    title: 'Przyjeto zamówienie!',
+                    title: 'Przyjęto zamówienie!',
                     text: 'Życzymy miłego seansu!<br><button class="swall-ok">Ok</button>',
                     type: 'success',
                     html: true,
@@ -463,7 +463,7 @@ $(document).on("click", '#paid', function(e) {
             modal.css('display','none');
             return swal({
                 title: 'Błąd',
-                text: 'Błedne dane!<br>'+ JSON.parse(response.responseText).message +'<br><button class="swall-error">Ok</button>',
+                text: 'Błędne dane!<br>'+ JSON.parse(response.responseText).message +'<br><button class="swall-error">Ok</button>',
                 type: 'warning',
                 html: true,
                 showConfirmButton: false
@@ -473,6 +473,9 @@ $(document).on("click", '#paid', function(e) {
 });
 
 $(document).on("click", '#cms-order-show', function(e) {
+    var selectedTicked = parseInt($('#dom5').html());
+    var maxTicked = parseInt($('#dom0').html());
+    var tickedDiv = $('#cms-tickets-payment');
     var _url = document.getElementById('cms-order-show').dataset.url;
     var _data = {
         TICKETS: HASH_OF_SELECTED_TICKETS
@@ -480,6 +483,10 @@ $(document).on("click", '#cms-order-show', function(e) {
     console.log(_url);
     console.log(_data);
     e.preventDefault();
+    if (selectedTicked != maxTicked){
+        SetStyle(tickedDiv);
+        return;
+    }
     return $.ajax({
         method: 'get',
         dataType: 'json',
@@ -487,8 +494,8 @@ $(document).on("click", '#cms-order-show', function(e) {
         url: _url,
         success: function(response) {
                 return swal({
-                    title: 'Przyjeto dane.',
-                    text: 'Operacja zakończona powodzeniem!<br><button>Ok</button>',
+                    title: 'Przyjęto dane.',
+                    text: 'Operacja zakończona powodzeniem!<br><button id="swall-confirm">Ok</button>',
                     type: 'success',
                     html: true,
                     showConfirmButton: false
@@ -497,11 +504,67 @@ $(document).on("click", '#cms-order-show', function(e) {
         error: function(response) {
             return swal({
                 title: 'Błąd',
-                text: 'Błedne dane!<br><button class="swall-error">Ok</button>',
+                text: 'Błędne dane!<br><button class="swall-error">Ok</button>',
                 type: 'warning',
                 html: true,
                 showConfirmButton: false
             });
         }
     });
+});
+
+$(document).on("click", '#cms-order-buy', function(e) {
+    var selectedTicked = parseInt($('#dom5').html());
+    var maxTicked = parseInt($('#dom0').html());
+    var tickedDiv = $('#cms-tickets-payment');
+    var _url = document.getElementById('cms-order-buy').dataset.url;
+    var _url2 = document.getElementById('cms-order-buy').dataset.redirect;
+    var _data = {
+        TICKETS: HASH_OF_SELECTED_TICKETS
+    }
+    console.log(_url);
+    console.log(_url2);
+    console.log(_data);
+    e.preventDefault();
+    if (selectedTicked != maxTicked){
+        SetStyle(tickedDiv);
+        return;
+    }
+    return $.ajax({
+        method: 'get',
+        dataType: 'json',
+        data: _data,
+        url: _url,
+        success: function(response) {
+            return swal({
+                title: 'Przyjęto dane.',
+                text: 'Operacja zakończona powodzeniem!<br><button id="swall-buy" data-redirect='+ _url2 +' >Ok</button>',
+                type: 'success',
+                html: true,
+                showConfirmButton: false
+            });
+        },
+        error: function(response) {
+            return swal({
+                title: 'Błąd',
+                text: 'Błędne dane!<br><button class="swall-error">Ok</button>',
+                type: 'warning',
+                html: true,
+                showConfirmButton: false
+            });
+        }
+    });
+});
+
+$(document).on("click", '#swall-buy', function(e){
+   var url = location.href;
+   var _url2 = document.getElementById('swall-buy').dataset.redirect;
+   var url_http = url.replace('http://', '');
+   var end_url = url_http.indexOf('/');
+   e.preventDefault();
+    window.location.href = 'http://' + url_http.substring(0,end_url) + _url2;
+});
+
+$(document).on("click", '#swall-confirm', function(e){
+    location.reload();
 });

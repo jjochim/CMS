@@ -1,0 +1,39 @@
+<div class="row">
+  <ul class="nav nav-tabs" role="tablist">
+    <% active = 6 %>
+    <% tmp = false %>
+    <% (0..6).each do |indx1| %>
+        <% one_day = @seances.where(start_date: (Time.now.beginning_of_day + indx1.days)..(Time.now.end_of_day + indx1.days)) %>
+        <% tmp1 = day_of_week((Time.now + indx1.day).wday) %>
+        <li role="presentation" class="<% if one_day.count == 0 %>disable-nav-tabs<% else; active = indx1; end %><% if indx1 == active and tmp == false; tmp = true %>active<% end %>">
+          <a href="#<%= tmp1 %>" aria-controls="<%= tmp1 %>" role="tab" data-toggle="tab">
+            <h4 class="date-seance"><%= tmp1 %></h4>
+            <%= format_date(Time.now + indx1.day) %>
+          </a>
+        </li>
+    <% end %>
+  </ul>
+  <div class="tab-content seance">
+    <% active = 6 %>
+    <% tmp = false %>
+    <% (0..6).each do |indx2| %>
+        <% one_day = @seances.where(start_date: (Time.now.beginning_of_day + indx2.days)..(Time.now.end_of_day + indx2.days)) %>
+        <% tmp2 = day_of_week((Time.now + indx2.day).wday) %>
+        <div role="tabpanel" class="tab-pane <% if one_day.count != 0; active = indx2; end %><% if indx2 == active and tmp == false; tmp = true %>active<% end %>" id="<%= tmp2 %>">
+          <table>
+            <tbody>
+            <% one_day.group(:movie_id).each do |seance| %>
+                <tr>
+                  <td>
+                    <% one_day.where(movie_id: seance.movie).sort_by { |x| x.start_date }.each do |time| %>
+                        <%= link_to(  (time.start_date.strftime("%H:%M") + '<b>' + threed_check(time) + '</b>' + '<br>' + '<b>' + subtitle_check(time) + '</b>').html_safe , {controller: 'orders', action: 'show_info', seance_id: time.id}, class: "btn btn-default btn-xs btn-seance") %>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+    <% end %>
+  </div>
+</div>

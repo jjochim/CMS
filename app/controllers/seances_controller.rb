@@ -22,16 +22,6 @@ class SeancesController < ApplicationController
     render :index
   end
 
-  def show_seances_with_movie
-    @movie_name = Movie.find(params[:movie_id]).title
-    @seances = Seance.where(movie_id: params[:movie_id]).seven_days_from_now
-    Rails.logger.info @seances_with.inspect
-    respond_to do |format|
-      format.html {  }
-      format.json { render json:  @seances_with  }
-    end
-  end
-
   # GET /seances/1
   # GET /seances/1.json
   def show

@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :seances do
     collection do
       match 'search' => 'seances#search', via: [:get, :post], as: :search
-      get :show_seances_with_movie
     end
   end
   resources :orders do

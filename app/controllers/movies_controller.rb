@@ -22,6 +22,7 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
+    @seances = Seance.where(movie_id: params[:id]).seven_days_from_now
   end
 
   # GET /movies/new
