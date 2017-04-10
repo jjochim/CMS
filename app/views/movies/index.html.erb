@@ -63,25 +63,27 @@
     <!--user, employee-->
 
     <div class="container container-margin">
-      <div class="row">
-        <div class="col-xs-12">
-          <legend>Premiery</legend>
-        </div>
-      </div>
-      <div class="row">
-        <section class="regular slider">
-          <% @premiere.each do |p| %>
-            <div>
-              <%= image_tag p.picture %>
+      <% if @premiere.count > 0 %>
+          <div class="row">
+            <div class="col-xs-12">
+              <legend>Premiery</legend>
             </div>
-          <% end %>
-        </section>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <legend>Repertuar</legend>
-        </div>
-      </div>
+          </div>
+          <div class="row">
+            <section class="regular slider">
+              <% @premiere.each do |p| %>
+                  <div>
+                    <%= image_tag p.picture %>
+                  </div>
+              <% end %>
+            </section>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <legend>Repertuar</legend>
+            </div>
+          </div>
+      <% end %>
       <div class="search-form-movie">
         <%= search_form_for @search do |f| %>
             <%= f.text_field :title_or_country_cont %>
