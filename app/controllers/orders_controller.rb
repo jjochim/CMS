@@ -57,6 +57,23 @@ class OrdersController < ApplicationController
   def show
     @tickets = @order.tickets
     @price = 0
+    @Info = Info.find(1)
+    if @tickets
+      @arr = []
+      @tickets.each do |x|
+        @arr << { "name" => x.name, "price" => x.price }
+        p x
+      end
+    end
+    p " "
+    p " "
+    p " "
+    p " "
+    p " "
+    p " "
+    p " "
+    p " "
+    p @arr
   end
 
   def show_info

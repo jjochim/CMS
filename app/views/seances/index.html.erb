@@ -58,7 +58,7 @@
                 <td><% if seance.subtitle %>Napisy<% end %><% if seance.lector %>Lektor<% end %><% if seance.dubbing %>Dubbing<% end %></td>
                 <td class="text-right">
                   <% if seats_count(seance) == 0 %><%= link_to 'Edytuj', edit_seance_path(seance), class: "btn btn-default btn-xs" %>
-                      <%= link_to 'Usuń', seance, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %><% end %></td>
+                      <%= link_to 'Usuń', seance, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %><% end %></td>
               </tr>
           <% end %>
           </tbody>
@@ -99,8 +99,10 @@
                 <tbody>
                 <% one_day.group(:movie_id).each do |seance| %>
                     <tr>
-                      <td><h4><b><%= seance.movie.title %></b></h4></td>
-                      <td>
+                      <td class="col-xs-2">
+                        <h4><b><%= link_to seance.movie.title, movie_path(seance.movie) %></b></h4>
+                      </td>
+                      <td class="col-xs-10">
                         <% one_day.where(movie_id: seance.movie).sort_by { |x| x.start_date }.each do |time| %>
                             <%= link_to((time.start_date.strftime("%H:%M") + '<b>' + threed_check(time) + '</b>' + '<br>' + '<b>' + subtitle_check(time) + '</b>').html_safe , {controller: 'orders', action: 'show_info', seance_id: time.id}, class: "btn btn-default btn-xs btn-seance") %>
                         <% end %>

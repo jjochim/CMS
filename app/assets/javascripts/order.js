@@ -565,6 +565,27 @@ $(document).on("click", '#swall-buy', function(e){
     window.location.href = 'http://' + url_http.substring(0,end_url) + _url2;
 });
 
-$(document).on("click", '#swall-confirm', function(e){
+$(document).on("click", '#swall-confirm', function(){
     location.reload();
+});
+
+var Print
+Print = function(div) {
+    var element = document.getElementById(div);
+    var domClone = element.cloneNode(true);
+    var $printSection = document.createElement("div");
+    $printSection.id = "printSection";
+    $printSection.appendChild(domClone);
+    document.body.insertBefore($printSection, document.body.firstChild);
+    window.print();
+
+    var oldElement = document.getElementById('printSection');
+    if (oldElement != null) { oldElement.parentNode.removeChild(oldElement);}
+
+    return true;
+};
+
+$(document).on("click", '#button-tickets-print', function(){
+
+    Print('ticket-print');
 });

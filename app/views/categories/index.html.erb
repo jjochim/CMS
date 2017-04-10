@@ -1,15 +1,3 @@
-<!--<div class="panel panel-default">-->
-  <!--<div class="panel-heading">-->
-    <!---->
-  <!--</div>-->
-  <!--<div class="panel-body">-->
-    <!---->
-  <!--</div>-->
-  <!--<div class="panel-footer">-->
-    <!---->
-  <!--</div>-->
-<!--</div>-->
-
 <div class="col-xs-6">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -39,7 +27,7 @@
               <td><%= category.name %></td>
               <td class="text-right">
                 <%= link_to 'Edytuj', edit_category_path(category), class: "btn btn-default btn-xs" %>
-                <%= link_to 'Usuń', category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %>
+                <%= link_to 'Usuń', category, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %>
               </td>
             </tr>
         <% end %>

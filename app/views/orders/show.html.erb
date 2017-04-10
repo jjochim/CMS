@@ -29,7 +29,7 @@
         <td><%= @order.seance.room.name %></td>
         <td><%= @order.seatings.count %></td>
         <td><% if @order.paid %>TAK<% else %>NIE<% end %></td>
-        <td class="text-center"><%= link_to 'Usuń', @order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
+        <td class="text-center"><%= link_to 'Usuń', @order, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %></td>
       </tr>
   </tbody>
 </table>
@@ -70,6 +70,49 @@
   <%= link_to 'Powrót', orders_path, class: "btn btn-default" %>
   <% if @order.paid == false %>
     <button id="cms-order-show" class="btn btn-default" data-url="<%= update_ticket_type_orders_path(order_id: @order) %>">Potwierdź odbiór</button>
+  <% else %>
+    <button id="button-tickets-print">Bilety</button>
   <% end %>
-</div>
+</div><br>
 
+<% if @order.paid == true %>
+    <div id="ticket-print" style="margin-top: 120px;">
+      <% x = 0 %>
+      <% @order.list_seats.split(",").each do |val| %>
+        <div class="ticket" id="ticket">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <b><%= @Info.cinema_name %></b>
+            </div>
+            <div class="panel-body">
+              <table style="width: 100%">
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td><h3><%= @order.seance.movie.title %></h3></td>
+                    <td><h3><b><%= threed_check(@order.seance) %></b></h3></td>
+                  </tr>
+                  <tr>
+                    <td>Data: <%= format_date(@order.seance.start_date) %></td>
+                    <td>Godzina: <%= format_time(@order.seance.start_date) %></td>
+                    <td></td>
+                    <td>Bilet: <%= @arr[x]['name'] %></td>
+                    <td>Cena: <%= @arr[x]['price'] %>zł</td>
+                  </tr>
+                  <tr>
+                    <td>Sala: <%= @order.seance.room.name %></td>
+                    <td></td>
+                    <td></td>
+                    <td>Rząd: <% y = val %><%= y.sub(/\d/, "") %></td>
+                    <td>Miejsce: <%= val.sub(/\D/, "") %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="panel-footer"></div>
+          </div>
+        </div>
+        <% x = x+1 %>
+      <% end %>
+    </div>
+<% end %>

@@ -56,7 +56,7 @@
                 <td><%= order.seance.room.name %></td>
                 <td><%= format_datatime(order.seance.start_date) %></td>
                 <td class="text-right"><%= link_to 'Szczególy', order, class: "btn btn-default btn-xs" %>
-                  <%= link_to 'Usuń', order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
+                  <%= link_to 'Usuń', order, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %></td>
               </tr>
           <% end %>
           </tbody>
@@ -114,7 +114,7 @@
                                   <td><%= order.seance.room.name %></td>
                                   <td><%= format_time(order.seance.start_date) %></td>
                                   <td class="text-right"><%= link_to 'Szczególy', order, class: "btn btn-default btn-xs" %>
-                                    <%= link_to 'Usuń', order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
+                                    <%= link_to 'Usuń', order, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %></td>
                                 </tr>
                             <% end %>
                         <% end %>

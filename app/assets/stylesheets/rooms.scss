@@ -3,8 +3,6 @@
   box-sizing: border-box !important;
 }
 
-
-
 .seating-row {
   display: block;
   background-color: black;
@@ -46,33 +44,33 @@
   font-size: 16px;
 }
 
-.seat {
-  transition: background-color 0.25s linear;
-  display: inline-block;
-  margin: 5px;
-  background-color: white;
-  width: 50px;
-  height: 50px;
-  padding-top: 17px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: rgba(0,0,0,0);
-  transition: color 0.25s linear;
-}
-
-.seat:hover {
-  color: rgba(0,0,0,1);
-}
-
-.seat:hover:not(.is-na-true):not(.sold):not(.false) {
-  background-color: lime;
-  cursor: pointer;
-}
-.seat.is-na-true {
-  background-color: orange;
-  cursor: not-allowed;
-}
+//.seat {
+//  transition: background-color 0.25s linear;
+//  display: inline-block;
+//  margin: 5px;
+//  background-color: white;
+//  width: 50px;
+//  height: 50px;
+//  padding-top: 17px;
+//  text-align: center;
+//  font-size: 16px;
+//  font-weight: bold;
+//  color: rgba(0,0,0,0);
+//  transition: color 0.25s linear;
+//}
+//
+//.seat:hover {
+//  color: rgba(0,0,0,1);
+//}
+//
+//.seat:hover:not(.is-na-true):not(.sold):not(.false) {
+//  background-color: lime;
+//  cursor: pointer;
+//}
+//.seat.is-na-true {
+//  background-color: orange;
+//  cursor: not-allowed;
+//}
 
 .seatings {
   position: absolute;
@@ -128,10 +126,18 @@
 }
 
 .cms-seat:hover:not(.is-na-true):not(.sold):not(.false) {
-  background-color: lime;
+  background-color: #c1e2b3;
   cursor: pointer;
 }
+
+.cms-seat.is-na-true:hover {
+  background-color: lime;
+}
+
 .cms-seat.is-na-true {
   background-color: orange;
-  cursor: not-allowed;
+}
+
+.cms-seat.is-true {
+  background-color: #6e6e6e;
 }

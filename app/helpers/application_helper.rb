@@ -36,7 +36,6 @@ module ApplicationHelper
   end
 
   def threed_check(seance)
-    tmp = ''
     if seance.threed
       tmp = ' 3D'
     else

@@ -11,7 +11,10 @@
     </div>
   <% end %>
 
-  <div class="col-lg-6">
+  <div class="panel-body">
+
+
+    <div class="col-lg-6">
     <div class="field">
       <%= f.label :title, 'Tytuł' %>
       <%= f.text_field :title %>
@@ -73,9 +76,13 @@
       <%= f.file_field :picture %>
     </div>
 
+    </div>
+  </div>
+  <div class="panel-footer">
     <div class="actions">
       <%= f.submit value: 'Akceptuj' %>
     </div>
+    <%= button_to 'Powrót', movies_path, class: 'button', method: :get  %>
   </div>
 
 <% end %>

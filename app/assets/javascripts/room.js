@@ -40,8 +40,10 @@ var SeatingUtils = {
         $div.find('.seating-status').val(value);
         if(value) {
             $div.addClass('is-na-true');
+            $div.removeClass('is-true');
         } else {
             $div.removeClass('is-na-true');
+            $div.addClass('is-true');
         }
     },
     /**
@@ -99,12 +101,12 @@ $(document).ready(function() {
 //     });
 // });
 
-$(document).on("click", '#cms-room-create', function(e) {
+$(document).on("click", '#cms-room-create', function() {
     $('#myModal').css('display', 'block');
 });
 
 
-$(document).ready(function() {
+$(document).ready(function(e) {
     var colums = $('#cms-columns').text();
     var margin = 5;
     var seat = (1115/colums-2*margin);

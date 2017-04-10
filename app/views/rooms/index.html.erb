@@ -1,32 +1,37 @@
-<div class="container">
-
-  <h1>Sale</h1>
-  <%= link_to new_room_path, class: "btn btn-success admin_new" do %>
-      </span>Dodaj nowy seans
-  <% end %>
-  <table class="table table-striped table-bordered">
-    <thead>
-    <tr>
-      <th>Nazawa</th>
-      <th>Wiersze</th>
-      <th>Kolumny</th>
-      <th>Miejsca</th>
-      <th colspan="3">Akcje</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @rooms.each do |room| %>
-        <tr>
-          <td><%= room.name %></td>
-          <td><%= room.rows %></td>
-          <td><%= room.columns %></td>
-          <td><%= room.seatings.where(slot: true).count %></td>
-          <td class="text-right"><%= link_to 'Szczegóły', room, class: "btn btn-default btn-xs" %>
-            <%= link_to 'Usuń', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %></td>
-        </tr>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1>Sale</h1>
+    <%= link_to new_room_path, class: "btn btn-success admin_new" do %>
+        Nowy
     <% end %>
-    </tbody>
-  </table>
-  <%= will_paginate @rooms, :previous_label => 'Poprzednia', :next_label => 'Nastepna', renderer: BootstrapPagination::Rails %>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Nazawa</th>
+        <th>Wiersze</th>
+        <th>Kolumny</th>
+        <th>Miejsca</th>
+        <th colspan="3">Akcje</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @rooms.each do |room| %>
+          <tr>
+            <td><%= room.name %></td>
+            <td><%= room.rows %></td>
+            <td><%= room.columns %></td>
+            <td><%= room.seatings.where(slot: true).count %></td>
+            <td class="text-right"><%= link_to 'Szczegóły', room, class: "btn btn-default btn-xs" %>
+              <%= link_to 'Usuń', room, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel-footer">
+    <%= will_paginate @rooms, :previous_label => 'Poprzednia', :next_label => 'Nastepna', renderer: BootstrapPagination::Rails %>
+  </div>
 </div>
