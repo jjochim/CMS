@@ -586,6 +586,5 @@ Print = function(div) {
 };
 
 $(document).on("click", '#button-tickets-print', function(){
-
     Print('ticket-print');
 });

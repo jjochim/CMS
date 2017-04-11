@@ -79,6 +79,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.7.0)
+    faker (1.7.3)
+      i18n (~> 0.5)
     ffi (1.9.14)
     figaro (1.1.1)
       thor (~> 0.14)
@@ -216,6 +218,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.2)
   devise
+  faker
   figaro
   i18n
   jbuilder (~> 2.5)

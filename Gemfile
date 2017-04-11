@@ -59,4 +59,4 @@ gem 'rufus-scheduler'
 gem 'rails-erd'
 gem 'figaro'
 gem 'seed_dump'
-
+gem 'faker'
