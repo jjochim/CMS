@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action -> {redirect_some_path_unless_role root_path, ['admin']}, only: [:edit, :create, :destroy, :new, :update, :index]
 
   # GET /users
   # GET /users.json

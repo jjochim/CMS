@@ -48,7 +48,9 @@
                 <td><%= format_date(movie.premiere) %></td>
                 <td class="text-right"><%= link_to 'Szczegóły', movie, class: "btn btn-default btn-xs" %>
                   <%= link_to 'Edytuj', edit_movie_path(movie), class: "btn btn-default btn-xs" %>
-                  <%= link_to 'Usuń', movie, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %></td>
+                  <% if movie.seances.count == 0 %>
+                      <%= link_to 'Usuń', movie, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %>
+                  <% end %></td>
               </tr>
           <% end %>
           </tbody>

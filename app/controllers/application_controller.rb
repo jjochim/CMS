@@ -3,8 +3,12 @@ class ApplicationController < ActionController::Base
   $movie_front_side = [4, 16, 6]
 
   protected
-  def redirect_some_path_unless_role some_path, role #przekierowaie gdzies jezeli user nie ma podanej roli
-    redirect_to some_path unless current_user and current_user.role == role
+  def redirect_some_path_unless_role some_path, role #przekierowaie gdzies jezeli user nie ma podanej role
+    redirect_to some_path unless current_user and current_user.role == role[0]
+  end
+
+  def redirect_some_path_unless_roles some_path #przekierowaie gdzies jezeli user nie jest zalogowany
+    redirect_to some_path unless current_user
   end
 
   # protect_from_forgery

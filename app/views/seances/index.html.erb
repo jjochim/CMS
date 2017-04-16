@@ -54,11 +54,14 @@
                 <td><%= seance.movie.title %></td>
                 <td><%= seance.room.name %></td>
                 <td><%= seats_count(seance) %>/<%= seance.room.seatings.where(slot: true).count %></td>
-                <td><%= seance.threed %></td>
+                <td><%= threed_trueorfalse(seance) %></td>
                 <td><% if seance.subtitle %>Napisy<% end %><% if seance.lector %>Lektor<% end %><% if seance.dubbing %>Dubbing<% end %></td>
                 <td class="text-right">
                   <% if seats_count(seance) == 0 %><%= link_to 'Edytuj', edit_seance_path(seance), class: "btn btn-default btn-xs" %>
-                      <%= link_to 'Usuń', seance, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %><% end %></td>
+                      <%= link_to 'Usuń', seance, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %>
+                  <% else %>
+                      <%= link_to 'Blokuj', '#' %>
+                  <% end %></td>
               </tr>
           <% end %>
           </tbody>

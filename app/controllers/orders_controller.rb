@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action -> {redirect_some_path_unless_roles root_path}, only: [:destroy, :index, :search]
+
   # GET /orders
   # GET /orders.json
   def index

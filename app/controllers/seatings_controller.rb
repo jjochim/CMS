@@ -1,5 +1,7 @@
 class SeatingsController < ApplicationController
   before_action :set_seating, only: [:show, :edit, :update, :destroy]
+  before_action -> {redirect_some_path_unless_role root_path, ['admin']}, only: [:edit, :create, :destroy, :new, :update, :index]
+
 
   # GET /seatings
   # GET /seatings.json

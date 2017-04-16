@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-u1 = User.create name: 'Janusz', last_name: 'Joc', email: 'janusz.jochim@gmail.com', phone: '123456789', password: 'zaq12wsx', password_confirmation: 'zaq12wsx', role: 'admin'
+u1 = User.create name: 'Admin', last_name: 'Admin', email: ENV["admin_email"], phone: '123456789', password: ENV["admin_password"], password_confirmation: 'zaq12wsx', role: 'admin'
 u2 = User.create name: 'Jan', last_name: 'Joc', email: 'evo670@wp.pl', phone: '123456789', password: 'zaq12wsx', password_confirmation: 'zaq12wsx', role: 'employee'
 
 Info.create(cinema_name: 'Kino', street: 'ulica', email: 'email@email.com', phone: '7356252783', city: 'Miasto', zip_code: '68-273',
@@ -21,7 +21,7 @@ Category.create(name: 'Akcja')
 Category.create(name: 'Dramat')
 Category.create(name: 'Kryminał')
 Category.create(name: 'Miuzikal')
-Category.create(name: 'sci-fi')
+Category.create(name: 'Sci-fi')
 Category.create(name: 'Dokumentalny')
 puts
 
@@ -1002,34 +1002,34 @@ Seating.create!([
   {slot: true, room_id: 3}
 ])
 
-# print 'Seance '
-# 0.upto(1) do |indx|
-#   10.upto(22) do |index|
-#     0.upto(10) do
-#       if index % 2 == 0
-#         print '. '
-#         Seance.create(room: Room.all.shuffle.first, movie: Movie.all.shuffle.first, start_date: Time.now + indx.days + index.hours,
-#                       threed: [true, false].shuffle.first, dubbing: true)
-#       end
-#     end
-#   end
-# end
-# puts
+print 'Seance '
+0.upto(1) do |indx|
+  10.upto(22) do |index|
+    0.upto(10) do
+      if index % 2 == 0
+        print '. '
+        Seance.create(room: Room.all.shuffle.first, movie: Movie.all.shuffle.first, start_date: Time.now + indx.days + index.hours,
+                      threed: [true, false].shuffle.first, dubbing: true)
+      end
+    end
+  end
+end
+puts
 
-Seance.create!([
-  {start_date: "2017-04-16 13:06:00", movie_id: 1, room_id: 1, threed: true, lector: true, subtitle: false, dubbing: false},
-  {start_date: "2017-04-16 04:07:00", movie_id: 1, room_id: 2, threed: false, lector: false, subtitle: true, dubbing: false}
-])
-Order.create!([
-  {name: "dasdas", surname: "fdssad", email: "adfasda@da.pl", phone: "", seance_id: 2, paid: false, approved: true, paypal: false, reserved: true, list_seats: "1E,2E"},
-  {name: "sad", surname: "qq", email: "wqw@pl.pl", phone: "", seance_id: 2, paid: false, approved: true, paypal: false, reserved: true, list_seats: "3E,4E"},
-  {name: "wqwqwq", surname: "reert", email: "iii@pl.pl", phone: "", seance_id: 2, paid: false, approved: true, paypal: false, reserved: true, list_seats: "10E,9E"}
-])
-OrderSeating.create!([
-  {seating_id: 201, order_id: 1},
-  {seating_id: 202, order_id: 1},
-  {seating_id: 203, order_id: 2},
-  {seating_id: 204, order_id: 2},
-  {seating_id: 210, order_id: 3},
-  {seating_id: 209, order_id: 3}
-])
+# Seance.create!([
+#   {start_date: "2017-04-16 13:06:00", movie_id: 1, room_id: 1, threed: true, lector: true, subtitle: false, dubbing: false},
+#   {start_date: "2017-04-16 04:07:00", movie_id: 1, room_id: 2, threed: false, lector: false, subtitle: true, dubbing: false}
+# ])
+# Order.create!([
+#   {name: "dasdas", surname: "fdssad", email: "adfasda@da.pl", phone: "", seance_id: 2, paid: false, approved: true, paypal: false, reserved: true, list_seats: "1E,2E"},
+#   {name: "sad", surname: "qq", email: "wqw@pl.pl", phone: "", seance_id: 2, paid: false, approved: true, paypal: false, reserved: true, list_seats: "3E,4E"},
+#   {name: "wqwqwq", surname: "reert", email: "iii@pl.pl", phone: "", seance_id: 2, paid: false, approved: true, paypal: false, reserved: true, list_seats: "10E,9E"}
+# ])
+# OrderSeating.create!([
+#   {seating_id: 201, order_id: 1},
+#   {seating_id: 202, order_id: 1},
+#   {seating_id: 203, order_id: 2},
+#   {seating_id: 204, order_id: 2},
+#   {seating_id: 210, order_id: 3},
+#   {seating_id: 209, order_id: 3}
+# ])

@@ -5,6 +5,6 @@ class Order < ApplicationRecord
   has_many :order_tickets, dependent: :destroy
   has_many :tickets, through: :order_tickets
   validates_presence_of [:name, :surname, :email, :seance_id]
-
+  validates :email, format: /@/
   self.per_page =10
 end

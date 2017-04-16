@@ -1,5 +1,7 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action -> {redirect_some_path_unless_role root_path, ['admin']}, only: [:edit, :create, :destroy, :new, :update, :index]
+
   # GET /rooms
   # GET /rooms.json
   def index

@@ -44,6 +44,15 @@ module ApplicationHelper
     return tmp
   end
 
+  def threed_trueorfalse(seance)
+    if seance.threed
+      tmp = 'TAK'
+    else
+      tmp = 'NIE'
+    end
+    return tmp
+  end
+
   def subtitle_check(seance)
     tmp = ''
     if seance.subtitle

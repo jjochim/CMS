@@ -1,5 +1,7 @@
 class SeancesController < ApplicationController
   before_action :set_seance, only: [:show, :edit, :update, :destroy]
+  before_action -> {redirect_some_path_unless_role root_path, ['admin']}, only: [:edit, :create, :destroy, :new, :update]
+
 
   # GET /seances
   # GET /seances.json
@@ -51,8 +53,8 @@ class SeancesController < ApplicationController
 
     respond_to do |format|
       if @seance.save
-        format.html { redirect_to @seance, notice: 'Seance was successfully created.' }
-        format.json { render :show, status: :created, location: @seance }
+        format.html { redirect_to seances_path, notice: 'Seance was successfully created.' }
+        format.json { render :index, status: :created, location: @seance }
       else
         format.html { render :new }
         format.json { render json: @seance.errors, status: :unprocessable_entity }
