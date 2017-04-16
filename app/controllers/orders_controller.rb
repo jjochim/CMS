@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action -> {redirect_some_path_unless_roles root_path}, only: [:destroy, :index, :search]
+  before_action -> {redirect_some_path_unless_roles root_path}, only: [:destroy, :index, :search, :find]
 
   # GET /orders
   # GET /orders.json
@@ -67,15 +67,6 @@ class OrdersController < ApplicationController
         p x
       end
     end
-    p " "
-    p " "
-    p " "
-    p " "
-    p " "
-    p " "
-    p " "
-    p " "
-    p @arr
   end
 
   def show_info
@@ -136,6 +127,7 @@ class OrdersController < ApplicationController
   def summary
     seance_id = params[:s]
     order_id = params[:o]
+    code = params[:c]
 
     if seance_id && order_id
 
@@ -151,12 +143,13 @@ class OrdersController < ApplicationController
         seance = nil
       end
 
-      if order && seance
+      if order && seance && code == order.activation_code
         order.approved = true
         order.save
         CinemaMailer.info_for_user(Order.find(order_id),order.list_seats.split(',')).deliver_later(wait: 1.seconds)
+        @message = 'Aktywowano rezerwacje!'
       else
-        puts 404
+        @message = 'Przekroczono czas aktywacji!'
       end
     end
     puts 404404
@@ -164,12 +157,24 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    if session[:code] != @order.activation_code
+      redirect_to movies_path
+    end
+  end
+
+  def find
+    if params[:ac]
+      order = Order.where(activation_code: parmas[:ac]).last
+      redirect_to order_path(order_id: order.id)
+    end
   end
 
   # POST /orders
   # POST /orders.json
   def create
     occupied = false
+    code = generate_activation_code
+    session[:code] = code
     seance_id = params[:seance_id]
     if params[:ARR_OF_SELECTED_FIELDS]
       selected_fields = params[:ARR_OF_SELECTED_FIELDS].split(",")
@@ -191,7 +196,8 @@ class OrdersController < ApplicationController
                           approved: false,
                           reserved: false,
                           paypal: false,
-                          list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE]
+                          list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE],
+                          activation_code: code
         )
       else
         order = Order.new(seance_id: seance_id,
@@ -202,7 +208,8 @@ class OrdersController < ApplicationController
                           approved: false,
                           reserved: true,
                           paypal: false,
-                          list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE]
+                          list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE],
+                          activation_code: code
         )
       end
     end
@@ -215,7 +222,9 @@ class OrdersController < ApplicationController
                         approved: false,
                         reserved: false,
                         paypal: true,
-                        list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE]
+                        list_seats: params[:ARR_OF_SELECTED_SEATING_NUMBRE],
+                        activation_code: code
+
       )
     end
     if not order.save
@@ -277,6 +286,11 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
+    end
+
+    def generate_activation_code(size = 6)
+      charset = %w{ 1 2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z}
+      (0...size).map{ charset.to_a[rand(charset.size)] }.join
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -27,6 +27,25 @@ class PaymentsController < ApplicationController
   def new
     @order = Order.find(params[:order_id])
     @max = @order.order_seatings.count
+    p ' '
+    p ' '
+    p ' '
+    p ' '
+    p ' '
+    p ' '
+    p ' tuuuuuuuuuuuuuuu'
+    p session[:code]
+    p @order.paid
+    p @order.activation_code
+    if session[:code] != @order.activation_code || @order.paid == true
+      p 'sasasasasassa'
+    end
+    p ' '
+    p ' '
+    p ' '
+    if session[:code] != @order.activation_code || @order.paid == true
+      redirect_to movies_path
+    end
   end
 
   # GET /orders/1/edit
@@ -69,6 +88,11 @@ class PaymentsController < ApplicationController
     items = []
     item = {}
     total = 0
+
+    if @order.paid
+      return
+      redirect_to movies_path
+    end
 
     respond_to do |format|
       if @order.update(order_params)

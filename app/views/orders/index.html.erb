@@ -20,6 +20,9 @@
                   <%= f.search_field :surname_cont, class: "form-control", placeholder: "Nazwisko" %>
                 </div>
                 <div class="col-xs-2">
+                  <%= f.search_field :activation_code_cont, class: "form-control", placeholder: "Kod" %>
+                </div>
+                <div class="col-xs-2">
                   <%= f.label :reserved_eq, 'Rezerwacje' %>
                   <%= f.check_box :reserved_eq %>
                 </div>
@@ -38,9 +41,10 @@
             <th><b><%= sort_link @search, :surname, "Nazwisko:" %></b></th>
             <th><b>Email:</b></th>
             <th><b>Tel:</b></th>
-            <th><b>Film:</b></th>
-            <th><b>Sala:</b></th>
+            <th><b><%= sort_link @search, :movie_title, "Film:" %></b></th>
+            <th><b><%= sort_link @search, :room_name, "Sala:" %></b></th>
             <th><b><%= sort_link @search, :seance_start_date, "Data:" %></b></th>
+            <th><b>Kod:</b></th>
             <th><b>Akcje:</b></th>
           </tr>
           </thead>
@@ -55,6 +59,7 @@
                 <td><%= order.seance.movie.title %></td>
                 <td><%= order.seance.room.name %></td>
                 <td><%= format_datatime(order.seance.start_date) %></td>
+                <td><%= order.activation_code %></td>
                 <td class="text-right"><%= link_to 'Szczególy', order, class: "btn btn-default btn-xs" %>
                   <%= link_to 'Usuń', order, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %></td>
               </tr>

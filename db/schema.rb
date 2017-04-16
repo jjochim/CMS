@@ -82,12 +82,13 @@ ActiveRecord::Schema.define(version: 20170323140206) do
     t.string   "phone"
     t.integer  "seance_id"
     t.boolean  "paid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.boolean  "approved"
     t.boolean  "paypal"
     t.boolean  "reserved"
     t.string   "list_seats"
+    t.string   "activation_code"
   end
 
   create_table "rooms", force: :cascade do |t|

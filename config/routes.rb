@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get :show_room
       get :summary
       get :update_ticket_type
+      get :find
     end
   end
   resources :payments
