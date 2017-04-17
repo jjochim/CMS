@@ -24,6 +24,11 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def show
     @seances = Seance.where(movie_id: params[:id]).seven_days_from_now
+    if /src\s*=\s*"([^"]*)"/.match(@movie.url_trailer) == nil
+      @src = "https://www.youtube.com/embed/H-IVzFIRSVE"
+    else
+      @src = /src\s*=\s*"([^"]*)"/.match(@movie.url_trailer)[1]
+    end
   end
 
   # GET /movies/new

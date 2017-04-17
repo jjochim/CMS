@@ -165,6 +165,16 @@ class OrdersController < ApplicationController
   def find
     if params[:ac]
       @order = Order.where(activation_code: params[:ac]).last
+      @tickets = @order.tickets
+      @price = 0
+      @Info = Info.find(1)
+      if @tickets
+        @arr = []
+        @tickets.each do |x|
+          @arr << { "name" => x.name, "price" => x.price }
+          p x
+        end
+      end
     end
   end
 

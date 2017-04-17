@@ -4,7 +4,9 @@
 <% end %>
 
 <% if params[:ac] && @order %>
-    <%= render template: 'orders/show', order: @order %>
-<% else %>
+    <div style="border: 4px solid black; padding: 20px; margin-top: 20px;">
+      <%= render template: 'orders/show', order: @order %>
+    </div>
+<% elsif params[:ac] %>
     Brak wyników!
 <% end %>

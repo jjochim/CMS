@@ -21,7 +21,7 @@
 //     $('#my-trailer').css('display','block');
 //     var span = $('#close-trailer');
 //     span.css('position', 'absolute');
-//     span.css('top', 10);
+//     span.css('top', 250);
 //     span.css('left', 20);
 // });
 //

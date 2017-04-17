@@ -118,7 +118,7 @@ var seatsManagement = {
             if (this.ticketsLeft > 0) {
                 this.selectedFields.push(id);
                 this.selectedSeatingNumber.push(number);
-                console.log("to to",this.selectedFields, this.selectedSeatingNumber);
+                console.log("to to",this.selectedFields, this.selectedSeatingNumber, this.selectedFields.length);
 
                 $(dom).addClass('cms-selected-seat');
                 this.ticketsLeft--;

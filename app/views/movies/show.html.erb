@@ -53,6 +53,24 @@
 <div id="my-trailer" class="modal">
   <div class="modal-content-yt">
     <span id="close-trailer" class="close">&times;</span>
-    <iframe src=<%= @movie.url_trailer %> frameborder="0" allowfullscreen width="980px" height="420px"></iframe>
+    <iframe id="iframe-trailer" src=<%= @src %> frameborder="0" allowfullscreen width="980px" height="420px"></iframe>
   </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).on("click", '#trailer', function() {
+        $('#my-trailer').css('display','block');
+        var top = $('#iframe-trailer').position().top;
+        var left = $('#iframe-trailer').position().left;
+        var span = $('#close-trailer');
+        span.css('position', 'absolute');
+        span.css('top', top - 60);
+        span.css('left', left - 10);
+        console.log(top);
+        console.log(left);
+    });
+
+    $(document).on("click", '#close-trailer', function() {
+        $('#my-trailer').css('display','none');
+    });
+</script>

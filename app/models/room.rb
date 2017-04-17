@@ -4,6 +4,6 @@ class Room < ApplicationRecord
   validates :name, :rows, :columns, presence: true
   validates :rows, :columns, numericality: { only_integer: true }
   validates :rows, inclusion: { in: 1..26 }
-  validates :columns, inclusion: { in: 1..36 }
+  validates :columns, inclusion: { in: 4..36 }
   self.per_page = 20
 end

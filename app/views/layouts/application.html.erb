@@ -39,18 +39,16 @@
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
           <% if user_signed_in? %>
-              <%= link_to "Wyloguj", destroy_user_session_path, :method => :delete %>
-              <% if current_user.role=='admin' %>
-                  Admin
-              <% else %>
-                  EMP
-              <% end %>
+            <% if current_user.role=='admin' %>
+                <li style="color: #7ecff4; padding: 16px;"><b>Admin</b></li>
+            <% else %>
+              <li style="color: #7ecff4; padding: 16px;"><b><%= current_user.name %> <%= current_user.last_name %></b></li>
+            <% end %>
+            <li><%= link_to "Wyloguj", destroy_user_session_path, :method => :delete %></li>
           <% else %>
-              <%= link_to "Zalo", user_session_path %>
+            <%= link_to "Zalo", user_session_path %>
           <% end %>
-        </li>
       </ul>
     </div>
   </nav>
