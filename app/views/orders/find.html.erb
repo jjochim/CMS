@@ -1,0 +1,10 @@
+<%= form_tag(find_orders_path, method: "get") do %>
+    <%= text_field_tag(:ac) %>
+    <%= submit_tag("Szukaj") %>
+<% end %>
+
+<% if params[:ac] && @order %>
+    <%= render template: 'orders/show', order: @order %>
+<% else %>
+    Brak wyników!
+<% end %>

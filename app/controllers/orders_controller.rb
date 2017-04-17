@@ -164,8 +164,7 @@ class OrdersController < ApplicationController
 
   def find
     if params[:ac]
-      order = Order.where(activation_code: parmas[:ac]).last
-      redirect_to order_path(order_id: order.id)
+      @order = Order.where(activation_code: params[:ac]).last
     end
   end
 

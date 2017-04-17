@@ -30,6 +30,7 @@
                 <li <% if [params[:controller], params[:action]] == ["movie", "index"] %>class="active"<% end %>><%= link_to "Filmy", movies_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["seances", "index"] %>class="active"<% end %>><%= link_to "Seanse", seances_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["orders", "index"] %>class="active"<% end %>><%= link_to "Rezerwacje", orders_path %></li>
+                <li <% if [params[:controller], params[:action]] == ["orders", "find"] %>class="active"<% end %>><%= link_to "Kod", find_orders_path %></li>
             <% end %>
         <% else %>
             <li <% if [params[:controller], params[:action]] == ["movie", "index"] %>class="active"<% end %>><%= link_to "Filmy", root_path %></li>
