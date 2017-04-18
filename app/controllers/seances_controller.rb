@@ -10,7 +10,7 @@ class SeancesController < ApplicationController
     @search = Seance.search(search_params[:q])
     @seances = @search.result(distinct: true).includes(:movie, :room).paginate(:page => params[:page])
     else
-      @seances = Seance.seven_days_from_now.paginate(:page => params[:page])
+      @seances = Seance.seven_days_from_now.where(block: false).paginate(:page => params[:page])
     end
   end
 
@@ -50,6 +50,8 @@ class SeancesController < ApplicationController
         @seance.send((val + '=').to_sym, false)
       end
     end
+
+    @seance.send(:block => false)
 
     respond_to do |format|
       if @seance.save
@@ -106,6 +108,6 @@ class SeancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def seance_params
-      params.require(:seance).permit(:start_date, :movie_id, :room_id, :threed, :lector, :subtitle, :dubbing)
+      params.require(:seance).permit(:start_date, :movie_id, :room_id, :threed, :lector, :subtitle, :dubbing, :block)
     end
 end

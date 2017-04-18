@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323140206) do
+ActiveRecord::Schema.define(version: 20170418170332) do
 
   create_table "approveds", force: :cascade do |t|
     t.integer  "order_id"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20170323140206) do
     t.boolean  "dubbing"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "block"
   end
 
   create_table "seatings", force: :cascade do |t|

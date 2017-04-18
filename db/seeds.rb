@@ -1009,7 +1009,7 @@ print 'Seance '
       if index % 2 == 0
         print '. '
         Seance.create(room: Room.all.shuffle.first, movie: Movie.all.shuffle.first, start_date: Time.now + indx.days + index.hours,
-                      threed: [true, false].shuffle.first, dubbing: true)
+                      threed: [true, false].shuffle.first, dubbing: true, block: false)
       end
     end
   end

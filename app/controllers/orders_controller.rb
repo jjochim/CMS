@@ -195,6 +195,10 @@ class OrdersController < ApplicationController
       return
       redirect_to show_room_orders_path(seance_id: seance_id), notice: "Błąd serwer. Sprubój później!"
     end
+    if Seance.find(seance_id).block
+      redirect_to movies_url
+      return
+    end
 
     if 'false' == params[:payment]
       if current_user && current_user.role = 'employee'

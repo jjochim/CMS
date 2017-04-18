@@ -60,7 +60,17 @@
                   <% if seats_count(seance) == 0 %><%= link_to 'Edytuj', edit_seance_path(seance), class: "btn btn-default btn-xs" %>
                       <%= link_to 'Usuń', seance, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %>
                   <% else %>
-                      <%= link_to 'Blokuj', '#' %>
+                      <% if seance.block == false %>
+                          <%= form_for(seance, :method => :put, :html => {:'data-type' => 'json'}) do |f| %>
+                              <%= f.hidden_field :block, value: true,class: "seating-status" %>
+                              <%= submit_tag "Blokuj", class: "btn btn-danger btn-xs", data: { confirm: 'Czy na pewno chcesz zablokować seans?' } %>
+                          <% end %>
+                      <% else %>
+                          <%= form_for(seance, :method => :put, :html => {:'data-type' => 'json'}) do |f| %>
+                              <%= f.hidden_field :block, value: false,class: "seating-status" %>
+                              <%= submit_tag "Odblokuj", class: "btn btn-danger btn-xs", data: { confirm: 'Czy na pewno chcesz odblokować seans?' } %>
+                          <% end %>
+                      <% end %>
                   <% end %></td>
               </tr>
           <% end %>
