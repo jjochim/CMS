@@ -15,11 +15,15 @@ class PaymentsController < ApplicationController
       if PayPal::SDK::REST::Payment.find(params[:paymentId]).execute( :payer_id => params[:PayerID] )
         @order.update(approved: true, paid: true)
         p 'succes payments'
+        CinemaMailer.sale(@order).deliver_later(wait: 1.seconds)
       else
         puts @payment.error # Error Hash
+        @tmp = 1
+        @order
       end
     else
       p 'error payments'
+      @tmp = 0
     end
   end
 
@@ -194,6 +198,7 @@ class PaymentsController < ApplicationController
           if @payment.create
             logger.info "Payment[#{@payment.id}] created successfully"
             @order.update(approved: true, paid: true)
+            CinemaMailer.sale(@order).deliver_later(wait: 1.seconds)
             format.json { render json: {message: "ok"}, status: :ok, location: @order }
           else
             # Display Error message

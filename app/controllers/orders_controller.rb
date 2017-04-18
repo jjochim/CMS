@@ -148,6 +148,7 @@ class OrdersController < ApplicationController
         order.save
         CinemaMailer.info_for_user(Order.find(order_id),order.list_seats.split(',')).deliver_later(wait: 1.seconds)
         @message = 'Aktywowano rezerwacje!'
+
       else
         @message = 'Przekroczono czas aktywacji!'
       end

@@ -47,4 +47,22 @@ class CinemaMailer < ApplicationMailer
     end
     tmp.deliver
   end
+
+  def sale(order)
+    @order = order
+    @info = Info.last
+    room = order.seance.room
+    @room = room.name
+
+    tmp = mail(
+        to: order.email,
+        subject: 'Transakcja zakończona sukcesem',
+        from: 'cinema.managment.system@gmail.com',
+        return_path: 'cinema.managment.system@gmail.com'
+    ) do |format|
+      format.html
+      format.text
+    end
+    tmp.deliver
+  end
 end
