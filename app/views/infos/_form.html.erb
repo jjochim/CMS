@@ -11,52 +11,135 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :cinema_name, 'Nazwa kina' %>
-    <%= f.text_field :cinema_name %>
+  <div class="col-xs-6">
+    <div class="field">
+      <%= f.label :cinema_name, 'Nazwa kina' %>
+      <%= f.text_field :cinema_name %>
+    </div>
+
+    <div class="field" style="z-index: 1">
+      <%= f.label :description, 'Opis' %>
+      <%= f.text_area :description, rows: "5" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :city, 'Miasto' %>
+      <%= f.text_field :city %>
+    </div>
+
+    <div class="field">
+      <%= f.label :street, 'Ulica' %>
+      <%= f.text_field :street %>
+    </div>
+
+    <div class="field">
+      <%= f.label :building_number, 'Numer budynku' %>
+      <%= f.text_field :building_number %>
+    </div>
+
+    <div class="field">
+      <%= f.label :zip_code, 'Kod pocztowy' %>
+      <%= f.text_field :zip_code %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email, 'Email' %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :phone, 'Telefon' %>
+      <%= f.text_field :phone %>
+    </div>
+
+    <div class="field">
+      <%= f.label :google_url, 'URL mapy googla' %>
+      <%= f.text_field :google_url %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :description, 'Opis' %>
-    <%= f.text_area :description, rows: "5" %>
+  <div class="col-xs-6">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>
+            Dzień tygodania:
+          </th>
+          <th>
+            Godzina otwarcia:
+          </th>
+          <th>
+            Godzina zamknięcia:
+          </th>
+        </tr>
+        <tr>
+          <td><b>Poniedziałek:</b></td>
+          <td>
+            <%= f.time_select :start_mon %>
+          </td>
+          <td>
+            <%= f.time_select :end_mon %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Wtore:</b></td>
+          <td>
+            <%= f.time_select :start_tue %>
+          </td>
+          <td>
+            <%= f.time_select :end_tue %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Środa:</b></td>
+          <td>
+            <%= f.time_select :start_wed %>
+          </td>
+          <td>
+            <%= f.time_select :end_wed %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Czwartek:</b></td>
+          <td>
+            <%= f.time_select :start_thu %>
+          </td>
+          <td>
+            <%= f.time_select :end_thu %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Piątek:</b></td>
+          <td>
+            <%= f.time_select :start_fri %>
+          </td>
+          <td>
+            <%= f.time_select :end_fri %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Sobota:</b></td>
+          <td>
+            <%= f.time_select :start_sat %>
+          </td>
+          <td>
+            <%= f.time_select :end_sat %>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Niedziela:</b></td>
+          <td>
+            <%= f.time_select :start_sun %>
+          </td>
+          <td>
+            <%= f.time_select :end_sun %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="field">
-    <%= f.label :city, 'Miasto' %>
-    <%= f.text_field :city %>
-  </div>
-
-  <div class="field">
-    <%= f.label :street, 'Ulica' %>
-    <%= f.text_field :street %>
-  </div>
-
-  <div class="field">
-    <%= f.label :building_number, 'Numer budynku' %>
-    <%= f.text_field :building_number %>
-  </div>
-
-  <div class="field">
-    <%= f.label :zip_code, 'Kod pocztowy' %>
-    <%= f.text_field :zip_code %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email, 'Email' %>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone, 'Telefon' %>
-    <%= f.text_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :google_url, 'URL mapy googla' %>
-    <%= f.text_field :google_url %>
-  </div>
-
-  <div class="actions">
+  <div class="actions col-xs-12">
     <%= f.submit value: 'Akceptuj' %>
   </div>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418170332) do
+ActiveRecord::Schema.define(version: 20170419142149) do
 
   create_table "approveds", force: :cascade do |t|
     t.integer  "order_id"
@@ -43,6 +43,20 @@ ActiveRecord::Schema.define(version: 20170418170332) do
     t.string   "building_number"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.datetime "start_mon"
+    t.datetime "start_tue"
+    t.datetime "start_wed"
+    t.datetime "start_thu"
+    t.datetime "start_fri"
+    t.datetime "start_sat"
+    t.datetime "start_sun"
+    t.datetime "end_mon"
+    t.datetime "end_tue"
+    t.datetime "end_wed"
+    t.datetime "end_thu"
+    t.datetime "end_fri"
+    t.datetime "end_sat"
+    t.datetime "end_sun"
   end
 
   create_table "movies", force: :cascade do |t|

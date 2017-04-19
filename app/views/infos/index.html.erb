@@ -13,6 +13,76 @@
         tel. <%= @info.phone %><br>
         <%= @info.email %>
       </div>
+      <legend><h5>Godziny otwarcia</h5></legend>
+      <div>
+        <table>
+          <tbody>
+          <tr>
+            <td style="text-align: right;"><b>Poniedziałek:</b></td>
+            <td>
+              <%= format_time(@info.start_mon) %>
+            </td>
+            <td>
+              <%= format_time(@info.end_mon) %>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: right;"><b>Wtore:</b></td>
+            <td>
+              <%= format_time(@info.start_tue) %>
+            </td>
+            <td>
+              <%= format_time(@info.end_tue) %>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: right;"><b>Środa:</b></td>
+            <td>
+              <%= format_time(@info.start_wed) %>
+            </td>
+            <td>
+              <%= format_time(@info.end_wed) %>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: right;"><b>Czwartek:</b></td>
+            <td>
+              <%= format_time(@info.start_thu) %>
+            </td>
+            <td>
+              <%= format_time(@info.end_thu) %>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: right;"><b>Piątek:</b></td>
+            <td>
+              <%= format_time(@info.start_fri) %>
+            </td>
+            <td>
+              <%= format_time(@info.end_fri) %>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: right;"><b>Sobota:</b></td>
+            <td>
+              <%= format_time(@info.start_sat) %>
+            </td>
+            <td>
+              <%= format_time(@info.end_sat) %>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: right;"><b>Niedziela:</b></td>
+            <td>
+              <%= format_time(@info.start_sun) %>
+            </td>
+            <td>
+              <%= format_time(@info.end_sun) %>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
