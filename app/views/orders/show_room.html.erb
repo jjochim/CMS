@@ -32,21 +32,23 @@
     </div>
   </div>
 </div>
-<% if current_user %>
-    <%= link_to 'Sprzedaj', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order"  %>
-    <%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal", style: "display: none" %>
-<% else %>
-  <% if ENV["available_reservations"] != 'true' && !current_user %>
-    <%= link_to 'Rezerwój', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order", style: "display: none"  %>
+<div id="show-room-buttons">
+  <% if current_user %>
+      <%= link_to 'Sprzedaj', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order"  %>
+      <%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal", style: "display: none" %>
   <% else %>
-    <%= link_to 'Rezerwój', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order"  %>
+      <% if ENV["available_reservations"] != 'true' && !current_user %>
+          <%= link_to 'Rezerwój', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order", style: "display: none"  %>
+      <% else %>
+          <%= link_to 'Rezerwój', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order"  %>
+      <% end %>
+      <% if ENV["available_payment"] != 'true' %>
+          <%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal", style: "display: none"  %>
+      <% else %>
+          <%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal" %>
+      <% end %>
   <% end %>
-  <% if ENV["available_payment"] != 'true' %>
-    <%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal", style: "display: none"  %>
-  <% else %>
-    <%= link_to 'Kup', orders_path( seance_id: @seance.id), method: :post, class: "btn btn-default", id: "cms-submit-order-paypal" %>
-  <% end %>
-<% end %>
+</div>
 <div id="cms-columns" style = "display:none;">
   <%= @room.columns %>
 </div>
@@ -73,6 +75,8 @@
             $(".legend-item").css("height", 'auto');
             $('.seatings').ready(function(){
                 $(".seating-legend-horizontal").css("height", $('.seatings').height()+"px");
+                $("#show-room-buttons").css('margin-top', $('.seatings').height() + 20 + "px");
+                console.log($('.seatings').height()+"px" + ' tuuuuu');
             });
             $(".seating-legend-horizontal").css("display", 'flex');
             $(".seating-legend-horizontal").css("justify-content", 'space-around');
