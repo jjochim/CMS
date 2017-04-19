@@ -4,7 +4,7 @@
       <div class="panel-heading">
         <div class="container">
           <div class="col-xs-6">
-            <h3>Filmy</h3>
+            <h2 style="margin-top: 0px; margin-bottom: 0px;" >Filmy</h2>
             <%= link_to new_movie_path, class: "btn btn-success admin_new" do %>
                 Nowy
             <% end %>
@@ -13,8 +13,8 @@
             <div class="search-form">
               <%= search_form_for @search do |f| %>
                   <%= f.text_field :title_cont, placeholder: 'Tytuł' %>
-                  <%= f.select :categories_name_cont, options_for_select(Category.all.map {|x| [x.name] }, :selected => @search.categories_name_cont) %>
-                  <%= f.submit value: 'Szukaj' %>
+                  <%= f.select :categories_name_cont, options_for_select(Category.all.map {|x| [x.name] }.unshift(['Wszystkie','']), :selected => @search.categories_name_cont) %>
+                  <%= f.submit value: 'Szukaj', class: 'btn btn-info' %>
               <% end %>
             </div>
           </div>

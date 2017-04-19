@@ -5,19 +5,19 @@
       <div class="panel-heading">
         <div class="container">
           <div class="row-seance col-xs-5">
-            <h2>Seanse</h2>
+            <h2 style="margin-top: 0px; margin-bottom: 0px;" >Seanse</h2>
             <%= link_to new_seance_path, class: "btn btn-success admin_new" do %>
-                Dodaj nowy seans
+                Nowy
             <% end %>
           </div>
           <div>
             <%= search_form_for @search, url: search_seances_path, html: {class: "form-inline col-xs-6 seance-search", method: :get} do |f| %>
                 <div class="input-daterange input-group" id="datepicker">
                   <div class="col-xs-5">
-                    <%= f.search_field :start_date_gteq, class: "form-control", placeholder: "Od" %>
+                    <%= f.search_field :start_date_gteq, class: "form-control", placeholder: "Data od" %>
                   </div>
                   <div class="col-xs-5">
-                    <%= f.search_field :start_date_lteq, class: "form-control", placeholder: "Do" %>
+                    <%= f.search_field :start_date_lteq, class: "form-control", placeholder: "Data do" %>
                   </div>
                 </div>
                 <div class="col-xs-5">
@@ -61,14 +61,20 @@
                       <%= link_to 'Usuń', seance, method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %>
                   <% else %>
                       <% if seance.block == false %>
-                          <%= form_for(seance, :method => :put, :html => {:'data-type' => 'json'}) do |f| %>
-                              <%= f.hidden_field :block, value: true,class: "seating-status" %>
+                          <%= form_for(seance, :html => {:'data-type' => 'json'}) do |f| %>
+                              <%= f.hidden_field :block, value: true %>
+                              <%= f.hidden_field :lector, value: seance.lector %>
+                              <%= f.hidden_field :subtitle, value: seance.subtitle %>
+                              <%= f.hidden_field :dubbing, value: seance.dubbing %>
                               <%= submit_tag "Blokuj", class: "btn btn-danger btn-xs", data: { confirm: 'Czy na pewno chcesz zablokować seans?' } %>
                           <% end %>
                       <% else %>
-                          <%= form_for(seance, :method => :put, :html => {:'data-type' => 'json'}) do |f| %>
-                              <%= f.hidden_field :block, value: false,class: "seating-status" %>
-                              <%= submit_tag "Odblokuj", class: "btn btn-danger btn-xs", data: { confirm: 'Czy na pewno chcesz odblokować seans?' } %>
+                          <%= form_for(seance, :html => {:'data-type' => 'json'}) do |f| %>
+                              <%= f.hidden_field :block, value: false %>
+                              <%= f.hidden_field :lector, value: seance.lector %>
+                              <%= f.hidden_field :subtitle, value: seance.subtitle %>
+                              <%= f.hidden_field :dubbing, value: seance.dubbing %>
+                              <%= submit_tag "Odblokuj", class: "btn btn-warning btn-xs", data: { confirm: 'Czy na pewno chcesz odblokować seans?' } %>
                           <% end %>
                       <% end %>
                   <% end %></td>

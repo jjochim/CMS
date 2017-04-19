@@ -77,10 +77,10 @@ class SeancesController < ApplicationController
     end
     respond_to do |format|
       if @seance.update(seance_params)
-        format.html { redirect_to @seance, notice: 'Seance was successfully updated.' }
-        format.json { render :show, status: :ok, location: @seance }
+        format.html { redirect_to seances_path, notice: 'Seance was successfully updated.' }
+        format.json { render :index, status: :ok, location: @seance }
       else
-        format.html { render :edit }
+        format.html { render :index }
         format.json { render json: @seance.errors, status: :unprocessable_entity }
       end
     end

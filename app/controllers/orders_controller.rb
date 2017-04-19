@@ -1,6 +1,14 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action -> {redirect_some_path_unless_roles root_path}, only: [:destroy, :index, :search, :find]
+  if not ENV["available_reservations"] == 'true'
+    if not ENV["available_payment"] == 'true'
+      before_action -> {redirect_some_path_unless_roles root_path}, only: [:destroy, :index, :create, :show, :update, :new, :edit, :search, :update_ticket_type, :show_room, :summary, :find]
+    else
+      before_action -> {redirect_some_path_unless_roles root_path}, only: [:destroy, :index, :show, :update, :new, :edit, :search, :summary, :find]
+    end
+  else
+    before_action -> {redirect_some_path_unless_roles root_path}, only: [:destroy, :index, :search, :find]
+  end
 
   # GET /orders
   # GET /orders.json
