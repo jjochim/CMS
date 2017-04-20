@@ -294,6 +294,18 @@ class OrdersController < ApplicationController
     end
   end
 
+  def timer_destroy
+    @order = Order.find(params[:order_id])
+
+    respond_to do |format|
+      if @order.destroy
+        format.json { render json: {message: "ok"}, status: :ok, location: @order }
+      else
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy

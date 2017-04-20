@@ -107,7 +107,7 @@
   </div>
   <div class="col-xs-3">
     <h4>Czas:</h4>
-    <p style="text-align: center; font-size: 30px; margin-top: 34px; border: 1px solid darkgray; border-radius: 4px; width: 100%; padding: 7px; " id="timer2" class="timer" data-url="<%=  %>"></p>
+    <p style="text-align: center; font-size: 30px; margin-top: 34px; border: 1px solid darkgray; border-radius: 4px; width: 100%; padding: 7px; " id="timer2" class="timer" data-url="<%= show_info_orders_path(seance_id: @order.seance.id) %>" data-order="<%= @order.id %>" data-sendurl="<%= timer_destroy_orders_path %>"></p>
   </div>
 </div>
 <div class="col-xs-12 cms-payments-chosen">
@@ -124,8 +124,19 @@
 <script>
     // Set the date we're counting down to
     var countDownDate = new Date();
-    countDownDate.setMinutes(countDownDate.getMinutes() + 1);
+    countDownDate.setMinutes(countDownDate.getMinutes() + 5);
     countDownDate.getTime();
+
+    var timer1 = document.getElementById("timer1");
+    var timer2 = document.getElementById("timer2");
+    var loc = location.href;
+    var url_http = loc.replace('http://', '');
+    var end_url = url_http.indexOf('/');
+    var url = timer2.dataset.url;
+    var _url = timer2.dataset.sendurl;
+    var _data = { order_id: timer2.dataset.order };
+    console.log(url);
+    console.log('http://' + url_http.substring(0,end_url) + url);
 
     // Update the count down every 1 second
     var x = setInterval(function() {
@@ -141,16 +152,31 @@
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Output the result in an element with id="demo"
-        document.getElementById("timer1").innerHTML = minutes + "m " + seconds + "s ";
-        document.getElementById("timer2").innerHTML = minutes + "m " + seconds + "s ";
+        timer1.innerHTML = minutes + "m " + seconds + "s ";
+        timer2.innerHTML = minutes + "m " + seconds + "s ";
 
         // If the count down is over, write some text
         if (distance < 0) {
             clearInterval(x);
-            document.getElementById("timer1").innerHTML = "Koniec czasu!";
-            document.getElementById("timer2").innerHTML = "Koniec czasu!";
+            timer1.innerHTML = "Koniec czasu!";
+            timer2.innerHTML = "Koniec czasu!";
 
-
+            return $.ajax({
+                method: 'get',
+                dataType: 'json',
+                data: _data,
+                url: _url,
+                success: function(response) {
+                    window.location.href = 'http://' + url_http.substring(0,end_url) + url;
+                    return
+                    location.reload();
+                },
+                error: function(response) {
+                    window.location.replace('http://' + url_http.substring(0,end_url) + url);
+                    return
+                    location.reload();
+                }
+            });
         }
     }, 1000);
 </script>

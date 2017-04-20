@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get :summary
       get :update_ticket_type
       get :find
+      get :timer_destroy
     end
   end
   resources :payments
