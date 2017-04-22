@@ -16,6 +16,5 @@
 //= require bootstrap
 //= require codemirror
 //= require summernote
-//= require summernote/locales
 //= require summernote/plugin/hello/summernote-ext-hello
 //= require_tree .

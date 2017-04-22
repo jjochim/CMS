@@ -23,3 +23,18 @@
 body {
     margin: 0px;
 }
+
+.navbar-cms {
+    color: #7ecff4;
+    font-weight: bold;
+}
+
+.logo-cms-1 {
+    font-size: 30px;
+    margin-top: 15px;
+    margin-right: 5px;
+}
+
+.navbar-nav > li {
+    font-weight: bold;
+}

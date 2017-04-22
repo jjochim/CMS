@@ -22,12 +22,32 @@
       </div>
       <% if @available_seatings != 0 %>
         <% if ENV["available_reservations"] == 'true' || ENV["available_payment"] == 'true' || current_user %>
-          <%= link_to 'Kontynuuj', {controller: 'orders', action: 'show_room', seance_id: @seance_info.id}, class: "btn btn-default" %>
+          <%= link_to 'Kontynuj', {controller: 'orders', action: 'show_room', seance_id: @seance_info.id}, class: "btn btn-default", id: 'next' %>
         <% end %>
       <% end %>
       <%= link_to 'Powrót', seances_path, class: "btn btn-default" %>
+      <div class="checkbox" id="regulation-checkbox-div">
+        <label><input id="regulation-checked" type="checkbox" <% if current_user  %> checked="true" <% end %> >Akceptuje <%= link_to('regulamin', regulations_path, target: '_blank') %>!</label>
+      </div>
     </div>
   </div>
 </div>
 
+<script>
+    $(document).on("click", '#next', function(e){
+        var url = $('#next').attr('href');
+        var checkbox = $('#regulation-checked');
+        var div = $('#regulation-checkbox-div');
+        e.preventDefault();
+        console.log(checkbox.is(':checked'));
 
+        if (checkbox.is(':checked')){
+            div.css('border','');
+            console.log(url);
+            $(location).attr('href', url);
+        }else{
+            div.css('border','4px solid red');
+            div.css('border-radius','4px');
+        }
+    });
+</script>
