@@ -6,6 +6,7 @@
 
     <%= stylesheet_link_tag    'application', 'data-turbolinks-track': 'reload', media: 'all' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
@@ -25,6 +26,7 @@
                 <li <% if [params[:controller], params[:action]] == ["orders", "index"] %>class="active"<% end %>><%= link_to "Zamówienia", orders_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["tickets", "index"] %>class="active"<% end %>><%= link_to "Bilety", tickets_path %></li>
                 <li <% if [params[:controller], params[:action]] == ["infos", "edit"] %>class="active"<% end %>><%= link_to "Kontakt", edit_info_path(1) %></li>
+                <li <% if [params[:controller], params[:action]] == ["regulations", "edit"] %>class="active"<% end %>><%= link_to "Regulamin", edit_regulation_path(1) %></li>
                 <li <% if [params[:controller], params[:action]] == ["users", "index"] %>class="active"<% end %>><%= link_to "Konta", users_path %></li>
             <% else %>
                 <li <% if [params[:controller], params[:action]] == ["movie", "index"] %>class="active"<% end %>><%= link_to "Filmy", movies_path %></li>
@@ -36,6 +38,7 @@
             <li <% if [params[:controller], params[:action]] == ["movie", "index"] %>class="active"<% end %>><%= link_to "Filmy", root_path %></li>
             <li <% if [params[:controller], params[:action]] == ["seances", "index"] %>class="active"<% end %>><%= link_to "Seanse", seances_path %></li>
             <li <% if [params[:controller], params[:action]] == ["infos", "index"] %>class="active"<% end %>><%= link_to "Kontakt", infos_path %></li>
+            <li <% if [params[:controller], params[:action]] == ["regulations", "index"] %>class="active"<% end %>><%= link_to "Regulamin", regulations_path %></li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">

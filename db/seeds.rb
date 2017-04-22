@@ -1036,3 +1036,6 @@ puts
 Info.create!([
   {street: "ulica", email: "email@email.com", phone: "7356252783", city: "Miasto", zip_code: "68-273", description: "Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker", google_url: "https://wws", cinema_name: "Kino", building_number: "", start_mon: "2017-04-19 08:00:00", start_tue: "2017-04-19 08:00:00", start_wed: "2017-04-19 09:00:00", start_thu: "2017-04-19 08:00:00", start_fri: "2017-04-19 08:00:00", start_sat: "2017-04-19 10:00:00", start_sun: "2017-04-19 10:00:00", end_mon: "2017-04-19 18:00:00", end_tue: "2017-04-19 18:00:00", end_wed: "2017-04-19 18:00:00", end_thu: "2017-04-19 18:00:00", end_fri: "2017-04-19 20:00:00", end_sat: "2017-04-19 21:40:00", end_sun: "2017-04-19 21:40:00"}
 ])
+Regulation.create!([
+  {regulations: "<b>Witaj w CMS!</b>"},
+])

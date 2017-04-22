@@ -1,6 +1,6 @@
 class InfosController < ApplicationController
   before_action :set_info, only: [:show, :edit, :update, :destroy]
-  before_action -> {redirect_some_path_unless_role root_path, ['admin']}, only: [:edit, :create, :destroy, :new, :update]
+  before_action -> {redirect_some_path_unless_role root_path, ['admin']}, only: [:edit, :update]
 
   # GET /infos
   # GET /infos.json

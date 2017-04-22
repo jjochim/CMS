@@ -14,4 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require codemirror
+//= require summernote
+//= require summernote/locales
+//= require summernote/plugin/hello/summernote-ext-hello
 //= require_tree .
