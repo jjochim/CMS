@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @seances = Seance.where(movie_id: params[:id]).seven_days_from_now.where(block: false)
+    @seances = Seance.where(friendly_url: params[:id]).seven_days_from_now.where(block: false)
     if /src\s*=\s*"([^"]*)"/.match(@movie.url_trailer) == nil
       @src = "https://www.youtube.com/embed/H-IVzFIRSVE"
     else
@@ -63,6 +63,7 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update
+
     params[:movie][:category_ids] ||= []
     respond_to do |format|
       if @movie.update(movie_params)
@@ -88,12 +89,12 @@ class MoviesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie = Movie.find(params[:id])
+      @movie = Movie.where(friendly_url: params[:id]).first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
       params.require(:movie).permit(:title, :duration, :genre, :pegi, :description, :director, :actors, :country,
-                                    :language, :premiere, :url_trailer, :picture, :category_ids => [])
+                                    :language, :friendly_url, :premiere, :url_trailer, :picture, :category_ids => [])
     end
 end

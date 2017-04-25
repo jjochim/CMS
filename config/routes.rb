@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :regulations
   devise_for :users
   resources :movies
+  # do
+    # get '/movies/:id', to: "movies#show", as: :show
+  # end
   resources :infos
   resources :tickets
   resources :seances do
