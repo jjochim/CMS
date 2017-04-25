@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use sqlite3 as the database for Active Record
 # gem 'pg' , group: :production
-gem 'sqlite3' , group: :development
+# gem 'sqlite3' , group: :development
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -65,3 +65,4 @@ gem 'codemirror-rails'
 gem 'simple_form'
 gem 'font-awesome-rails'
 gem 'pry'
+gem 'pg'

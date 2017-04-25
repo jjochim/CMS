@@ -116,7 +116,7 @@
             <div role="tabpanel" class="tab-pane <% if one_day.count != 0; active = indx2; end %><% if indx2 == active and tmp == false; tmp = true %>active<% end %>" id="<%= tmp2 %>">
               <table class="table-hover table">
                 <tbody>
-                <% one_day.group(:movie_id).each do |seance| %>
+                <% one_day.group(:id, :movie_id).each do |seance| %>
                     <tr>
                       <td class="col-xs-2">
                         <h4><b><%= link_to seance.movie.title, movie_path(seance.movie) %></b></h4>
