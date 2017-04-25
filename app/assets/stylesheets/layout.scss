@@ -1,0 +1,34 @@
+body.background {
+  background-image: image_url('background2.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+.seances-background, .payments-background, .infos-background, .regulations-background {
+  background-color: white;
+  margin-top: -15px;
+  border-radius: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.movies-background {
+  margin-top: 60px;
+  h4 {
+    text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
+
+    a {
+      color: white;
+      &:hover {
+        background-color: transparent;
+      }
+      &:visited {
+        color: white;
+      }
+    }
+  }
+}

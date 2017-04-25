@@ -8,8 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   </head>
-
-  <body>
+  <body <%= "class=background" unless current_user and current_user.role == 'admin' %>>
 
   <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container container-fluid">
@@ -59,8 +58,8 @@
       </ul>
     </div>
   </nav>
-  <div class="container">
+  <%= content_tag(:div, class: "container #{params[:controller]}-background ") do %>
     <%= yield %>
-  </div>
+  <% end %>
   </body>
 </html>

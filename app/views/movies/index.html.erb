@@ -62,6 +62,16 @@
     </div>
     <!--admin-->
 <% else %>
+    <div class="search-form-movie">
+      <div class="container">
+        <%= search_form_for @search do |f| %>
+            <%= f.text_field :title_or_country_cont, class: "form-control width-150 display-inline" %>
+            <%= f.select :categories_name_cont, options_for_select(Category.all.map {|x| [x.name] }.unshift(['Wszystkie','']), :selected => @search.categories_name_cont), {},
+                         class: "form-control width-150 display-inline" %>
+            <%= f.submit value: 'Szukaj', class: 'btn btn-default top-3px' %>
+        <% end %>
+      </div>
+    </div>
     <!--user, employee-->
 
     <div class="container container-margin">
@@ -86,12 +96,7 @@
             </div>
           </div>
       <% end %>
-      <div class="search-form-movie">
-        <%= search_form_for @search do |f| %>
-            <%= f.text_field :title_or_country_cont %>
-            <%= f.submit value: 'Szukaj', class: 'btn btn-default' %>
-        <% end %>
-      </div>
+
 
       <% @movies.each_slice(4) do |slice| %>
 

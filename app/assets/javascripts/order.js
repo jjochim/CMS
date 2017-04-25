@@ -154,8 +154,8 @@ var seatsManagement = {
 
 $(document).on('turbolinks:load', function() {
     ticketsManagement.deploy($("#dom0"), $("#dom1"), $("#dom2"), $("#dom3"), $("#dom4"), $('#dom5'), $("#dom6"));
-    HTML = document.getElementById('cms-submit-order').href;
-    PAYPALHTML = document.getElementById('cms-submit-order-paypal').href;
+    HTML = $('#cms-submit-order').attr('href');
+    PAYPALHTML = $('#cms-submit-order-paypal').attr('href');
     seatsManagement.deploy($('.cms-seatable'));
 });
 
@@ -269,7 +269,7 @@ var ticketsManagement = {
             "</div>" +
             "</div>" +
             "</div>" +
-            "<button class='col-xs-3 btn btn-default btn-ticket-delete' data-ticket-count='" + ticket.number + "' data-ticket-name='" + ticketsName[ticket.type - 1] + "' data-index='" + index + "'>Usuń</button>" +
+            "<button class='col-xs-3 btn btn-danger btn-ticket-delete' data-ticket-count='" + ticket.number + "' data-ticket-name='" + ticketsName[ticket.type - 1] + "' data-index='" + index + "'>Usuń</button>" +
             "</div>"
         );
     },

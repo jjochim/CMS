@@ -23,7 +23,7 @@ $lightOrange: rgba(255, 165, 125, 1);
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 45px;
   }
 
   .tip {
@@ -72,4 +72,19 @@ $lightOrange: rgba(255, 165, 125, 1);
 .photo-show{
   margin-top: 10px;
   width: 320px;
+}
+
+.search-form-movie {
+  padding: 8px;
+  width: 100%;
+  position: absolute;
+  top: 50px;
+  background-color: white;
+  left: 0 !important;
+}
+
+.schedule-container {
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 10px;
 }

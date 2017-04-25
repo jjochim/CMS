@@ -45,17 +45,17 @@ class MoviesController < ApplicationController
   # POST /movies
   # POST /movies.json
   def create
-    movie = Movie.new(movie_params)
+    @movie = Movie.new(movie_params)
     Rails.logger.info '#' * 30
 
     respond_to do |format|
-      if movie.save
-        format.html { redirect_to movie, notice: 'Movie was successfully created.' }
-        format.json { render :show, status: :created, location: movie }
+      if @movie.save
+        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
+        format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new }
-        format.json { render json: movie.errors, status: :unprocessable_entity }
-        movie.delete
+        format.json { render json: @movie.errors, status: :unprocessable_entity }
+        @movie.delete
       end
     end
   end

@@ -3,7 +3,7 @@
 <div class="col-md-6">
   <iframe src="<%= @src %>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 </div>
-<div class="col-md-6">
+<div class="col-md-6 text-center">
   <div style="margin-left: 10%;">
     <legend><h5>Dane kontaktowe</h5></legend>
     <div>
@@ -14,7 +14,7 @@
     </div>
     <legend><h5>Godziny otwarcia</h5></legend>
     <div>
-      <table>
+      <table style="margin: 0 auto;">
         <tbody>
         <tr>
           <td style="text-align: right;"><b>Poniedziałek:</b></td>
@@ -26,7 +26,7 @@
           </td>
         </tr>
         <tr>
-          <td style="text-align: right;"><b>Wtore:</b></td>
+          <td style="text-align: right;"><b>Wtorek:</b></td>
           <td>
             <%= format_time(@info.start_tue) %>
           </td>

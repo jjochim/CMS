@@ -18,6 +18,7 @@
  *= require summernote
  *= require codemirror
  *= require font-awesome
+ *= require layout
  */
 
 body {
