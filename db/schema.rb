@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422092510) do
+ActiveRecord::Schema.define(version: 20170425183503) do
 
   create_table "approveds", force: :cascade do |t|
     t.integer  "order_id"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20170422092510) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "block"
+    t.index ["start_date"], name: "index_seances_on_start_date"
   end
 
   create_table "seatings", force: :cascade do |t|
