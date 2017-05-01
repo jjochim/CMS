@@ -1,17 +1,29 @@
 body.background {
-  background-image: image_url('background2.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
   background-size: 100% 100%;
 }
 
-.seances-background, .payments-background, .infos-background, .regulations-background {
+.background-1 {
+  background-image: image_url('background1.jpg');
+}
+
+.background-2 {
+  background-image: image_url('background2.jpg');
+}
+
+.seances-background, .payments-background, .infos-background, .regulations-background, .reservation-container {
   background-color: white;
   margin-top: -15px;
   border-radius: 10px;
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+.reservation-container {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .movies-background {
@@ -30,5 +42,18 @@ body.background {
         color: white;
       }
     }
+  }
+}
+
+.field_with_errors {
+  display: inherit !important;
+}
+
+.tooltip.top {
+  .tooltip-inner {
+    border: 2px solid white;
+  }
+  .tooltip-arrow {
+    border-top-color: white;
   }
 }

@@ -1,7 +1,7 @@
 <div class="col-xs-4">
-  <%= image_tag @movie.picture, class: "photo-show" %>
+  <%= image_tag @movie.picture, class: "photo" %>
 </div>
-<div class="col-xs-6">
+<div class="col-xs-6 white-color">
   <h3><%= @movie.title %></h3>
 
   <br><%= @movie.description %><br><%= @movie.duration/60.to_i %> godz. <%= @movie.duration%60 %> min.</br></p>

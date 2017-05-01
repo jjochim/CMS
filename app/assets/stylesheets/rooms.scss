@@ -16,15 +16,17 @@
 }
 
 .seating-legend-vertical {
-  position: absolute;
   left: 30px;
   top: 0px;
 }
 
 .seating-legend-horizontal {
-  position: absolute;
   left: 0px;
   top: 25px;
+}
+.seating-legend-horizontal, .seating-legend-vertical {
+  position: absolute;
+  color: white;
 }
 
 .seating-legend-vertical > .legend-item {
@@ -121,7 +123,7 @@
   transition: color 0.25s linear;
 }
 
-.cms-seat:hover {
+.cms-seat.has-hover:hover {
   color: rgba(0,0,0,1);
 }
 

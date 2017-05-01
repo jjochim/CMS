@@ -7,10 +7,10 @@
             <%= search_form_for @search, url: search_orders_path, html: {class: "form-inline col-xs-12 seance-search", method: :get} do |f| %>
                 <div class="input-daterange input-group" id="datepicker">
                   <div class="col-xs-3">
-                    <%= f.search_field :seance_start_date_gteq, class: "form-control", placeholder: "Data od" %>
+                    <%= f.search_field :seance_start_date_gteq, value: date_for_gteq(params[:q]), class: "form-control margin-bottom-2px", placeholder: "Data od" %>
                   </div>
                   <div class="col-xs-3">
-                    <%= f.search_field :seance_start_date_lteq, class: "form-control", placeholder: "Data do" %>
+                    <%= f.search_field :seance_start_date_lteq, value: date_for_lteq(params[:q]), class: "form-control margin-bottom-2px", placeholder: "Data do" %>
                   </div>
                 </div>
                 <div class="col-xs-3">

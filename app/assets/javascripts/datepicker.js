@@ -1,11 +1,11 @@
 $(document).ready(function(){
     $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd hh:MM',
+        dateFormat: 'yyyy-mm-dd',
         language: "pl"
     });
 
     $('.input-daterange').datepicker({
-        format: 'yyyy-mm-dd',
+        dateFormat: 'yyyy-mm-dd',
         language: "pl"
     });
 

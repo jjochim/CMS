@@ -28,6 +28,7 @@
     <button style="margin-left: 15px; margin-top: 10px; padding-left: 20px; padding-right: 20px;" id="cms-order-buy" class="btn btn-info" data-url="<%= update_ticket_type_orders_path(order_id: @order) %>" data-redirect="<%= order_path(@order) %>" >Zapisz</button>
   </div>
 <% else %>
+    <div class="reservation-container">
   <h1>Dane rezerwacji</h1>
     <div class="col-xs-2">
       <label for="timer2" style="margin-left: -15px;">Czas:</label>
@@ -100,3 +101,4 @@
 <div class="cms-url-order" data-url="<%= order_path(@order) %>">
 </div>
 
+</div>

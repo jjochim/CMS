@@ -5,19 +5,19 @@
       <div class="panel-heading">
         <div class="container">
           <div class="row-seance col-xs-5">
-            <h2 style="margin-top: 0px; margin-bottom: 0px;" >Seanse</h2>
+            <h2 style="margin-top: 0px; margin-bottom: 2px;" >Seanse</h2>
             <%= link_to new_seance_path, class: "btn btn-success admin_new" do %>
                 Nowy
             <% end %>
           </div>
           <div>
             <%= search_form_for @search, url: search_seances_path, html: {class: "form-inline col-xs-6 seance-search", method: :get} do |f| %>
-                <div class="input-daterange input-group" id="datepicker">
+                <div class="input-daterange" id="datepicker">
                   <div class="col-xs-5">
-                    <%= f.search_field :start_date_gteq, class: "form-control", placeholder: "Data od" %>
+                    <%= f.search_field :start_date_gteq, value: date_for_gteq(params[:q]), class: "form-control margin-bottom-2px", placeholder: "Data od" %>
                   </div>
                   <div class="col-xs-5">
-                    <%= f.search_field :start_date_lteq, class: "form-control", placeholder: "Data do" %>
+                    <%= f.search_field :start_date_lteq, value: date_for_lteq(params[:q]),  class: "form-control margin-bottom-2px", placeholder: "Data do" %>
                   </div>
                 </div>
                 <div class="col-xs-5">
@@ -92,7 +92,7 @@
 <% else %>
     <!--user, emp-->
 
-    <legend>Seance</legend>
+    <legend>Seanse</legend>
     <div class="row">
       <ul class="nav nav-tabs" role="tablist">
         <% active = 6 %>

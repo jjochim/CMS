@@ -110,4 +110,5 @@ class SeancesController < ApplicationController
     def seance_params
       params.require(:seance).permit(:start_date, :movie_id, :room_id, :threed, :lector, :subtitle, :dubbing, :block)
     end
+
 end

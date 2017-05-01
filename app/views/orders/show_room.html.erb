@@ -22,7 +22,7 @@
       <% @responseObject.each_with_index do |item, i| %>
           <div class="seating-row" style="width: <%= @room.columns * 64 %>px">
             <% item.each_with_index do |child, j| %>
-                <div class="cms-seat <%=  child.slot == true  ? 'cms-seatable' : 'cms-not-seatable'%>
+                <div class="cms-seat has-hover <%=  child.slot == true  ? 'cms-seatable' : 'cms-not-seatable'%>
                 <%= "cms-occupied" if @occupied_places.include? child.id %>" data-seating-id="<%= child.id %>" data-seating-number="<%= j+1 %><%=(65 + i).chr %>">
                   <%= j+1 %><%=(65 + i).chr %>
                 </div>
@@ -64,8 +64,10 @@
             $(".seatings-container").css('width','100%');
             $(".seatings-container").css('height','auto');
             // $(".seatings-container").css('margin_right','25px')
-            $(".cms-seat").css("width", seat + "px");
-            $(".cms-seat").css("height", seat + "px");
+            var seats = $(".cms-seat")
+            seats.css("width", seat + "px");
+            seats.css("height", seat + "px");
+            seats.removeClass('has-hover');
             // $(".seating-legend-vertical").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
             $(".seating-legend-vertical").css("width", 1115+"px");
             $(".seating-legend-vertical").css("display", 'flex');
@@ -89,6 +91,9 @@
             console.log((1170/$('#responseObject').text()) + "px");
 
             $(".cms-screen-wrapper").css("width", colums * seat + "px");
+            seats.each(function() {
+                $(this).tooltip({title: $(this).text()})
+            });
         }else {
             $(".cms-screen-wrapper").css("width", parseFloat(width) * 0.8 + "px");
         }

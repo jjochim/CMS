@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-4">
+    <div class="col-xs-12 col-sm-8 col-md-6">
       <%= image_tag @seance_info.movie.picture, class: "photo" %>
     </div>
-    <div class="col-xs-8">
+    <div class="col-xs-12 col-sm-4 col-md-6 show-info-field">
       <h2><%= @seance_info.movie.title %></h2>
       <h4>
         <%= @seance_info.start_date.strftime("%H:%M") %>

@@ -1,6 +1,22 @@
 module ApplicationHelper
   def format_date(time)
-    time.strftime("%d-%m-%Y")
+    time.strftime("%Y-%m-%d")
+  end
+
+  def date_for_gteq(q)
+    return "" if q.blank?
+    q[:start_date_gteq].blank? ? "" : format_date(q[:start_date_gteq].to_date)
+  end
+
+  def background_check(controller, action)
+    back_class = "background "
+    return back_class.concat("background-2") if controller == "orders" && action == "show_room"
+    back_class.concat("background-1")
+  end
+
+  def date_for_lteq(q)
+    return "" if q.blank?
+    q[:start_date_lteq].blank? ? "" : format_date(q[:start_date_lteq].to_date)
   end
 
   def format_time(time)

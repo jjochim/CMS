@@ -1,20 +1,22 @@
-<div class="cms-login">
-  <h2>Logowanie</h2>
+  <div class="container-center">
+    <h2>Logowanie</h2>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.email_field :email, autofocus: true, placeholder: "Login", class: 'form-control input-lg cms-login-imput' %>
-      </div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
 
-      <div class="field">
-        <%= f.password_field :password, autocomplete: "off", placeholder: "Hasło", class: 'form-control input-lg cms-login-imput' %>
-      </div>
+        <div class="field">
+          <%= f.email_field :email, autofocus: true, placeholder: "Login", class: 'form-control input-lg cms-login-imput' %>
+        </div>
 
-      <div class="actions">
-        <%= f.submit "Log in", value: 'Zaloguj', class: 'cms-login-submit btn btn-default' %>
-      </div>
-  <% end %>
-  <div class="cms-login-link">
-    <%= render "devise/shared/links" %>
+        <div class="field">
+          <%= f.password_field :password, autocomplete: "off", placeholder: "Hasło", class: 'form-control input-lg cms-login-imput' %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Log in", value: 'Zaloguj', class: 'cms-login-submit btn btn-default' %>
+        </div>
+    <% end %>
+    <div class="cms-login-link">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-</div>
