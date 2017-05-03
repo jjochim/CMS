@@ -20,7 +20,7 @@ Category.create(name: 'Horror')
 Category.create(name: 'Akcja')
 Category.create(name: 'Dramat')
 Category.create(name: 'Kryminał')
-Category.create(name: 'Miuzikal')
+Category.create(name: 'Musical')
 Category.create(name: 'Sci-fi')
 Category.create(name: 'Dokumentalny')
 puts

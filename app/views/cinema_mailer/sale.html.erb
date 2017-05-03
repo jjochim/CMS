@@ -10,7 +10,7 @@
 </p>
 <p>
   Dokonano wpłaty za bilet na seans: <%= @order.seance.movie.title %><br>
-  Seans odbedzie sie dnia: <%= @order.seance.start_date.strftime("%d-%m-%Y") %>, o godzinie: <%= @order.seance.start_date.strftime("%H:%M") %>, w sali: <%= @room %>.<br>
+  Seans odbędzie się dnia: <%= @order.seance.start_date.strftime("%d-%m-%Y") %>, o godzinie: <%= @order.seance.start_date.strftime("%H:%M") %>, w sali: <%= @room %>.<br>
   Zarezerwowane miejsca to: <%= @order.list_seats %><br>
 </p>
 <p>Twój kod wejścia to: <h4 style="color: red"><%= @order.activation_code %></h4></p>

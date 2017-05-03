@@ -17,14 +17,14 @@
       </thead>
 
       <tbody>
-      <% @users.each do |user| %>
+      <% @users.each_with_index do |user, idx| %>
           <tr>
             <td><%= user.name %></td>
             <td><%= user.last_name %></td>
             <td><%= user.role %></td>
             <td class="text-right"><%= link_to 'Szczegóły', user_path(id: user), class: "btn btn-default btn-xs" %>
               <%= link_to 'Edit', edit_user_path(id: user), class: "btn btn-default btn-xs" %>
-              <%= link_to 'Usuń', user_path(user), method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" %></td>
+              <%= link_to 'Usuń', user_path(user), method: :delete, data: { confirm: 'Czy na pewno chcesz usunąć' }, class: "btn btn-danger btn-xs" unless idx == 0 %></td>
           </tr>
       <% end %>
       </tbody>

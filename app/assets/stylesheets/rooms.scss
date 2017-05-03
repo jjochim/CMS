@@ -29,6 +29,12 @@
   color: white;
 }
 
+.rooms-background {
+  .seating-legend-horizontal, .seating-legend-vertical {
+    color: black;
+  }
+}
+
 .seating-legend-vertical > .legend-item {
   display: inline-block;
   width: 60px;

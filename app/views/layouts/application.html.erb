@@ -53,15 +53,14 @@
               <li style="color: #7ecff4; padding: 16px;"><b><%= current_user.name %> <%= current_user.last_name %></b></li>
             <% end %>
             <li><%= link_to "Wyloguj", destroy_user_session_path, :method => :delete %></li>
-          <% else %>
-            <%= link_to "Zalo", user_session_path %>
           <% end %>
       </ul>
     </div>
   </nav>
-  <%= content_tag(:div, class: "container #{params[:controller]}-background ") do %>
+  <%= content_tag(:div, class: "container #{params[:controller]}-background #{admin_class}") do %>
     <%= yield %>
   <% end %>
   <!--</body>-->
+<%= render 'layouts/footer' %>
     <% end %>
 </html>
