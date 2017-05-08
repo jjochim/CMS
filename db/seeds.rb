@@ -37,7 +37,8 @@ print 'Movie '
       country: ['PL', 'UK', 'DE'].shuffle.first,
       premiere: Time.now - 10.days + indx.days,
       url_trailer: 'https://www.youtube.com/embed/hvchSr3Myfg',
-      language: ['polish', 'german', 'english'].shuffle.first
+      language: ['polish', 'german', 'english'].shuffle.first,
+      picture: File.open(File.join(Rails.root, "/public/uploads/movie/picture/2/#{indx}.jpg"))
   )
   tmp.categories << Category.all.shuffle.first
   print '. '

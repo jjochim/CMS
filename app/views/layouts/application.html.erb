@@ -42,7 +42,6 @@
             <li <% if [params[:controller], params[:action]] == ["movie", "index"] %>class="active"<% end %>><%= link_to "Filmy", root_path %></li>
             <li <% if [params[:controller], params[:action]] == ["seances", "index"] %>class="active"<% end %>><%= link_to "Seanse", seances_path %></li>
             <li <% if [params[:controller], params[:action]] == ["infos", "index"] %>class="active"<% end %>><%= link_to "Kontakt", infos_path %></li>
-            <li <% if [params[:controller], params[:action]] == ["regulations", "index"] %>class="active"<% end %>><%= link_to "Regulamin", regulations_path %></li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -57,7 +56,7 @@
       </ul>
     </div>
   </nav>
-  <%= content_tag(:div, class: "container #{params[:controller]}-background #{admin_class}") do %>
+  <%= content_tag(:div, class: "container #{params[:controller]}-background #{params[:action]}-background #{admin_class}") do %>
     <%= yield %>
   <% end %>
   <!--</body>-->
