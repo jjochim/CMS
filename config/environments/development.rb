@@ -55,12 +55,12 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :user_name            => ENV["email_login"],
-      :password             => ENV["email_password"],
-      :authentication       => "plain",
-      :enable_starttls_auto => true
+      :address              => ENV["address"],
+      :port                 => ENV["port"],
+      :user_name            => ENV["user_name"],
+      :password             => ENV["password"],
+      :authentication       => ENV["authentication"],
+      :enable_starttls_auto => ENV["enable_starttls_auto"]
   }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true

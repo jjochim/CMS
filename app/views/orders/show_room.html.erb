@@ -8,12 +8,12 @@
 </div>
 <div class="row" style="text-align:center">
   <div class="seatings-container" style="display: inline-block; width: <%= @room.columns*64 + 40 %>px; height: <%= @room.rows*60 + 40%>px">
-    <div class="seating-legend-vertical">
+    <div class="seating-column-legend">
       <% (1..@room.columns).each do |index| %>
           <div class="legend-item"><%= index %></div>
       <% end %>
     </div>
-    <div class="seating-legend-horizontal">
+    <div class="seating-row-legend">
       <% (1..@room.rows).each do |index| %>
           <div class="legend-item"><%= (64 + index).chr %></div>
       <% end %>
@@ -68,23 +68,23 @@
             seats.css("width", seat + "px");
             seats.css("height", seat + "px");
             seats.removeClass('has-hover');
-            // $(".seating-legend-vertical").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
-            $(".seating-legend-vertical").css("width", 1115+"px");
-            $(".seating-legend-vertical").css("display", 'flex');
-            // $(".seating-legend-vertical").css("justify-content", 'space-around')
-            $(".seating-legend-vertical").css("left", '25px');
+            // $(".seating-column-legend").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
+            $(".seating-column-legend").css("width", 1115+"px");
+            $(".seating-column-legend").css("display", 'flex');
+            // $(".seating-column-legend").css("justify-content", 'space-around')
+            $(".seating-column-legend").css("left", '25px');
             $(".legend-item").css("padding-top", '0');
             $(".legend-item").css("height", 'auto');
             $('.seatings').ready(function(){
-                $(".seating-legend-horizontal").css("height", $('.seatings').height()+"px");
+                $(".seating-row-legend").css("height", $('.seatings').height()+"px");
                 $("#show-room-buttons").css('margin-top', $('.seatings').height() + 20 + "px");
                 console.log($('.seatings').height()+"px" + ' tuuuuu');
             });
-            $(".seating-legend-horizontal").css("display", 'flex');
-            $(".seating-legend-horizontal").css("justify-content", 'space-around');
-            $(".seating-legend-horizontal").css("left", '0px');
-            $(".seating-legend-horizontal").css("top", '25px');
-            $(".seating-legend-horizontal").css("flex-direction", 'column');
+            $(".seating-row-legend").css("display", 'flex');
+            $(".seating-row-legend").css("justify-content", 'space-around');
+            $(".seating-row-legend").css("left", '0px');
+            $(".seating-row-legend").css("top", '25px');
+            $(".seating-row-legend").css("flex-direction", 'column');
             $(".seating-row").css('display', 'flex');
             $(".seating-row").css('height', 'auto');
             $(".seating-row").css('width', 'auto');

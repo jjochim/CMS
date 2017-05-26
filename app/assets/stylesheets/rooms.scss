@@ -15,27 +15,27 @@
   position: relative;
 }
 
-.seating-legend-vertical {
+.seating-column-legend {
   left: 30px;
   top: 0px;
 }
 
-.seating-legend-horizontal {
+.seating-row-legend {
   left: 0px;
   top: 25px;
 }
-.seating-legend-horizontal, .seating-legend-vertical {
+.seating-row-legend, .seating-column-legend {
   position: absolute;
   color: white;
 }
 
 .rooms-background {
-  .seating-legend-horizontal, .seating-legend-vertical {
+  .seating-row-legend, .seating-column-legend {
     color: black;
   }
 }
 
-.seating-legend-vertical > .legend-item {
+.seating-column-legend > .legend-item {
   display: inline-block;
   width: 60px;
   height: 25px;
@@ -43,7 +43,7 @@
   font-size: 16px;
 }
 
-.seating-legend-horizontal > .legend-item {
+.seating-row-legend > .legend-item {
   display: block;
   width: 25px;
   height: 60px;

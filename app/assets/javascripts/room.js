@@ -117,21 +117,21 @@ $(document).ready(function(e) {
         // $(".seatings-container").css('margin_right','25px')
         $(".cms-seat").css("width", seat + "px");
         $(".cms-seat").css("height", seat + "px");
-        // $(".seating-legend-vertical").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
-        $(".seating-legend-vertical").css("width", 1115+"px");
-        $(".seating-legend-vertical").css("display", 'flex');
-        // $(".seating-legend-vertical").css("justify-content", 'space-around')
-        $(".seating-legend-vertical").css("left", '25px');
+        // $(".seating-column-legend").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
+        $(".seating-column-legend").css("width", 1115+"px");
+        $(".seating-column-legend").css("display", 'flex');
+        // $(".seating-column-legend").css("justify-content", 'space-around')
+        $(".seating-column-legend").css("left", '25px');
         $(".legend-item").css("padding-top", '0');
         $(".legend-item").css("height", 'auto');
         $('.seatings').ready(function(){
-            $(".seating-legend-horizontal").css("height", $('.seatings').height()+"px");
+            $(".seating-row-legend").css("height", $('.seatings').height()+"px");
         });
-        $(".seating-legend-horizontal").css("display", 'flex');
-        $(".seating-legend-horizontal").css("justify-content", 'space-around');
-        $(".seating-legend-horizontal").css("left", '0px');
-        $(".seating-legend-horizontal").css("top", '25px');
-        $(".seating-legend-horizontal").css("flex-direction", 'column');
+        $(".seating-row-legend").css("display", 'flex');
+        $(".seating-row-legend").css("justify-content", 'space-around');
+        $(".seating-row-legend").css("left", '0px');
+        $(".seating-row-legend").css("top", '25px');
+        $(".seating-row-legend").css("flex-direction", 'column');
         $(".seating-row").css('display', 'flex');
         $(".seating-row").css('height', 'auto');
         $(".seating-row").css('width', 'auto');

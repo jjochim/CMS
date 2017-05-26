@@ -65,3 +65,4 @@ gem 'codemirror-rails'
 gem 'simple_form'
 gem 'font-awesome-rails'
 gem 'pry'
+gem 'rails_12factor', group: :production

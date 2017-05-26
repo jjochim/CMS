@@ -26,7 +26,7 @@ Category.create(name: 'Dokumentalny')
 puts
 
 print 'Movie '
-0.upto(15) do |indx|
+1.upto(15) do |indx|
   tmp = Movie.create(
       title: 'Movie_' + indx.to_s,
       duration: 60 + indx,
@@ -38,7 +38,7 @@ print 'Movie '
       premiere: Time.now - 10.days + indx.days,
       url_trailer: 'https://www.youtube.com/embed/hvchSr3Myfg',
       language: ['polish', 'german', 'english'].shuffle.first,
-      picture: File.open(File.join(Rails.root, "/public/uploads/movie/picture/2/#{indx}.jpg"))
+      picture: File.open(File.join(Rails.root, "/public/uploads/movie/picture/photo/#{indx}.jpg"))
   )
   tmp.categories << Category.all.shuffle.first
   print '. '

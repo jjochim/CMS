@@ -8,13 +8,13 @@ test: &default
   mode: sandbox
 
   # Credentials for Classic APIs
-  app_id: APP-80W284485P519543T
-  username: janusz.jochim-facilitator_api1.gmail.com
-  password: AUXJN47KVMXNXCW2
-  signature: AFcWxV21C7fd0v3bYYYRCpSSRl31AM9i6t4PTowdlsv88RR0c3lYk4VF
-  # # With Certificate
+#  app_id: APP-80W284485P519543T
+#  username: janusz.jochim-facilitator_api1.gmail.com
+#  password: AUXJN47KVMXNXCW2
+#  signature: AFcWxV21C7fd0v3bYYYRCpSSRl31AM9i6t4PTowdlsv88RR0c3lYk4VF
+#  # # With Certificate
   # cert_path: "config/cert_key.pem"
-  sandbox_email_address: janusz.jochim-facilitator@gmail.com
+#  sandbox_email_address: janusz.jochim-facilitator@gmail.com
 
   # # IP Address
   # ip_address: 127.0.0.1
@@ -25,5 +25,7 @@ development:
   <<: *default
 
 production:
-  <<: *default
-  mode: live
+  mode: sandbox
+
+  client_id: AdXVfxXy3tev-odZEVGmYwXFHHpUAWFAosnm-5XXxZBFdpnPhv8XlbB2km2koIntGqmwhWrPL-hZQ-Lh
+  client_secret: EI2zR8-ZYXW4VU16AuoyV_Bso1rCwfBLGv-PcGio2JhAMETKJny1_9cpv2E0Cn83jTuPjw799OnhFGcU

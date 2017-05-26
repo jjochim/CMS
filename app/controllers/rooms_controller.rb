@@ -21,9 +21,7 @@ class RoomsController < ApplicationController
 
     (0..@room.rows-1).each do |i|
       (0..@room.columns-1).each do |j|
-        if ((i)*@room.columns + (j+1) <= @room.columns * @room.rows)
-          @responseObject[i].push(@seatings[((i)*@room.columns + (j+1)-1)])
-        end
+          @responseObject[i].push(@seatings[((i)*@room.columns + j)])
       end
     end
   end
