@@ -84,12 +84,12 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.asset_host = { host: 'cinema-managment-system.herokuapp.com', port: 33544 }
+  config.action_mailer.default_url_options = { host: ENV["host"], port: ENV["port"] }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       :address              => ENV["address"],
-      :port                 => ENV["port"],
+      :port                 => ENV["smtp_port"],
       :user_name            => ENV["user_name"],
       :password             => ENV["password"],
       :authentication       => ENV["authentication"],

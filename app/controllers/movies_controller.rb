@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action -> {redirect_some_path_unless_role root_path, ['admin']}, only: [:edit, :create, :destroy, :new, :update]
-
+  before_action -> {redirect_if_movie_not_in_front_side current_user}, only: [:show]
   # GET /movies
   # GET /movies.json
   def index

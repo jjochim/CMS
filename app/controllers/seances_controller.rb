@@ -1,6 +1,6 @@
 class SeancesController < ApplicationController
   before_action :set_seance, only: [:show, :edit, :update, :destroy]
-  before_action -> {redirect_some_path_unless_role root_path, ['admin']}, only: [:edit, :create, :destroy, :new, :update]
+  before_action -> {redirect_some_path_unless_role root_path, ['admin']}, only: [:show, :edit, :create, :destroy, :new, :update]
 
 
   # GET /seances
@@ -51,7 +51,7 @@ class SeancesController < ApplicationController
       end
     end
 
-    @seance.send(('block' + '=').to_sym, false)
+    # @seance.send(('block' + '=').to_sym, false)
 
     respond_to do |format|
       if @seance.save
@@ -75,8 +75,11 @@ class SeancesController < ApplicationController
         @seance.send((val + '=').to_sym, false)
       end
     end
+    # @seance.send(('block' + '=').to_sym, false)
+
     respond_to do |format|
       if @seance.update(seance_params)
+        p '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
         format.html { redirect_to seances_path, notice: 'Seance was successfully updated.' }
         format.json { render :index, status: :ok, location: @seance }
       else

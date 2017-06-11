@@ -15,7 +15,7 @@ class Seance < ApplicationRecord
     room = self.room
     time_tested = (self.start_date.to_i..(self.start_date + self.movie.duration.minutes).to_i).to_a
 
-    seances = Seance.where(room_id: room.id)
+    seances = Seance.where(room_id: room.id).where.not(id: self.id)
 
     seances.each do |seans|
       if time_tested.include?(seans.start_date.to_i) or
