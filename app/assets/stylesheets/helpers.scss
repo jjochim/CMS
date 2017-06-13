@@ -19,6 +19,22 @@ img.photo {
   color: white;
 }
 
+.white-color .admin-class {
+  color: black !important;
+}
+
 .margin-bottom-2px {
   margin-bottom: 2px !important;
+}
+
+.disable-nav-tabs >*{
+  color: gainsboro;
+}
+
+.inf-legend h5{
+  font-weight: 800;
+}
+
+.inf-legend {
+  margin-bottom: 5px;
 }

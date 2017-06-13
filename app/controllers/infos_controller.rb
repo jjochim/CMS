@@ -10,6 +10,7 @@ class InfosController < ApplicationController
     else
       @src = /src\s*=\s*"([^"]*)"/.match(@info.google_url)[1]
     end
+    @tickets = Ticket.all
   end
 
   def edit

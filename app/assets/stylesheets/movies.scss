@@ -1,8 +1,10 @@
 // Place all the styles related to the Movies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-$mainOrange: rgba(225, 125, 85, 1);
-$lightOrange: rgba(255, 165, 125, 1);
+//$mainOrange: rgba(225, 125, 85, 1);
+$mainOrange: #7ecff4;
+//$lightOrange: rgba(255, 165, 125, 1);
+$lightOrange: #9EEFFF;
 
 .movies-container {
   width: 100%;
@@ -82,4 +84,25 @@ $lightOrange: rgba(255, 165, 125, 1);
   background-color: white;
   border-radius: 5px;
   margin-top: 10px;
+}
+
+.popover {
+  border: 2px solid black;
+}
+/* Popover Header */
+.popover-title {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+  display: block;
+}
+/* Popover Body */
+.popover-content {
+  background-color: #7ecff4;
+  color: black;
+  padding: 5px;
+  text-align: left;
+  display: block;
 }

@@ -1,7 +1,8 @@
 <div class="col-xs-4">
   <%= image_tag @movie.picture, class: "photo" %>
 </div>
-<div class="col-xs-6 white-color">
+<!--<div class="col-xs-6 white-color">-->
+<%= content_tag(:div, class: "col-xs-6 #{black_or_white}") do %>
   <h3><%= @movie.title %></h3>
 
   <br><%= @movie.description %><br><%= @movie.duration/60.to_i %> godz. <%= @movie.duration%60 %> min.</br></p>
@@ -39,7 +40,8 @@
     </tbody>
   </table>
   <button id="trailer" class="btn btn-default col-xs-3">Zwiastun</button>
-</div>
+<!--</div>-->
+<% end %>
 <div class="col-xs-2">
   <% if current_user and current_user.role == 'admin' %>
       <%= link_to 'Edytuj', edit_movie_path(@movie), class: "btn btn-default" %>

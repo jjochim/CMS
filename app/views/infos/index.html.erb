@@ -5,14 +5,14 @@
 </div>
 <div class="col-md-6 text-center">
   <div style="margin-left: 10%;">
-    <legend><h5>Dane kontaktowe</h5></legend>
+    <legend class="inf-legend"><h5>Dane kontaktowe</h5></legend>
     <div>
       ul. <%= @info.street %> <%= @info.building_number %><br>
       <%= @info.zip_code %> <%= @info.city %><br>
       tel. <%= @info.phone %><br>
       <%= @info.email %>
     </div>
-    <legend><h5>Godziny otwarcia</h5></legend>
+    <legend class="inf-legend"><h5>Godziny otwarcia</h5></legend>
     <div>
       <table style="margin: 0 auto;">
         <tbody>
@@ -81,6 +81,34 @@
         </tr>
         </tbody>
       </table>
+      <legend class="inf-legend"><h5>Cennik</h5></legend>
+      <table style="margin: 0 auto;">
+        <thead>
+        <tr>
+          <th style="text-align: right; padding-right: 5px;">Nazwa</th>
+          <th style="padding-left: 5px;">Cena</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @tickets.each do |ticket| %>
+            <tr>
+              <td style="text-align: right;"><%= ticket.name %>:</td>
+              <td><%= ticket.price %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
+
+<script>
+    $(document).ready(function(e) {
+      if (screen.width <= 1024){
+          $('.inf-legend').css("width", "55%");
+          $('.inf-legend').css("margin", "0px auto");
+          alert("test");
+      };
+    });
+</script>

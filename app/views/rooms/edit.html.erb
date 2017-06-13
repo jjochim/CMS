@@ -46,4 +46,55 @@
 <div id="cms-columns" style = "display:none;">
   <%= @room.columns %>
 </div>
+<script>
 
+    $(document).ready(function(e) {
+        var colums = $('#cms-columns').text();
+        var margin = 5;
+        var screenWidth = (screen.width <= 1024) ? 944 : 1115;
+        var seat = (screenWidth/colums-2*margin);
+        var width = $(".seatings-container").css("width");
+        if( parseFloat(colums.trim()) > ((screen.width <= 1024) ? 14 : 18) ){
+//        if( parseFloat(colums.trim()) > 18){
+            $(".seatings-container").css('width','100%');
+            $(".seatings-container").css('height','auto');
+// $(".seatings-container").css('margin_right','25px')
+            var seats = $(".cms-seat")
+            seats.css("width", seat + "px");
+            seats.css("height", seat + "px");
+            seats.removeClass('has-hover');
+// $(".seating-column-legend").css("left", ((1170/$('#cms-columns').text()-2*margin)/2)+12.5+"px")
+            $(".seating-column-legend").css("width", screenWidth+"px");
+//            $(".seating-column-legend").css("width", 1115+"px");
+            $(".seating-column-legend").css("display", 'flex');
+// $(".seating-column-legend").css("justify-content", 'space-around')
+            $(".seating-column-legend").css("left", '25px');
+            $(".legend-item").css("padding-top", '0');
+            $(".legend-item").css("height", 'auto');
+            $('.seatings').ready(function(){
+                $(".seating-row-legend").css("height", $('.seatings').height()+"px");
+                $(".edit-background").css('height', $('.seatings').height() + 230 + "px");
+                console.log($('.seatings').height()+"px" + ' tuuuuu');
+            });
+            $(".seating-row-legend").css("display", 'flex');
+            $(".seating-row-legend").css("justify-content", 'space-around');
+            $(".seating-row-legend").css("left", '0px');
+            $(".seating-row-legend").css("top", '25px');
+            $(".seating-row-legend").css("flex-direction", 'column');
+            $(".seating-row").css('display', 'flex');
+            $(".seating-row").css('height', 'auto');
+            $(".seating-row").css('width', 'auto');
+//            alert(screen.width);
+//            console.log((1170/$('#responseObject').text()) + "px");
+
+            $(".cms-screen-wrapper").css("width", colums * seat + "px");
+            seats.each(function() {
+                $(this).tooltip({title: $(this).text()})
+            });
+
+
+        }else {
+            $(".cms-screen-wrapper").css("width", parseFloat(width) * 0.8 + "px");
+        }
+    });
+</script>

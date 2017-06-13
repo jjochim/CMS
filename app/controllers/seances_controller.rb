@@ -51,7 +51,7 @@ class SeancesController < ApplicationController
       end
     end
 
-    # @seance.send(('block' + '=').to_sym, false)
+    @seance.send(('block' + '=').to_sym, false)
 
     respond_to do |format|
       if @seance.save

@@ -18,6 +18,10 @@ module ApplicationHelper
     "admin-class" if current_user and current_user.role == 'admin'
   end
 
+  def black_or_white
+    "white-color" unless current_user and current_user.role == 'admin'
+  end
+
   def date_for_lteq(q)
     return "" if q.blank?
     q[:start_date_lteq].blank? ? "" : format_date(q[:start_date_lteq].to_date)

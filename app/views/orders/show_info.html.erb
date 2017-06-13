@@ -22,7 +22,7 @@
       </div>
       <% if @available_seatings != 0 %>
         <% if ENV["available_reservations"] == 'true' || ENV["available_payment"] == 'true' || current_user %>
-          <%= link_to 'Kontynuj', {controller: 'orders', action: 'show_room', seance_id: @seance_info.id}, class: "btn btn-default", id: 'next' %>
+          <%= link_to 'Kontynuuj', {controller: 'orders', action: 'show_room', seance_id: @seance_info.id}, class: "btn btn-default", id: 'next' %>
         <% end %>
       <% end %>
       <%= link_to 'Powrót', seances_path, class: "btn btn-default" %>

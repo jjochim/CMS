@@ -82,15 +82,11 @@
         <div class="col-xs-12">
           <div class="movies-container">
             <% slice.each do |movie| %>
-              <div class="movies-item" data-toltip="toltip<%= movie.id %>">
+              <div class="movies-item" data-content="<%= movie.description %>" rel="popover" data-placement="bottom" data-original-title="<%= movie.title %>" data-trigger="hover">
                 <%= link_to (image_tag movie.picture, class: "photo"), movie %>
                 <div class="movie-title" >
                   <h4><%= link_to movie.title, movie %></h4>
                 </div>
-              </div>
-              <div class="tip" id="toltip<%= movie.id %>" style="position: absolute; display: none;">
-                <div class="tip-title"><%= movie.title %></div>
-                <div class="tip-content"><%= movie.description %></div>
               </div>
           <% end %>
           </div>
@@ -108,22 +104,6 @@
 <% end %>
 
 <script>
-    $(document).ready(function() {
-        $("div.movies-item")
-            .mouseout(function () {
-                var id = $(this).data('toltip');
-                $('#' + id).css('display', 'none');
+$('.movies-item').popover();
 
-            })
-            .mouseover(function () {
-                var id = $(this).data('toltip');
-                var top = $(this).position().top;
-                var left = $(this).position().left;
-                $('#' + id).css('top', top + 133);
-                $('#' + id).css('left', left + 250);
-                $('#' + id).css('display', 'block');
-                console.log($(this).position().left);
-                console.log($(this).position().top);
-            });
-    });
 </script>

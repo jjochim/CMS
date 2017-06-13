@@ -61,7 +61,7 @@
         var screenWidth = (screen.width <= 1024) ? 944 : 1115;
         var seat = (screenWidth/colums-2*margin);
         var width = $(".seatings-container").css("width");
-        if( parseFloat(colums.trim()) > (screen.width <= 1024) ? 14 : 18){
+        if( parseFloat(colums.trim()) > ((screen.width <= 1024) ? 14 : 18) ){
 //        if( parseFloat(colums.trim()) > 18){
             $(".seatings-container").css('width','100%');
             $(".seatings-container").css('height','auto');
@@ -91,8 +91,8 @@
             $(".seating-row").css('display', 'flex');
             $(".seating-row").css('height', 'auto');
             $(".seating-row").css('width', 'auto');
-            alert(screen.width);
-            console.log((1170/$('#responseObject').text()) + "px");
+//            alert(screen.width);
+//            console.log((1170/$('#responseObject').text()) + "px");
 
             $(".cms-screen-wrapper").css("width", colums * seat + "px");
             seats.each(function() {
