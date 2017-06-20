@@ -1005,7 +1005,7 @@ Seating.create!([
 
 print 'Seance '
 0.upto(8) do |indx|
-  10.upto(22) do |index|
+  1.upto(6) do |index|
     0.upto(10) do
       if index % 2 == 0
         print '. '

@@ -6,11 +6,11 @@
 <body>
 <h1>Witaj, <%= @order.name %>!</h1>
 <p>
-  Uwaga informacja wygenerowana automatycznie!<br>
+  Uwaga, informacja wygenerowana automatycznie!<br>
 </p>
 <p>
-  Aby potwierdzić rezerwację na seans: <%= @order.seance.movie.title %> Proszę kliknąć link:<br>
-  <a href="<%= summary_orders_url %>?s=<%= @order.seance.id %>&o=<%= @order.id %>&c=<%= @order.activation_code %>">Potwierdzam rezerwacje</a>
+  Aby potwierdzić rezerwację na seans "<%= @order.seance.movie.title %>", proszę kliknąć link:<br>
+  <a href="<%= summary_orders_url %>?s=<%= @order.seance.id %>&o=<%= @order.id %>&c=<%= @order.activation_code %>">Potwierdzam rezerwację</a>
 </p>
 <p>Dziękujemy za skorzystanie z naszych usług, miłego seansu!</p>
 <p>

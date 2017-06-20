@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action -> {redirect_if_seance_not_in_front_side current_user}, only: [:show_room, :show_info]
   if not ENV["available_reservations"] == 'true'
     if not ENV["available_payment"] == 'true'
       before_action -> {redirect_some_path_unless_roles root_path}, only: [:destroy, :index, :create, :show, :update, :new, :edit, :search, :update_ticket_type, :show_room, :summary, :find]

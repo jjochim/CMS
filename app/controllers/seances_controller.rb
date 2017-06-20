@@ -2,7 +2,6 @@ class SeancesController < ApplicationController
   before_action :set_seance, only: [:show, :edit, :update, :destroy]
   before_action -> {redirect_some_path_unless_role root_path, ['admin']}, only: [:show, :edit, :create, :destroy, :new, :update]
 
-
   # GET /seances
   # GET /seances.json
   def index
@@ -10,7 +9,8 @@ class SeancesController < ApplicationController
     @search = Seance.search(search_params[:q])
     @seances = @search.result(distinct: true).includes(:movie, :room).paginate(:page => params[:page])
     else
-      @seances = Seance.seven_days_from_now.where(block: false).paginate(:page => params[:page])
+      # @seances = Seance.seven_days_from_now.where(block: false).paginate(:page => params[:page])
+      @seances = Seance.where(id: $seance_front_side, block: false).paginate(:page => params[:page])
     end
   end
 
